@@ -5,11 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\parentschool\admin\AccessModel;
-use app\parentschool\admin\Hash;
-use app\parentschool\admin\ModuleModel;
-use app\parentschool\admin\Role;
-use app\parentschool\model\TagModel;
+use app\gallery\model\TagModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
