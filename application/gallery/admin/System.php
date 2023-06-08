@@ -5,6 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
+use app\gallery\model\SystemParamModel;
 use app\user\model\Role;
 use think\Db;
 use think\facade\Hook;
