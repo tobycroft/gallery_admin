@@ -5,6 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
+use app\gallery\model\EnrollModel;
 use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
@@ -40,7 +41,7 @@ class EnrollUpload extends Admin
         $num1 = EnrollUploadModel::where("date", ">", $todaytime)
             ->count();
         $num2 = EnrollUploadModel::count();
-
+        $enroll = EnrollModel::column("id,name");
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
             ->setPageTips("总数量：" . $num2, 'danger')
@@ -52,7 +53,7 @@ class EnrollUpload extends Admin
 //            ->addColumn('uid', '用户id', 'number')
             ->addColumn('enroll_id', '报名id', 'number')
             ->addColumn('title', '标题', 'text')
-            ->addColumn('content', '内容', 'edit.textarea')
+            ->addColumn('content', '内容', 'select','',$enroll)
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('teacher_name', '教师名称', 'text.edit')
             ->addColumn('teacher_phone', '教师电话', 'text.edit')
