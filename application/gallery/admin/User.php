@@ -53,11 +53,11 @@ class User extends Admin
             ->setSearch(['id' => 'ID', "phone" => "phone", 'username' => '用户名']) // 设置搜索参数
             ->addOrder('id')
             ->addColumn('id', 'UID')
-            ->addColumn('pid', '上级UID')
+//            ->addColumn('pid', '上级UID')
             ->addColumn('phone', '手机号')
             ->addColumn('wx_name', '用户名')
             ->addColumn('wx_img', '头像', 'img_url')
-            ->addColumn('share', '邀请码')
+//            ->addColumn('share', '邀请码')
             ->addColumn('active', '是否启用', "switch")
 //            ->addColumn('lock', '是否锁定', "switch")
             ->addColumn('change_date', '修改时间')
