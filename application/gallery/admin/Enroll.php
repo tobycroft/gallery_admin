@@ -8,6 +8,7 @@ use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
+use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
@@ -120,7 +121,7 @@ class Enroll extends Admin
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
-                ['text', 'uid', '用户id', ''],
+                ['text', 'uid', '用户id', "",UserModel::column("id,name")],
                 ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
