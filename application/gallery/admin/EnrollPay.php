@@ -63,7 +63,7 @@ class EnrollPay extends Admin
             ->addColumn('province', '报名学校', 'text.edit')
             ->addColumn('city', '已支付', 'text.edit')
             ->addColumn('district', '已支付', 'text.edit')
-            ->addColumn('address', '已支付', 'text.edit')
+//            ->addColumn('address', '已支付', 'text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
