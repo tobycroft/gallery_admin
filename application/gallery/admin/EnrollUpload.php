@@ -7,8 +7,6 @@ use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
 use app\gallery\model\EnrollUploadModel;
-use app\gallery\model\TagGroupModel;
-use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
@@ -47,7 +45,8 @@ class EnrollUpload extends Admin
 //            ->setPageTips("总数量：" . $num2, 'danger')
             ->addTopButton("add")
             ->setPageTitle('列表')
-//            ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
+            ->setSearchArea([['select', 'enroll_id', '学生姓名', '', '', $enroll],])
+            //            ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
 //            ->addColumn('uid', '用户id', 'number')
