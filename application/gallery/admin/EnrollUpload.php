@@ -52,7 +52,7 @@ class EnrollUpload extends Admin
             ->addColumn('uid', '用户id', 'number')
             ->addColumn('enroll_id', '报名id', 'number')
             ->addColumn('title', '标题', 'text')
-            ->addColumn('content', '内容', 'text.edit')
+            ->addColumn('content', '内容', 'edit.textarea')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('teacher_name', '教师名称', 'text.edit')
             ->addColumn('teacher_phone', '教师电话', 'text.edit')
