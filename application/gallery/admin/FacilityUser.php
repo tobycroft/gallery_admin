@@ -37,7 +37,7 @@ class FacilityUser extends Admin
 
 
         return ZBuilder::make('table')
-//            ->addTopButton("add")
+            ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearch(['id' => 'ID', "pid" => "上级UID", 'username' => '用户名']) // 设置搜索参数
             ->addOrder('id')
