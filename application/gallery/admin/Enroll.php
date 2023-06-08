@@ -30,22 +30,17 @@ class Enroll extends Admin
     public function index()
     {
         // 获取排序
-        $order = $this->getOrder("callsign asc");
+        $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = StudentModel::field("a.*,c.wx_name,c.phone")
-            ->alias("a")
-            ->where($map)
-            ->leftJoin(["ps_user" => "c"], "a.uid=c.id")
-            ->order($order)
-            ->paginate();
+        $data_list = EnrollModel::where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
-        $num1 = StudentModel::where("date", ">", $todaytime)
+        $num1 = EnrollModel::where("date", ">", $todaytime)
             ->count();
-        $num2 = StudentModel::count();
-        $school = SchoolModel::column("id,name");
+        $num2 = EnrollModel::count();
+        $school = EnrollModel::column("id,name");
 
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
