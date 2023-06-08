@@ -47,7 +47,7 @@ class Tag extends Admin
                 ['ename', '报名显示', 'text.edit'],
                 ['group_name', '标签组名称', 'text.edit'],
                 ['img', '图片', 'picture'],
-                ['is_avail', '报名开关', 'switch'],
+                ['is_avail', '报名入口开关', 'switch'],
                 ['title', 'title', 'text.edit'],
                 ['content', 'content', "text.edit"],
                 ['price', 'price', "text.edit"],
