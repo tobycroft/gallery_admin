@@ -11,7 +11,7 @@ use think\Model;
  */
 class UserModel extends Model {
 	// 设置当前模型对应的完整数据表名称
-	protected $table = 'ps_user';
+	protected $table = 'ga_user';
 
 	// 设置当前模型对应的完整数据表名称
 
