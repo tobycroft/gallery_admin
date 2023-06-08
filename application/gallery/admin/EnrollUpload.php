@@ -44,7 +44,7 @@ class EnrollUpload extends Admin
         $enroll = EnrollModel::column("id,name");
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
-            ->setPageTips("总数量：" . $num2, 'danger')
+//            ->setPageTips("总数量：" . $num2, 'danger')
             ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
