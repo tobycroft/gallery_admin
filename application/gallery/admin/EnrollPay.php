@@ -123,7 +123,7 @@ class EnrollPay extends Admin
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
                 ['select', 'uid', '用户id', "", UserModel::column("id,name")],
-                ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
+                 ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
                 ['text', 'name', '姓名', ''],

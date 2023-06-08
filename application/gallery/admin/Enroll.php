@@ -48,7 +48,7 @@ class Enroll extends Admin
 //            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
             ->addTopButton("add")
             ->setPageTitle('列表')
-            ->setSearch(['name' => '学生姓名','phone'=>"手机号"]) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => "手机号"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
             ->addColumn('source', '数据来源', 'number')
@@ -121,8 +121,8 @@ class Enroll extends Admin
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
-                ['select', 'uid', '用户id', "",UserModel::column("id,name")],
-                ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
+                ['select', 'uid', '用户id', "", UserModel::column("id,name")],
+                 ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
                 ['text', 'name', '姓名', ''],
@@ -203,7 +203,7 @@ class Enroll extends Admin
                 ['hidden', 'id'],
                 ['text', 'source', '数据来源', ''],
                 ['text', 'uid', '用户id', ''],
-                ['text', 'tag_id', '报名类型', '', TagModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column('id,name')],
                 ['text', 'name', '姓名', ''],
