@@ -5,7 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\gallery\model\TagModel;
+use app\gallery\model\FacilityUserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
@@ -30,7 +30,7 @@ class FacilityUser extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = TagModel::where($map)
+        $data_list = FacilityUserModel::where($map)
             ->order($order)
             ->paginate();
         $page = $data_list->render();
@@ -91,7 +91,7 @@ class FacilityUser extends Admin
 
             $data['roles'] = isset($data['roles']) ? implode(',', $data['roles']) : '';
 
-            if ($user = TagModel::create($data)) {
+            if ($user = FacilityUserModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
                 action_log('user_add', 'admin_user', $user['id'], UID);
@@ -151,8 +151,8 @@ class FacilityUser extends Admin
             // 非超级管理需要验证可选择角色
 
 
-            if (TagModel::update($data)) {
-                $user = TagModel::get($data['id']);
+            if (FacilityUserModel::update($data)) {
+                $user = FacilityUserModel::get($data['id']);
                 // 记录行为
                 action_log('user_edit', 'user', $id, UID);
                 $this->success('编辑成功');
@@ -162,7 +162,7 @@ class FacilityUser extends Admin
         }
 
         // 获取数据
-        $info = TagModel::where('id', $id)
+        $info = FacilityUserModel::where('id', $id)
             ->find();
 
         // 使用ZBuilder快速创建表单
@@ -413,19 +413,19 @@ class FacilityUser extends Admin
 
         switch ($type) {
             case 'enable':
-                if (false === TagModel::where('id', 'in', $ids)
+                if (false === FacilityUserModel::where('id', 'in', $ids)
                         ->setField('status', 1)) {
                     $this->error('启用失败');
                 }
                 break;
             case 'disable':
-                if (false === TagModel::where('id', 'in', $ids)
+                if (false === FacilityUserModel::where('id', 'in', $ids)
                         ->setField('status', 0)) {
                     $this->error('禁用失败');
                 }
                 break;
             case 'delete':
-                if (false === TagModel::where('id', 'in', $ids)
+                if (false === FacilityUserModel::where('id', 'in', $ids)
                         ->delete()) {
                     $this->error('删除失败');
                 }
@@ -524,7 +524,7 @@ class FacilityUser extends Admin
                 $this->error('权限不足，没有可操作的用户');
             }
         }
-        $result = TagModel::where("id", $id)
+        $result = FacilityUserModel::where("id", $id)
             ->setField($field, $value);
         if (false !== $result) {
             action_log('user_edit', 'user', $id, UID);
