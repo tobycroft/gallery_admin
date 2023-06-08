@@ -43,10 +43,15 @@ class Tag extends Admin
             ->addOrder('id')
             ->addColumns([
                 ['id', 'ID'],
-                ['study_type', '课程类型', 'text.edit'],
-                ['tag_type', '标签类型', 'text.edit'],
-                ['class', '标签分类', 'text.edit'],
-                ['name', '标签名称', "text.edit"],
+                ['name', '报名标签', 'text.edit'],
+                ['ename', '报名显示', 'text.edit'],
+                ['group_name', '标签组名称', 'text.edit'],
+                ['img', '图片', 'picture'],
+                ['is_avail', '报名开关', 'switch'],
+                ['title', 'title', 'text.edit'],
+                ['content', 'content', "text.edit"],
+                ['price', 'price', "text.edit"],
+                ['price_title', 'price_title', "text.edit"],
             ])
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
