@@ -51,7 +51,7 @@ class EnrollUpload extends Admin
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
 //            ->addColumn('uid', '用户id', 'number')
-            ->addColumn('enroll_id', '报名id', 'select','','',$enroll)
+            ->addColumn('enroll_id', '报名id', 'select',$enroll)
             ->addColumn('title', '标题', 'text')
             ->addColumn('content', '内容', 'textarea')
             ->addColumn('attachment', '图片', 'picture')
