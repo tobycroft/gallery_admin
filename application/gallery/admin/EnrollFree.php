@@ -51,7 +51,7 @@ class EnrollFree extends Admin
             ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
-            ->addColumn('source', '数据来源', 'number')
+//            ->addColumn('source', '数据来源', 'number')
             ->addColumn('uid', '用户id', 'number')
             ->addColumn('age', '年龄', 'number')
             ->addColumn('phone', '手机', 'text')
