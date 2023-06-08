@@ -40,7 +40,7 @@ class EnrollUpload extends Admin
         $num1 = EnrollUploadModel::where("date", ">", $todaytime)
             ->count();
         $num2 = EnrollUploadModel::count();
-        $school = EnrollUploadModel::column("id,name");
+        $school = EnrollUploadModel::column("id,title");
 
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
