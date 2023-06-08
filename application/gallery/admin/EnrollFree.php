@@ -33,7 +33,7 @@ class EnrollFree extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->where("source", "free")->order($order)->paginate();
+        $data_list = EnrollModel::where($map)->where("source", "ps")->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
