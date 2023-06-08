@@ -19,7 +19,7 @@ use util\Tree;
  * 用户默认控制器
  * @package app\user\admin
  */
-class EnrollFree extends Admin
+class EnrollLocal extends Admin
 {
     /**
      * 用户首页
@@ -33,7 +33,7 @@ class EnrollFree extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->where("source", "free")->order($order)->paginate();
+        $data_list = EnrollModel::where($map)->where('source', 'local')->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
@@ -121,7 +121,7 @@ class EnrollFree extends Admin
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
-                ['select', 'uid', '用户id', "", UserModel::column("id,name")],
+                ['select', 'uid', '用户id', "",UserModel::column("id,name")],
                 ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
