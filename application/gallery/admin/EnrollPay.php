@@ -185,7 +185,14 @@ class EnrollPay extends Admin
 
             // 非超级管理需要验证可选择角色
 
-
+            foreach ($data as $key => $value) {
+                if ($value == 'on') {
+                    $data[$key] = true;
+                }
+                if ($value == 'off') {
+                    $data[$key] = false;
+                }
+            }
             if (EnrollModel::update($data)) {
                 $user = EnrollModel::get($data['id']);
                 // 记录行为
