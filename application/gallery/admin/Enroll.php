@@ -10,6 +10,8 @@ use app\gallery\model\FamilyMemberModel;
 use app\gallery\model\FamilyModel;
 use app\gallery\model\SchoolModel;
 use app\gallery\model\StudentModel;
+use app\gallery\model\TagGroupModel;
+use app\gallery\model\TagModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
@@ -121,17 +123,33 @@ class Enroll extends Admin
         return ZBuilder::make('form')
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
-                ['number', 'uid', '家长id', '请确认务必存在'],
-                ['number', 'school_id', '学校id', '请确认务必存在'],
-                ['select', 'gender', '性别', '', \Student\Student::get_student_gender()],
+                ['text', 'source', '数据来源', ''],
+                ['text', 'uid', '用户id', ''],
+                ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
+                ['text', 'age', '年龄', ''],
+                ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
                 ['text', 'name', '姓名', ''],
-                ['image', 'img', '头像', ''],
-                ['number', 'year', '入学年份'],
-                ['number', 'grade', '年段'],
-                ['number', 'class', '班级'],
-                ['text', 'special', '特殊班级'],
-                ['number', 'callsign', '座号'],
-                ['textarea', 'remark', '提示', ''],
+                ['text', 'email', '电子邮箱', ''],
+                ['text', 'phone', '电话', ''],
+                ['number', 'gender', '性别', ''],
+                ['text', 'cert', '身份证号', ''],
+                ['text', 'school_name', '绑定机构', ''],
+                ['text', 'school_name_show', '学校机构', ''],
+                ['text', 'province', '省', ''],
+                ['text', 'city', '城市', ''],
+                ['text', 'district', '区', ''],
+                ['text', 'address', '地址', ''],
+                ['text', 'receiver_name', '收件人', ''],
+                ['switch', 'is_upload', '是否已上传', ''],
+                ['switch', 'is_verify', '是否验证', ''],
+                ['switch', 'is_payed', '是否已支付', ''],
+                ['switch', 'is_expect', '是否已预约', ''],
+                ['text', 'expect_date', '预约时间', ''],
+//                ['image', 'img', '头像', ''],
+//                ['number', 'class', '班级'],
+//                ['text', 'special', '特殊班级'],
+//                ['number', 'callsign', '座号'],
+//                ['textarea', 'remark', '提示', ''],
             ])
             ->fetch();
     }
@@ -186,17 +204,28 @@ class Enroll extends Admin
             ->setPageTitle('编辑') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['hidden', 'id'],
-                ['number', 'uid', '家长id', '请确认务必存在'],
-                ['number', 'school_id', '学校id', '请确认务必存在'],
-                ['select', 'gender', '性别', '', \Student\Student::get_student_gender()],
+                ['text', 'source', '数据来源', ''],
+                ['text', 'uid', '用户id', ''],
+                ['text', 'tag_id', '报名类型', '', TagModel::column('id,name')],
+                ['text', 'age', '年龄', ''],
+                ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column('id,name')],
                 ['text', 'name', '姓名', ''],
-                ['image', 'img', '头像', ''],
-                ['number', 'year', '入学年份'],
-                ['number', 'grade', '年段'],
-                ['number', 'class', '班级'],
-                ['text', 'special', '特殊班级'],
-                ['number', 'callsign', '座号'],
-                ['textarea', 'remark', '提示', ''],
+                ['text', 'email', '电子邮箱', ''],
+                ['text', 'phone', '电话', ''],
+                ['number', 'gender', '性别', ''],
+                ['text', 'cert', '身份证号', ''],
+                ['text', 'school_name', '绑定机构', ''],
+                ['text', 'school_name_show', '学校机构', ''],
+                ['text', 'province', '省', ''],
+                ['text', 'city', '城市', ''],
+                ['text', 'district', '区', ''],
+                ['text', 'address', '地址', ''],
+                ['text', 'receiver_name', '收件人', ''],
+                ['switch', 'is_upload', '是否已上传', ''],
+                ['switch', 'is_verify', '是否验证', ''],
+                ['switch', 'is_payed', '是否已支付', ''],
+                ['switch', 'is_expect', '是否已预约', ''],
+                ['text', 'expect_date', '预约时间', ''],
             ]);
         return $data
             ->setFormData($info) // 设置表单数据
