@@ -103,6 +103,14 @@ class EnrollPay extends Admin
 
             $data['roles'] = isset($data['roles']) ? implode(',', $data['roles']) : '';
 
+            foreach ($data as $key => $value) {
+                if ($value == 'on') {
+                    $data[$key] = true;
+                }
+                if ($value == 'off') {
+                    $data[$key] = false;
+                }
+            }
             if ($user = EnrollModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
