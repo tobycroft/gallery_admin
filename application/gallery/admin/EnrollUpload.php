@@ -47,7 +47,7 @@ class EnrollUpload extends Admin
 //            ->setPageTips("总数量：" . $num2, 'danger')
             ->addTopButton("add")
             ->setPageTitle('列表')
-            ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
+//            ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
 //            ->addColumn('uid', '用户id', 'number')
