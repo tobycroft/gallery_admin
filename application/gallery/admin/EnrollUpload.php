@@ -49,7 +49,7 @@ class EnrollUpload extends Admin
             ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
-            ->addColumn('uid', '用户id', 'number')
+//            ->addColumn('uid', '用户id', 'number')
             ->addColumn('enroll_id', '报名id', 'number')
             ->addColumn('title', '标题', 'text')
             ->addColumn('content', '内容', 'edit.textarea')
