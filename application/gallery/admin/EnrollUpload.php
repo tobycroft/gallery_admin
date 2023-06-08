@@ -122,7 +122,7 @@ class EnrollUpload extends Admin
         return ZBuilder::make('form')
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
-                ['text', 'uid', '用户手机', '', UserModel::column('id,phone')],
+                ['select', 'uid', '用户手机', '', UserModel::column('id,phone')],
                 ['text', 'enroll_id', '报名人', '', EnrollModel::column("id,name")],
                 ['text', 'title', '标题', ''],
                 ['textarea', 'content', '内容', ''],
