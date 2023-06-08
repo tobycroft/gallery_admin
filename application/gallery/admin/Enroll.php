@@ -9,7 +9,7 @@ use app\gallery\model\EnrollModel;
 use app\gallery\model\FamilyMemberModel;
 use app\gallery\model\FamilyModel;
 use app\gallery\model\SchoolModel;
-use app\gallery\model\StudentModel;
+use app\gallery\model\EnrollModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\user\model\Role as RoleModel;
@@ -102,7 +102,7 @@ class Enroll extends Admin
 
             $data['roles'] = isset($data['roles']) ? implode(',', $data['roles']) : '';
 
-            if ($user = StudentModel::create($data)) {
+            if ($user = EnrollModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
                 action_log('user_add', 'admin_user', $user['id'], UID);
@@ -185,8 +185,8 @@ class Enroll extends Admin
             // 非超级管理需要验证可选择角色
 
 
-            if (StudentModel::update($data)) {
-                $user = StudentModel::get($data['id']);
+            if (EnrollModel::update($data)) {
+                $user = EnrollModel::get($data['id']);
                 // 记录行为
                 action_log('user_edit', 'user', $id, UID);
                 $this->success('编辑成功');
@@ -196,7 +196,7 @@ class Enroll extends Admin
         }
 
         // 获取数据
-        $info = StudentModel::where('id', $id)
+        $info = EnrollModel::where('id', $id)
             ->find();
 
         // 使用ZBuilder快速创建表单
@@ -464,20 +464,20 @@ class Enroll extends Admin
 
         switch ($type) {
             case 'enable':
-                if (false === StudentModel::where('id', 'in', $ids)
+                if (false === EnrollModel::where('id', 'in', $ids)
                         ->setField('status', 1)) {
                     $this->error('启用失败');
                 }
                 break;
             case 'disable':
-                if (false === StudentModel::where('id', 'in', $ids)
+                if (false === EnrollModel::where('id', 'in', $ids)
                         ->setField('status', 0)) {
                     $this->error('禁用失败');
                 }
                 break;
             case 'delete':
                 Db::startTrans();
-                if (false === StudentModel::where('id', 'in', $ids)
+                if (false === EnrollModel::where('id', 'in', $ids)
                         ->delete()) {
                     Db::rollback();
                     $this->error('删除失败');
@@ -581,7 +581,7 @@ class Enroll extends Admin
                 $this->error('权限不足，没有可操作的用户');
             }
         }
-        $result = StudentModel::where("id", $id)
+        $result = EnrollModel::where("id", $id)
             ->setField($field, $value);
         if (false !== $result) {
             action_log('user_edit', 'user', $id, UID);
