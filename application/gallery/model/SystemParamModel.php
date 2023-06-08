@@ -12,7 +12,7 @@ use think\Model;
 class SystemParamModel extends Model
 {
     // 设置当前模型对应的完整数据表名称
-    protected $table = 'g_system_param';
+    protected $table = 'system_param';
 
     // 自动写入时间戳
     protected $autoWriteTimestamp = true;
