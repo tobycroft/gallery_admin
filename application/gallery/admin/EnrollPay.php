@@ -41,7 +41,7 @@ class EnrollPay extends Admin
             ->count();
         $num2 = EnrollModel::count();
         $school = EnrollModel::column("id,name");
-
+        $tag = TagModel::column("id,name");
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
@@ -54,6 +54,7 @@ class EnrollPay extends Admin
 //            ->addColumn('source', '数据来源', 'number')
             ->addColumn('uid', '用户id', 'number')
             ->addColumn('age', '年龄', 'number')
+            ->addColumn('tag_id', '类型', 'select', $tag)
             ->addColumn('phone', '手机', 'text')
             ->addColumn('name', '姓名', 'text.edit')
             ->addColumn('cert', '身份证', 'text.edit')
@@ -121,7 +122,7 @@ class EnrollPay extends Admin
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
-                ['select', 'uid', '用户id', "",UserModel::column("id,name")],
+                ['select', 'uid', '用户id', "", UserModel::column("id,name")],
                 ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
