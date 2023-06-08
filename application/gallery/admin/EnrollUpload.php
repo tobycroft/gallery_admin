@@ -50,16 +50,15 @@ class EnrollUpload extends Admin
             ->setPageTitle('列表')
             ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
-            ->addColumn('id', '问题ID')
-            ->addColumn('source', '数据来源', 'number')
+            ->addColumn('id', '作品id')
             ->addColumn('uid', '用户id', 'number')
-            ->addColumn('age', '年龄', 'number')
-            ->addColumn('phone', '手机', 'text')
-            ->addColumn('name', '姓名', 'text.edit')
-            ->addColumn('cert', '身份证', 'text.edit')
-            ->addColumn('school_name', '绑定机构', 'text.edit')
-            ->addColumn('school_name_show', '报名学校', 'text.edit')
-            ->addColumn('is_payed', '已支付', 'switch')
+            ->addColumn('enroll_id', '报名id', 'number')
+            ->addColumn('title', '标题', 'text')
+            ->addColumn('content', '内容', 'text.edit')
+            ->addColumn('attachment', '图片', 'picture')
+            ->addColumn('teacher_name', '教师名称', 'text.edit')
+            ->addColumn('teacher_phone', '教师电话', 'text.edit')
+            ->addColumn('is_original', '是否原创', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
@@ -121,7 +120,7 @@ class EnrollUpload extends Admin
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
-                ['select', 'uid', '用户id', "",UserModel::column("id,name")],
+                ['select', 'uid', '用户id', "", UserModel::column("id,name")],
                 ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
