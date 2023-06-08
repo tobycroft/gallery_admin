@@ -5,10 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\gallery\model\EnrollModel;
-use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
-use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
@@ -19,7 +16,7 @@ use util\Tree;
  * 用户默认控制器
  * @package app\user\admin
  */
-class Enroll extends Admin
+class FacilityUser extends Admin
 {
     /**
      * 用户首页
@@ -33,36 +30,31 @@ class Enroll extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->order($order)->paginate();
+        $data_list = TagModel::where($map)
+            ->order($order)
+            ->paginate();
         $page = $data_list->render();
-        $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
-        $num1 = EnrollModel::where("date", ">", $todaytime)
-            ->count();
-        $num2 = EnrollModel::count();
-        $school = EnrollModel::column("id,name");
 
         return ZBuilder::make('table')
-            ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
-//            ->setPageTips("总数量：" . $num2, 'danger')
-//            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
-            ->addTopButton("add")
+//            ->addTopButton("add")
             ->setPageTitle('列表')
-            ->setSearch(['name' => '学生姓名','phone'=>"手机号"]) // 设置搜索参数
-//            ->addOrder('id,callsign,year,class')
-            ->addColumn('id', '问题ID')
-            ->addColumn('source', '数据来源', 'number')
-            ->addColumn('uid', '用户id', 'number')
-            ->addColumn('age', '年龄', 'number')
-            ->addColumn('phone', '手机', 'text')
-            ->addColumn('name', '姓名', 'text.edit')
-            ->addColumn('cert', '身份证', 'text.edit')
-            ->addColumn('school_name', '绑定机构', 'text.edit')
-            ->addColumn('school_name_show', '报名学校', 'text.edit')
-            ->addColumn('is_payed', '已支付', 'switch')
-            ->addColumn('date', '创建时间')
+            ->setSearch(['id' => 'ID', "pid" => "上级UID", 'username' => '用户名']) // 设置搜索参数
+            ->addOrder('id')
+            ->addColumns([
+                ['id', 'ID'],
+                ['name', '报名标签', 'text.edit'],
+                ['ename', '报名显示', 'text.edit'],
+                ['group_name', '标签组名称', 'text.edit'],
+                ['img', '图片', 'picture'],
+                ['is_avail', '报名入口开关', 'switch'],
+                ['title', 'title', 'text.edit'],
+                ['content', 'content', "text.edit"],
+                ['price', 'price', "text.edit"],
+                ['price_title', 'price_title', "text.edit"],
+            ])
             ->addColumn('right_button', '操作', 'btn')
-            ->addRightButton('edit') // 添加编辑按钮
+//            ->addRightButton('edit') // 添加编辑按钮
 //            ->addRightButton('delete') //添加删除按钮
             ->setRowList($data_list) // 设置表格数据
             ->setPages($page)
@@ -99,7 +91,7 @@ class Enroll extends Admin
 
             $data['roles'] = isset($data['roles']) ? implode(',', $data['roles']) : '';
 
-            if ($user = EnrollModel::create($data)) {
+            if ($user = TagModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
                 action_log('user_add', 'admin_user', $user['id'], UID);
@@ -120,33 +112,10 @@ class Enroll extends Admin
         return ZBuilder::make('form')
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
-                ['text', 'source', '数据来源', ''],
-                ['select', 'uid', '用户id', "",UserModel::column("id,name")],
-                ['text', 'tag_id', '报名类型', '', TagModel::column("id,name")],
-                ['text', 'age', '年龄', ''],
-                ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
-                ['text', 'name', '姓名', ''],
-                ['text', 'email', '电子邮箱', ''],
-                ['text', 'phone', '电话', ''],
-                ['number', 'gender', '性别', ''],
-                ['text', 'cert', '身份证号', ''],
-                ['text', 'school_name', '绑定机构', ''],
-                ['text', 'school_name_show', '学校机构', ''],
-                ['text', 'province', '省', ''],
-                ['text', 'city', '城市', ''],
-                ['text', 'district', '区', ''],
-                ['text', 'address', '地址', ''],
-                ['text', 'receiver_name', '收件人', ''],
-                ['switch', 'is_upload', '是否已上传', ''],
-                ['switch', 'is_verify', '是否验证', ''],
-                ['switch', 'is_payed', '是否已支付', ''],
-                ['switch', 'is_expect', '是否已预约', ''],
-                ['text', 'expect_date', '预约时间', ''],
-//                ['image', 'img', '头像', ''],
-//                ['number', 'class', '班级'],
-//                ['text', 'special', '特殊班级'],
-//                ['number', 'callsign', '座号'],
-//                ['textarea', 'remark', '提示', ''],
+                ["text", 'study_type', '课程类型'],
+                ["text", 'tag_type', '标签类型'],
+                ["text", 'class', '标签分类'],
+                ["text", 'name', '标签名称'],
             ])
             ->fetch();
     }
@@ -182,8 +151,8 @@ class Enroll extends Admin
             // 非超级管理需要验证可选择角色
 
 
-            if (EnrollModel::update($data)) {
-                $user = EnrollModel::get($data['id']);
+            if (TagModel::update($data)) {
+                $user = TagModel::get($data['id']);
                 // 记录行为
                 action_log('user_edit', 'user', $id, UID);
                 $this->success('编辑成功');
@@ -193,7 +162,7 @@ class Enroll extends Admin
         }
 
         // 获取数据
-        $info = EnrollModel::where('id', $id)
+        $info = TagModel::where('id', $id)
             ->find();
 
         // 使用ZBuilder快速创建表单
@@ -201,29 +170,12 @@ class Enroll extends Admin
             ->setPageTitle('编辑') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['hidden', 'id'],
-                ['text', 'source', '数据来源', ''],
-                ['text', 'uid', '用户id', ''],
-                ['text', 'tag_id', '报名类型', '', TagModel::column('id,name')],
-                ['text', 'age', '年龄', ''],
-                ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column('id,name')],
-                ['text', 'name', '姓名', ''],
-                ['text', 'email', '电子邮箱', ''],
-                ['text', 'phone', '电话', ''],
-                ['number', 'gender', '性别', ''],
-                ['text', 'cert', '身份证号', ''],
-                ['text', 'school_name', '绑定机构', ''],
-                ['text', 'school_name_show', '学校机构', ''],
-                ['text', 'province', '省', ''],
-                ['text', 'city', '城市', ''],
-                ['text', 'district', '区', ''],
-                ['text', 'address', '地址', ''],
-                ['text', 'receiver_name', '收件人', ''],
-                ['switch', 'is_upload', '是否已上传', ''],
-                ['switch', 'is_verify', '是否验证', ''],
-                ['switch', 'is_payed', '是否已支付', ''],
-                ['switch', 'is_expect', '是否已预约', ''],
-                ['text', 'expect_date', '预约时间', ''],
+                ["text", 'study_type', '课程类型'],
+                ["text", 'tag_type', '标签类型'],
+                ["text", 'class', '标签分类'],
+                ["text", 'name', '标签名称'],
             ]);
+
         return $data
             ->setFormData($info) // 设置表单数据
             ->fetch();;
@@ -461,29 +413,22 @@ class Enroll extends Admin
 
         switch ($type) {
             case 'enable':
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === TagModel::where('id', 'in', $ids)
                         ->setField('status', 1)) {
                     $this->error('启用失败');
                 }
                 break;
             case 'disable':
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === TagModel::where('id', 'in', $ids)
                         ->setField('status', 0)) {
                     $this->error('禁用失败');
                 }
                 break;
             case 'delete':
-                Db::startTrans();
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === TagModel::where('id', 'in', $ids)
                         ->delete()) {
-                    Db::rollback();
                     $this->error('删除失败');
                 }
-                if (FamilyMemberModel::where("student_id", 'in', $ids)->delete()) {
-                }
-                if (FamilyModel::where("student_id", 'in', $ids)->delete()) {
-                }
-                Db::commit();
                 break;
             default:
                 $this->error('非法操作');
@@ -548,6 +493,7 @@ class Enroll extends Admin
         return $this->setStatus('disable');
     }
 
+
     public function quickEdit($record = [])
     {
         $field = input('post.name', '');
@@ -578,7 +524,7 @@ class Enroll extends Admin
                 $this->error('权限不足，没有可操作的用户');
             }
         }
-        $result = EnrollModel::where("id", $id)
+        $result = TagModel::where("id", $id)
             ->setField($field, $value);
         if (false !== $result) {
             action_log('user_edit', 'user', $id, UID);
