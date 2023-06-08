@@ -56,7 +56,7 @@ class EnrollUpload extends Admin
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('teacher_name', '教师名称', 'text.edit')
             ->addColumn('teacher_phone', '教师电话', 'text.edit')
-            ->addColumn('is_original', '是否原创', 'switch')
+//            ->addColumn('is_original', '是否原创', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
 //            ->addRightButton('edit') // 添加编辑按钮
