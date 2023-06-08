@@ -5,7 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\gallery\model\ParentModel;
+use app\gallery\model\UserModel;
 use think\Db;
 use think\facade\Hook;
 use util\Tree;
@@ -28,15 +28,15 @@ class User extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = ParentModel::where($map)
+        $data_list = UserModel::where($map)
             ->order($order)
             ->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
-        $num1 = ParentModel::where("date", ">", $todaytime)
+        $num1 = UserModel::where("date", ">", $todaytime)
             ->count();
-        $num2 = ParentModel::count();
+        $num2 = UserModel::count();
 
         $btn_access = [
             'title' => '用户地址',
@@ -87,7 +87,7 @@ class User extends Admin
             if (true !== $result)
                 $this->error($result);
 
-            if ($user = ParentModel::create($data)) {
+            if ($user = UserModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
                 action_log('user_add', 'admin_user', $user['id'], UID);
@@ -131,7 +131,7 @@ class User extends Admin
         // 非超级管理员检查可编辑用户
         if (session('user_auth.role') != 1) {
             $role_list = RoleModel::getChildsId(session('user_auth.role'));
-            $user_list = ParentModel::where('role', 'in', $role_list)
+            $user_list = UserModel::where('role', 'in', $role_list)
                 ->column('id');
             if (!in_array($id, $user_list)) {
                 $this->error('权限不足，没有可操作的用户');
@@ -145,8 +145,8 @@ class User extends Admin
             // 非超级管理需要验证可选择角色
 
 
-            if (ParentModel::update($data)) {
-                $user = ParentModel::get($data['id']);
+            if (UserModel::update($data)) {
+                $user = UserModel::get($data['id']);
                 // 记录行为
                 action_log('user_edit', 'user', $id, UID);
                 $this->success('编辑成功');
@@ -156,7 +156,7 @@ class User extends Admin
         }
 
         // 获取数据
-        $info = ParentModel::where('id', $id)
+        $info = UserModel::where('id', $id)
             ->find();
 
         // 使用ZBuilder快速创建表单
@@ -196,7 +196,7 @@ class User extends Admin
         // 非超级管理员检查可编辑用户
         if (session('user_auth.role') != 1) {
             $role_list = RoleModel::getChildsId(session('user_auth.role'));
-            $user_list = ParentModel::where('role', 'in', $role_list)
+            $user_list = UserModel::where('role', 'in', $role_list)
                 ->column('id');
             if (!in_array($uid, $user_list)) {
                 $this->error('权限不足，没有可操作的用户');
@@ -407,19 +407,19 @@ class User extends Admin
 
         switch ($type) {
             case 'enable':
-                if (false === ParentModel::where('id', 'in', $ids)
+                if (false === UserModel::where('id', 'in', $ids)
                         ->setField('status', 1)) {
                     $this->error('启用失败');
                 }
                 break;
             case 'disable':
-                if (false === ParentModel::where('id', 'in', $ids)
+                if (false === UserModel::where('id', 'in', $ids)
                         ->setField('status', 0)) {
                     $this->error('禁用失败');
                 }
                 break;
             case 'delete':
-                if (false === ParentModel::where('id', 'in', $ids)
+                if (false === UserModel::where('id', 'in', $ids)
                         ->delete()) {
                     $this->error('删除失败');
                 }
