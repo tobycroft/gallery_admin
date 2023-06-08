@@ -107,10 +107,10 @@ class FacilityUser extends Admin
         return ZBuilder::make('form')
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
-                ["text", 'study_type', '课程类型'],
-                ["text", 'tag_type', '标签类型'],
-                ["text", 'class', '标签分类'],
-                ["text", 'name', '标签名称'],
+                ["text", 'uid', 'uid', '设定0为自动绑定，重新设为0意思是重新通过该手机号绑定', '0'],
+                ["text", 'phone', '手机号'],
+                ["text", 'name', '管理员名称'],
+                ["text", 'facility_name', '管理的机构名称'],
             ])
             ->fetch();
     }
@@ -165,10 +165,10 @@ class FacilityUser extends Admin
             ->setPageTitle('编辑') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['hidden', 'id'],
-                ["text", 'study_type', '课程类型'],
-                ["text", 'tag_type', '标签类型'],
-                ["text", 'class', '标签分类'],
-                ["text", 'name', '标签名称'],
+                ['text', 'uid', 'uid', '设定0为自动绑定，重新设为0意思是重新通过该手机号绑定', '0'],
+                ['text', 'phone', '手机号'],
+                ['text', 'name', '管理员名称'],
+                ['text', 'facility_name', '管理的机构名称'],
             ]);
 
         return $data
