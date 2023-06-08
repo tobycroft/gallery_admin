@@ -5,7 +5,7 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\gallery\model\EnrollModel;
+use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
@@ -33,14 +33,14 @@ class EnrollUpload extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->order($order)->paginate();
+        $data_list = EnrollUploadModel::where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
-        $num1 = EnrollModel::where("date", ">", $todaytime)
+        $num1 = EnrollUploadModel::where("date", ">", $todaytime)
             ->count();
-        $num2 = EnrollModel::count();
-        $school = EnrollModel::column("id,name");
+        $num2 = EnrollUploadModel::count();
+        $school = EnrollUploadModel::column("id,name");
 
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
@@ -99,7 +99,7 @@ class EnrollUpload extends Admin
 
             $data['roles'] = isset($data['roles']) ? implode(',', $data['roles']) : '';
 
-            if ($user = EnrollModel::create($data)) {
+            if ($user = EnrollUploadModel::create($data)) {
                 Hook::listen('user_add', $user);
                 // 记录行为
                 action_log('user_add', 'admin_user', $user['id'], UID);
@@ -182,8 +182,8 @@ class EnrollUpload extends Admin
             // 非超级管理需要验证可选择角色
 
 
-            if (EnrollModel::update($data)) {
-                $user = EnrollModel::get($data['id']);
+            if (EnrollUploadModel::update($data)) {
+                $user = EnrollUploadModel::get($data['id']);
                 // 记录行为
                 action_log('user_edit', 'user', $id, UID);
                 $this->success('编辑成功');
@@ -193,7 +193,7 @@ class EnrollUpload extends Admin
         }
 
         // 获取数据
-        $info = EnrollModel::where('id', $id)
+        $info = EnrollUploadModel::where('id', $id)
             ->find();
 
         // 使用ZBuilder快速创建表单
@@ -461,20 +461,20 @@ class EnrollUpload extends Admin
 
         switch ($type) {
             case 'enable':
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === EnrollUploadModel::where('id', 'in', $ids)
                         ->setField('status', 1)) {
                     $this->error('启用失败');
                 }
                 break;
             case 'disable':
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === EnrollUploadModel::where('id', 'in', $ids)
                         ->setField('status', 0)) {
                     $this->error('禁用失败');
                 }
                 break;
             case 'delete':
                 Db::startTrans();
-                if (false === EnrollModel::where('id', 'in', $ids)
+                if (false === EnrollUploadModel::where('id', 'in', $ids)
                         ->delete()) {
                     Db::rollback();
                     $this->error('删除失败');
@@ -578,7 +578,7 @@ class EnrollUpload extends Admin
                 $this->error('权限不足，没有可操作的用户');
             }
         }
-        $result = EnrollModel::where("id", $id)
+        $result = EnrollUploadModel::where("id", $id)
             ->setField($field, $value);
         if (false !== $result) {
             action_log('user_edit', 'user', $id, UID);
