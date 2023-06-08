@@ -104,9 +104,6 @@ class TagGroup extends Admin
         return ZBuilder::make('form')
             ->setPageTitle('新增') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
-                ["text", 'study_type', '课程类型'],
-                ["text", 'tag_type', '标签类型'],
-                ["text", 'class', '标签分类'],
                 ["text", 'name', '标签名称'],
             ])
             ->fetch();
@@ -162,10 +159,7 @@ class TagGroup extends Admin
             ->setPageTitle('编辑') // 设置页面标题
             ->addFormItems([ // 批量添加表单项
                 ['hidden', 'id'],
-                ["text", 'study_type', '课程类型'],
-                ["text", 'tag_type', '标签类型'],
-                ["text", 'class', '标签分类'],
-                ["text", 'name', '标签名称'],
+                ['text', 'name', '标签名称'],
             ]);
 
         return $data
