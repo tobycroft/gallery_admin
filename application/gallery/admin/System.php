@@ -5,12 +5,6 @@ namespace app\gallery\admin;
 
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
-use app\parentschool\admin\AccessModel;
-use app\parentschool\admin\Hash;
-use app\parentschool\admin\ModuleModel;
-use app\parentschool\admin\RoleModel;
-use app\parentschool\model\ParentModel;
-use app\parentschool\model\SystemParamModel;
 use app\user\model\Role;
 use think\Db;
 use think\facade\Hook;
