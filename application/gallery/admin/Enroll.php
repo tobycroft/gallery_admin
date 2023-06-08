@@ -50,7 +50,7 @@ class Enroll extends Admin
             ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
-            ->addOrder('id,callsign,year,class')
+//            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
             ->addColumn('source', '数据来源', 'number')
             ->addColumn('uid', '用户id', 'number')
