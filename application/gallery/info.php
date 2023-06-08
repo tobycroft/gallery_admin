@@ -22,7 +22,7 @@ return [
     // 模块图标[选填]
     'icon'        => 'fa fa-fw fa-newspaper-o',
     // 模块描述[选填]
-    'description' => '门户模块',
+    'description' => 'gallery',
     // 开发者[必填]
     'author'      => 'YourFather',
     // 版本[必填],格式采用三段式：主版本号.次版本号.修订版本号
