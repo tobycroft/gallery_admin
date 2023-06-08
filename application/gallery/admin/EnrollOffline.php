@@ -19,7 +19,7 @@ use util\Tree;
  * 用户默认控制器
  * @package app\user\admin
  */
-class EnrollPay extends Admin
+class EnrollOffline extends Admin
 {
     /**
      * 用户首页
@@ -33,7 +33,7 @@ class EnrollPay extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate();
+        $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
