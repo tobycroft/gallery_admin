@@ -60,7 +60,10 @@ class EnrollPay extends Admin
             ->addColumn('cert', '身份证', 'text.edit')
             ->addColumn('school_name', '绑定机构', 'text.edit')
             ->addColumn('school_name_show', '报名学校', 'text.edit')
-            ->addColumn('is_payed', '已支付', 'switch')
+            ->addColumn('province', '报名学校', 'text.edit')
+            ->addColumn('city', '已支付', 'text.edit')
+            ->addColumn('district', '已支付', 'text.edit')
+            ->addColumn('address', '已支付', 'text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
@@ -123,7 +126,7 @@ class EnrollPay extends Admin
             ->addFormItems([ // 批量添加表单项
                 ['text', 'source', '数据来源', ''],
                 ['select', 'uid', '用户id', "", UserModel::column("id,name")],
-                 ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
                 ['text', 'age', '年龄', ''],
                 ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column("id,name")],
                 ['text', 'name', '姓名', ''],
