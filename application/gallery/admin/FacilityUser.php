@@ -43,15 +43,10 @@ class FacilityUser extends Admin
             ->addOrder('id')
             ->addColumns([
                 ['id', 'ID'],
+                ['uid', '用户id', 'text.edit'],
                 ['name', '报名标签', 'text.edit'],
-                ['ename', '报名显示', 'text.edit'],
-                ['group_name', '标签组名称', 'text.edit'],
-                ['img', '图片', 'picture'],
-                ['is_avail', '报名入口开关', 'switch'],
-                ['title', 'title', 'text.edit'],
-                ['content', 'content', "text.edit"],
-                ['price', 'price', "text.edit"],
-                ['price_title', 'price_title', "text.edit"],
+                ['phone', 'phone', 'text.edit'],
+                ['facility_name', '所属机构', 'text.edit'],
             ])
             ->addColumn('right_button', '操作', 'btn')
 //            ->addRightButton('edit') // 添加编辑按钮
