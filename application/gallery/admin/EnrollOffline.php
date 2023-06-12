@@ -32,6 +32,8 @@ class EnrollOffline extends Admin
         // 获取排序
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
+        print_r($map);
+        exit();
         // 读取用户数据
         $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
         $page = $data_list->render();
