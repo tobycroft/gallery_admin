@@ -65,7 +65,7 @@ class EnrollFree extends Admin
             ->addColumn('cert', '身份证', 'text.edit')
             ->addColumn('school_name', '绑定机构', 'text.edit')
             ->addColumn('school_name_show', '报名学校', 'text.edit')
-            ->addColumn('province', '报名学校', 'text.edit')
+            ->addColumn('province', '省', 'text.edit')
             ->addColumn('city', '已支付', 'text.edit')
             ->addColumn('district', '已支付', 'text.edit')
 //            ->addColumn('address', '已支付', 'text.edit')
