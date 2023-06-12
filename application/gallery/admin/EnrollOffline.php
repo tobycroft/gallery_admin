@@ -34,6 +34,7 @@ class EnrollOffline extends Admin
         $map = $this->getMap();
         echo json_encode($map);
         exit();
+
         // 读取用户数据
         $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
         $page = $data_list->render();
