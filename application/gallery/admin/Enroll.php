@@ -47,8 +47,8 @@ class Enroll extends Admin
 //            ->setPageTips("总数量：" . $num2, 'danger')
 //            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
             ->setSearchArea([
-                ['text', 'is_payed', '是否已支付', '',],
-
+                ['text', 'is_payed', '是否已支付',],
+                ['text', 'name', '姓名',],
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')

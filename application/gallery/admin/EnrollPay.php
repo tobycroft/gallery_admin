@@ -46,8 +46,8 @@ class EnrollPay extends Admin
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
             ->setSearchArea([
-                ['text', 'is_payed', '是否已支付', '',],
-
+                ['text', 'is_payed', '是否已支付',],
+                ['text', 'name', '姓名',],
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')

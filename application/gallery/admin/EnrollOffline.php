@@ -56,7 +56,6 @@ class EnrollOffline extends Admin
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
                 ['text', 'name', '姓名',],
-
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')
