@@ -48,6 +48,7 @@ class EnrollOffline extends Admin
 //            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
+                ['text', 'name', '姓名',],
 
             ])
             ->addTopButton("add")
