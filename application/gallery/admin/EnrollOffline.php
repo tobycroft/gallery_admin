@@ -32,9 +32,13 @@ class EnrollOffline extends Admin
         // 获取排序
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
-        echo json_encode($map);
-        exit();
-
+        foreach ($map as $key => $item) {
+            if ($item[0] == "name") {
+                $item[1] = "in";
+                $item[2] = join(',', explode(' ', $item[2]));
+            }
+            $map[$key] = $item;
+        }
         // 读取用户数据
         $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
         $page = $data_list->render();
