@@ -69,7 +69,6 @@ class Enroll extends Admin
             ->addColumn('city', '城市', 'text.edit')
             ->addColumn('district', '区域', 'text.edit')
             ->addColumn('is_payed', '是否已支付', 'switch')
-            ->addColumn('is_payed', '已支付', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
