@@ -45,7 +45,10 @@ class EnrollPay extends Admin
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
-//            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
+            ->setSearchArea([
+                ['switch', 'is_payed', '是否已支付', '',],
+
+            ])
             ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号']) // 设置搜索参数
