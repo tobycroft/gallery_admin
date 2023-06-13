@@ -54,7 +54,7 @@ class Enroll extends Admin
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')
-            ->setSearch(['name' => '学生姓名', 'phone' => "手机号"]) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
             ->addColumn('source', '数据来源', 'number')
