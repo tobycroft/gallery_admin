@@ -534,7 +534,7 @@ class EnrollPay extends Admin
                 break;
             case 'export':
                 echo json_encode($ids, 320);
-                break;
+                return;
                 $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
                 // 设置表头信息（对应字段名,宽度，显示表头名称）
 //        echo json_encode($data);
