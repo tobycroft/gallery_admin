@@ -8,14 +8,12 @@ use app\admin\model\Menu as MenuModel;
 use app\admin\model\Module as ModuleModel;
 use app\common\builder\ZBuilder;
 use app\common\controller\Common;
-use app\gallery\model\EnrollModel;
 use app\user\model\Message as MessageModel;
 use app\user\model\Role as RoleModel;
 use think\Db;
 use think\facade\App;
 use think\facade\Cache;
 use think\helper\Hash;
-use Tobycroft\AossSdk\Excel\Excel;
 
 /**
  * 后台公共控制器
@@ -24,15 +22,6 @@ use Tobycroft\AossSdk\Excel\Excel;
 class Admin extends Common
 {
 
-    public function export($ids = [])
-    {
-        $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
-        // 设置表头信息（对应字段名,宽度，显示表头名称）
-        $Aoss = new Excel(config('upload_prefix'));
-        $ret = $Aoss->create_excel_fileurl($data);
-        url($ret->file_url());
-    }
-    
     /**
      * 禁用
      * @param array $record 行为日志内容

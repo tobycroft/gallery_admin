@@ -13,6 +13,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
+use Tobycroft\AossSdk\Excel\Excel;
 use util\Tree;
 
 /**
@@ -21,6 +22,17 @@ use util\Tree;
  */
 class EnrollPay extends Admin
 {
+
+    public function export($ids = [])
+    {
+        $data = EnrollModel::field("id,uidage,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
+            ->where('id', 'in', $ids)->select()->toArray();
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+        $Aoss = new Excel(config('upload_prefix'));
+        $ret = $Aoss->create_excel_fileurl($data);
+        url($ret->file_url());
+    }
+
     /**
      * 用户首页
      * @return mixed
