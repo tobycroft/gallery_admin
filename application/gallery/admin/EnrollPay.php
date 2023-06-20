@@ -96,6 +96,7 @@ class EnrollPay extends Admin
             ->addColumn('address', '地址', 'text')
             ->addColumn('is_payed', '是否已支付', 'switch')
             ->addColumn('date', '创建时间')
+            ->addColumn('attachment', '图片', 'picture')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
 //            ->addRightButton('delete') //添加删除按钮
