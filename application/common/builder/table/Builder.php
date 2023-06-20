@@ -726,6 +726,18 @@ class Builder extends ZBuilder
                 ];
                 break;
 
+            // 导出(不可恢复)
+            case 'export':
+                // 默认属性
+                $btn_attribute = [
+                    'title' => '导出',
+                    'icon' => 'fa fa-times-circle-o',
+                    'class' => 'btn btn-info',
+                    'target-form' => 'ids',
+                    'href' => $this->getDefaultUrl($type, ['_t' => $table_token])
+                ];
+                break;
+
             // 自定义按钮
             default:
                 // 默认属性
