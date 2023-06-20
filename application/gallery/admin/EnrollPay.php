@@ -64,7 +64,7 @@ class EnrollPay extends Admin
 
         // 授权按钮
         $btn_access = [
-            'title' => '提交导出数据',
+            'title' => '导出数据',
             'icon' => 'fa fa-fw fa-key',
             'href' => url('export')
         ];
