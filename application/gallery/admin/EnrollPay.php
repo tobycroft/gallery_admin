@@ -6,6 +6,7 @@ namespace app\gallery\admin;
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
+use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
@@ -46,7 +47,10 @@ class EnrollPay extends Admin
         $map = $this->getMap();
         // 读取用户数据
         $data_list = EnrollModel::where($map)
-            ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate();
+            ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate()->each(function ($item) {
+                $up = EnrollUploadModel::where("enroll_id", $item["enroll_id"])->find()->toArray();
+                $item["attachment"] = $up["attachment"];
+            });
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
