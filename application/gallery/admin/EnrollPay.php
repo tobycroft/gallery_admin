@@ -520,7 +520,6 @@ class EnrollPay extends Admin
                 Db::commit();
                 break;
             case 'export':
-
                 $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
                 // 设置表头信息（对应字段名,宽度，显示表头名称）
                 $Aoss = new Excel(config('upload_prefix'));
