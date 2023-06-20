@@ -31,7 +31,11 @@ class EnrollPay extends Admin
                 $item['attachment'] = '';
                 $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
                 if (!$up->isEmpty()) {
+                    $item['title'] = $up['title'];
+                    $item['content'] = $up['content'];
                     $item['attachment'] = $up['attachment'];
+                    $item['teacher_name'] = $up['teacher_name'];
+                    $item['teacher_phone'] = $up['teacher_phone'];
                 }
                 return $item;
             });
