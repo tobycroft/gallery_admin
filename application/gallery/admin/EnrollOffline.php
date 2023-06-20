@@ -13,6 +13,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
+use Tobycroft\AossSdk\Excel;
 use util\Tree;
 
 /**
@@ -21,6 +22,20 @@ use util\Tree;
  */
 class EnrollOffline extends Admin
 {
+
+
+    public function export($ids = [])
+    {
+        // 查询数据
+        $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+//        echo json_encode($data);
+        $Aoss = new Excel(config('upload_prefix'));
+        return $Aoss->create_excel_download_directly($data);
+        // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
+//        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
+    }
+
     /**
      * 用户首页
      * @return mixed
@@ -49,17 +64,27 @@ class EnrollOffline extends Admin
         $num2 = EnrollModel::count();
         $school = EnrollModel::column("id,name");
         $tag = TagModel::column("id,name");
+
+
+        // 授权按钮
+        $btn_access = [
+            'title' => '导出数据',
+            'icon' => 'fa fa-fw fa-key',
+            'href' => url('export', ['id' => '__id__'])
+        ];
+
+
         return ZBuilder::make('table')
-            ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
+            ->setPageTips('总数量：' . $num2 . '    今日数量：' . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
-//            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
                 ['text', 'name', '姓名',],
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
             ])
-            ->addTopButton("add")
+            ->addTopButton('add')
+            ->addTopButton('custom', $btn_access)
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
