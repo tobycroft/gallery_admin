@@ -33,7 +33,7 @@ class EnrollPay extends Admin
     public function export($ids = [])
     {
         echo json_encode($ids,320);
-        return
+        return;
         // 查询数据
         $data = EnrollModel::where("id", "in", $ids)->select()->toArray();
         // 设置表头信息（对应字段名,宽度，显示表头名称）
