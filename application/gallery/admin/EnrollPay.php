@@ -50,6 +50,7 @@ class EnrollPay extends Admin
             ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate()->each(function ($item) {
                 $up = EnrollUploadModel::where("enroll_id", $item["enroll_id"])->find()->toArray();
                 $item["attachment"] = $up["attachment"];
+                return $item;
             });
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
