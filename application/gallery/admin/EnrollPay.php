@@ -13,7 +13,6 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
-use think\Url;
 use Tobycroft\AossSdk\Excel;
 use util\Tree;
 
@@ -530,8 +529,7 @@ class EnrollPay extends Admin
                 // 设置表头信息（对应字段名,宽度，显示表头名称）
                 $Aoss = new Excel(config('upload_prefix'));
                 $ret = $Aoss->create_excel_download_directly($data);
-                \url($ret);
-                return ;
+                echo $ret;
                 break;
             default:
                 $this->error('非法操作');
