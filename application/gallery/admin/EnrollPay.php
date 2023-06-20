@@ -29,19 +29,12 @@ class EnrollPay extends Admin
      * @throws \think\exception\DbException
      */
 
-    public function export()
+
+    public function export($ids = [])
     {
         // 查询数据
-        $data = EnrollModel::all();
+        $data = EnrollModel::where("id", "in", $ids);
         // 设置表头信息（对应字段名,宽度，显示表头名称）
-        $cellName = [
-            ['id', 'auto', 'ID'],
-            ['name', 'auto', '级别名称'],
-            ['score', 'auto', '积分要求'],
-            ['discount', 'auto', '享受折扣'],
-            ['create_time', 'auto', '创建时间'],
-            ['update_time', 'auto', '更新时间']
-        ];
 //        echo json_encode($data);
         $Aoss = new Excel(config('upload_prefix'));
         $Aoss->create_excel_download_directly($data);
