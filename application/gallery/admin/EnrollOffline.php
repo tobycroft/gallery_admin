@@ -26,7 +26,10 @@ class EnrollOffline extends Admin
     public function export($ids = [])
     {
         $data = EnrollModel::field('id,uid,age,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
-            ->where('id', 'in', $ids)->select()->toArray();
+            ->where('id', 'in', $ids)
+            ->order("id desc")
+            ->select()
+            ->toArray();
         // 设置表头信息（对应字段名,宽度，显示表头名称）
         $Aoss = new Excel(config('upload_prefix'));
         $ret = $Aoss->create_excel_fileurl($data);
