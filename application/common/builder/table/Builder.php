@@ -996,18 +996,6 @@ class Builder extends ZBuilder
                 ];
                 break;
 
-
-            // 禁用按钮
-            case 'export':
-                // 默认属性
-                $btn_attribute = [
-                    'title' => '导出',
-                    'icon' => 'fa fa-ban',
-                    'class' => 'btn btn-' . $btn_style['size'] . ' btn-' . $btn_style['style'] . ' ajax-get confirm',
-                    'href' => $this->getDefaultUrl($type, ['ids' => '__id__', '_t' => $table_token]),
-                ];
-                break;
-
             // 自定义按钮
             default:
                 // 默认属性
