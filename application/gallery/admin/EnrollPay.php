@@ -13,7 +13,6 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
-use Tobycroft\AossSdk\Excel\Excel;
 use util\Tree;
 
 /**
@@ -28,15 +27,6 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-
-
-    public function export($ids = [])
-    {
-        Hook::listen('user_export', $ids);
-        action_log('user_export', 'user', $ids, UID);
-        return $this->setStatus('export');
-    }
-
     public function index()
     {
         // 获取排序
@@ -519,14 +509,7 @@ class EnrollPay extends Admin
                 }
                 Db::commit();
                 break;
-            case 'export':
-                $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
-                // 设置表头信息（对应字段名,宽度，显示表头名称）
-                $Aoss = new Excel(config('upload_prefix'));
-                $ret = $Aoss->create_excel_fileurl($data);
-                url($ret->file_url());
-                return;
-                break;
+
             default:
                 $this->error('非法操作');
         }

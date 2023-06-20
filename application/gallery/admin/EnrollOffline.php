@@ -13,7 +13,6 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
-use Tobycroft\AossSdk\Excel;
 use util\Tree;
 
 /**
@@ -22,19 +21,6 @@ use util\Tree;
  */
 class EnrollOffline extends Admin
 {
-
-
-    public function export($ids = [])
-    {
-        // 查询数据
-        $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
-        // 设置表头信息（对应字段名,宽度，显示表头名称）
-//        echo json_encode($data);
-        $Aoss = new Excel(config('upload_prefix'));
-        return $Aoss->create_excel_download_directly($data);
-        // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
-//        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
-    }
 
     /**
      * 用户首页
