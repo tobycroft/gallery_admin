@@ -26,7 +26,7 @@ class EnrollPay extends Admin
 
     public function export($ids = [])
     {
-        $data = EnrollModel::field("id,uidage,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
+        $data = EnrollModel::field("id,uid,age,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
             ->where('id', 'in', $ids)->select()->each(function ($item) {
                 $item['attachment'] = '';
                 $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
