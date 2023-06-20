@@ -37,7 +37,7 @@ class EnrollPay extends Admin
         // 设置表头信息（对应字段名,宽度，显示表头名称）
 //        echo json_encode($data);
         $Aoss = new Excel(config('upload_prefix'));
-        $Aoss->create_excel_download_directly($data);
+        return $Aoss->create_excel_download_directly($data);
         // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
 //        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
     }
