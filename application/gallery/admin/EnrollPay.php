@@ -526,6 +526,7 @@ class EnrollPay extends Admin
                 $Aoss = new Excel(config('upload_prefix'));
                 $ret = $Aoss->create_excel_fileurl($data);
                 echo $ret->file_url();
+                return;
                 break;
             default:
                 $this->error('非法操作');
