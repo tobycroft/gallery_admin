@@ -27,6 +27,24 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
+
+    public function export()
+    {
+        // 查询数据
+        $data = LevelModel::all();
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+        $cellName = [
+            ['id', 'auto', 'ID'],
+            ['name', 'auto', '级别名称'],
+            ['score', 'auto', '积分要求'],
+            ['discount', 'auto', '享受折扣'],
+            ['create_time', 'auto', '创建时间'],
+            ['update_time', 'auto', '更新时间']
+        ];
+        // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
+        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
+    }
+
     public function index()
     {
         // 获取排序
