@@ -25,7 +25,7 @@ class EnrollOffline extends Admin
 
     public function export($ids = [])
     {
-        $data = EnrollModel::field('id,uid,age,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
+        $data = EnrollModel::field('id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
             ->where('id', 'in', $ids)
             ->order("id desc")
             ->select()
@@ -69,6 +69,7 @@ class EnrollOffline extends Admin
         $num2 = EnrollModel::count();
         $school = EnrollModel::column("id,name");
         $tag = TagModel::column("id,name");
+        $tag_group = TagGroupModel::column('id,name');
 
 
         // 授权按钮
@@ -98,6 +99,7 @@ class EnrollOffline extends Admin
             ->addColumn('uid', '用户id', 'number')
             ->addColumn('age', '年龄', 'number')
             ->addColumn('tag_id', '类型', 'select', $tag)
+            ->addColumn('tag_group_id', '组别', 'select', $tag_group)
             ->addColumn('phone', '手机', 'text')
             ->addColumn('name', '姓名', 'text.edit')
             ->addColumn('cert', '身份证', 'text.edit')
