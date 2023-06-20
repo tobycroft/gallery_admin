@@ -13,7 +13,6 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
-use Tobycroft\AossSdk\Excel;
 use util\Tree;
 
 /**
@@ -516,10 +515,6 @@ class EnrollPay extends Admin
                         ->delete()) {
                     Db::rollback();
                     $this->error('删除失败');
-                }
-                if (FamilyMemberModel::where("student_id", 'in', $ids)->delete()) {
-                }
-                if (FamilyModel::where("student_id", 'in', $ids)->delete()) {
                 }
                 Db::commit();
                 break;
