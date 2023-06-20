@@ -35,15 +35,6 @@ class EnrollPay extends Admin
         Hook::listen('user_export', $ids);
         action_log('user_export', 'user', $ids, UID);
         return $this->setStatus('export');
-        return;
-        // 查询数据
-        $data = EnrollModel::where("id", "in", $ids)->select()->toArray();
-        // 设置表头信息（对应字段名,宽度，显示表头名称）
-//        echo json_encode($data);
-        $Aoss = new Excel(config('upload_prefix'));
-        return $Aoss->create_excel_download_directly($data);
-        // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
-//        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
     }
 
     public function index()
@@ -506,8 +497,6 @@ class EnrollPay extends Admin
     {
         $ids = $this->request->isPost() ? input('post.ids/a') : input('param.ids');
         $ids = (array)$ids;
-        echo json_encode($ids, 320);
-        return;
         switch ($type) {
             case 'enable':
                 if (false === EnrollModel::where('id', 'in', $ids)
