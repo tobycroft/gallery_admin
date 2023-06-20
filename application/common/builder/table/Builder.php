@@ -726,13 +726,13 @@ class Builder extends ZBuilder
                 ];
                 break;
 
-            // 导出(不可恢复)
+            // 导出
             case 'export':
                 // 默认属性
                 $btn_attribute = [
                     'title' => '导出',
-                    'icon' => 'fa fa-times-circle-o',
-                    'class' => 'btn btn-info',
+                    'icon' => 'fa fa-ban',
+                    'class' => 'btn btn-warning ajax-post confirm',
                     'target-form' => 'ids',
                     'href' => $this->getDefaultUrl($type, ['_t' => $table_token, 'field' => $field])
                 ];
