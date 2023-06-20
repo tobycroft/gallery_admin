@@ -29,22 +29,22 @@ class EnrollPay extends Admin
         $data = EnrollModel::field("id,uid,age,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
             ->where('id', 'in', $ids)->select()->toArray();
 
-        foreach ($data as $key => $item) {
-            $item['title'] = '';
-            $item['content'] = '';
-            $item['attachment'] = '';
-            $item['teacher_name'] = '';
-            $item['teacher_phone'] = '';
-            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
-            if (!$up->isEmpty()) {
-                $item['title'] = $up['title'];
-                $item['content'] = $up['content'];
-                $item['attachment'] = $up['attachment'];
-                $item['teacher_name'] = $up['teacher_name'];
-                $item['teacher_phone'] = $up['teacher_phone'];
-            }
-            $data[$key] = $item;
-        }
+//        foreach ($data as $key => $item) {
+//            $item['title'] = '';
+//            $item['content'] = '';
+//            $item['attachment'] = '';
+//            $item['teacher_name'] = '';
+//            $item['teacher_phone'] = '';
+//            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+//            if (!$up->isEmpty()) {
+//                $item['title'] = $up['title'];
+//                $item['content'] = $up['content'];
+//                $item['attachment'] = $up['attachment'];
+//                $item['teacher_name'] = $up['teacher_name'];
+//                $item['teacher_phone'] = $up['teacher_phone'];
+//            }
+//            $data[$key] = $item;
+//        }
 
         // 设置表头信息（对应字段名,宽度，显示表头名称）
         $Aoss = new Excel(config('upload_prefix'));
