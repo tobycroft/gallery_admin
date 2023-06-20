@@ -1004,7 +1004,7 @@ class Builder extends ZBuilder
                     'title' => '导出',
                     'icon' => 'fa fa-ban',
                     'class' => 'btn btn-' . $btn_style['size'] . ' btn-' . $btn_style['style'] . ' ajax-get confirm',
-                    'href' => $this->getDefaultUrl($type, ['ids' => '__id__', '_t' => $table_token])
+                    'href' => $this->getDefaultUrl($type, ['ids' => '__id__', '_t' => $table_token]),
                 ];
                 break;
 
