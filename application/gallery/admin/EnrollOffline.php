@@ -31,6 +31,11 @@ class EnrollOffline extends Admin
             ->select()
             ->toArray();
         // 设置表头信息（对应字段名,宽度，显示表头名称）
+        foreach ($data as $key => $item) {
+            $item['tag_id'] = TagModel::where('id', $item['tag_id'])->column('name');
+            $item['tag_group_id'] = TagGroupModel::where('id', $item['tag_group_id'])->column('name');
+            $data[$key] = $item;
+        }
         $Aoss = new Excel(config('upload_prefix'));
         $ret = $Aoss->create_excel_fileurl($data);
         $this->success('成功', $ret->file_url(), '_blank');
