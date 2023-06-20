@@ -49,7 +49,7 @@ class EnrollPay extends Admin
         // 设置表头信息（对应字段名,宽度，显示表头名称）
         $Aoss = new Excel(config('upload_prefix'));
         $ret = $Aoss->create_excel_fileurl($data);
-        $this->success("成功", url($ret->file_url()), "_blank");
+        $this->success("成功", $ret->file_url(), "_blank");
     }
 
     /**
