@@ -31,7 +31,7 @@ class EnrollPay extends Admin
     public function export()
     {
         // 查询数据
-        $data = LevelModel::all();
+        $data = EnrollModel::all();
         // 设置表头信息（对应字段名,宽度，显示表头名称）
         $cellName = [
             ['id', 'auto', 'ID'],
