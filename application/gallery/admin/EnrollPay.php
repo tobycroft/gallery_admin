@@ -62,7 +62,7 @@ class EnrollPay extends Admin
         $btn_access = [
             'title' => '导出数据',
             'icon' => 'fa fa-fw fa-key',
-            'href' => url('export')
+            'href' => url('export', ["id" => '__id__'])
         ];
 
 
