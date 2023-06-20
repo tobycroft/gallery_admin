@@ -60,6 +60,15 @@ class EnrollPay extends Admin
         $num2 = EnrollModel::count();
         $school = EnrollModel::column("id,name");
         $tag = TagModel::column("id,name");
+
+        // 授权按钮
+        $btn_access = [
+            'title' => '提交导出数据',
+            'icon' => 'fa fa-fw fa-key',
+            'href' => url('export')
+        ];
+
+
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
