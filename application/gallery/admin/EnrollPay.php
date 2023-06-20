@@ -27,21 +27,24 @@ class EnrollPay extends Admin
     public function export($ids = [])
     {
         $data = EnrollModel::field("id,uid,age,tag_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
-            ->where('id', 'in', $ids)->select()->each(function ($item) {
-//                $item['attachment'] = '';
-//                $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
-//                if (!$up->isEmpty()) {
-//                    $item['title'] = $up['title'];
-//                    $item['content'] = $up['content'];
-//                    $item['attachment'] = $up['attachment'];
-//                    $item['teacher_name'] = $up['teacher_name'];
-//                    $item['teacher_phone'] = $up['teacher_phone'];
-//                }
-//                return $item;
-            });
+            ->where('id', 'in', $ids)->select()->toArray();
+
+        foreach ($data as $key => $item) {
+            $item['attachment'] = '';
+            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+            if (!$up->isEmpty()) {
+                $item['title'] = $up['title'];
+                $item['content'] = $up['content'];
+                $item['attachment'] = $up['attachment'];
+                $item['teacher_name'] = $up['teacher_name'];
+                $item['teacher_phone'] = $up['teacher_phone'];
+            }
+            $data[$key]=$item;
+        }
+
         // 设置表头信息（对应字段名,宽度，显示表头名称）
         $Aoss = new Excel(config('upload_prefix'));
-        $ret = $Aoss->create_excel_fileurl($data->toArray());
+        $ret = $Aoss->create_excel_fileurl($data);
         url($ret->file_url());
     }
 
