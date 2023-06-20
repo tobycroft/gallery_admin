@@ -734,7 +734,7 @@ class Builder extends ZBuilder
                     'icon' => 'fa fa-times-circle-o',
                     'class' => 'btn btn-info',
                     'target-form' => 'ids',
-                    'href' => $this->getDefaultUrl($type, ['_t' => $table_token])
+                    'href' => $this->getDefaultUrl($type, ['_t' => $table_token, 'field' => $field])
                 ];
                 break;
 
