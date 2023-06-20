@@ -527,7 +527,8 @@ class EnrollPay extends Admin
 
                 $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
                 // 设置表头信息（对应字段名,宽度，显示表头名称）
-//        echo json_encode($data);
+        echo json_encode($data);
+        return ;
                 $Aoss = new Excel(config('upload_prefix'));
                 return $Aoss->create_excel_download_directly($data);
                 break;
