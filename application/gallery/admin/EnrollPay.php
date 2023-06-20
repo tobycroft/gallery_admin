@@ -41,8 +41,9 @@ class EnrollPay extends Admin
             ['create_time', 'auto', '创建时间'],
             ['update_time', 'auto', '更新时间']
         ];
+        echo json_encode($data);
         // 调用插件（传入插件名，[导出文件名、表头信息、具体数据]）
-        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
+//        plugin_action('Excel/Excel/export', ['test', $cellName, $data]);
     }
 
     public function index()
