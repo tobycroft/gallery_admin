@@ -505,7 +505,8 @@ class EnrollPay extends Admin
     {
         $ids = $this->request->isPost() ? input('post.ids/a') : input('param.ids');
         $ids = (array)$ids;
-
+        echo json_encode($ids, 320);
+        return;
         switch ($type) {
             case 'enable':
                 if (false === EnrollModel::where('id', 'in', $ids)
@@ -533,8 +534,7 @@ class EnrollPay extends Admin
                 Db::commit();
                 break;
             case 'export':
-                echo json_encode($ids, 320);
-                return;
+
                 $data = EnrollModel::where('id', 'in', $ids)->select()->toArray();
                 // 设置表头信息（对应字段名,宽度，显示表头名称）
 //        echo json_encode($data);
