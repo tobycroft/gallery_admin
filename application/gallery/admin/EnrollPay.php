@@ -32,7 +32,7 @@ class EnrollPay extends Admin
             ->select()->toArray();
 
         foreach ($data as $key => $item) {
-            $item["cert"] .= "ID:";
+            $item["cert"] = "ID:".$item["cert"];
             $item['title'] = '';
             $item['content'] = '';
             $item['attachment'] = '';
