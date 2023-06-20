@@ -48,7 +48,7 @@ class EnrollPay extends Admin
         // 读取用户数据
         $data_list = EnrollModel::where($map)
             ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate()->each(function ($item) {
-                $up = EnrollUploadModel::where("enroll_id", $item["id"])->find()->toArray();
+                $up = EnrollUploadModel::where("enroll_id", $item["id"])->findOrEmpty();
                 $item["attachment"] = $up["attachment"];
                 return $item;
             });
