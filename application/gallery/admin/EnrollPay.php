@@ -32,7 +32,9 @@ class EnrollPay extends Admin
 
     public function export($ids = [])
     {
-        echo json_encode($ids,320);
+        Hook::listen('user_export', $ids);
+        action_log('user_export', 'user', $ids, UID);
+        return $this->setStatus('export');
         return;
         // 查询数据
         $data = EnrollModel::where("id", "in", $ids)->select()->toArray();
@@ -529,6 +531,9 @@ class EnrollPay extends Admin
                 if (FamilyModel::where("student_id", 'in', $ids)->delete()) {
                 }
                 Db::commit();
+                break;
+            case 'export':
+                echo json_encode($ids, 320);
                 break;
             default:
                 $this->error('非法操作');
