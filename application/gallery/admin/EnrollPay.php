@@ -30,7 +30,11 @@ class EnrollPay extends Admin
             ->where('id', 'in', $ids)->select()->toArray();
 
         foreach ($data as $key => $item) {
+            $item['title'] = '';
+            $item['content'] = '';
             $item['attachment'] = '';
+            $item['teacher_name'] = '';
+            $item['teacher_phone'] = '';
             $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
             if (!$up->isEmpty()) {
                 $item['title'] = $up['title'];
@@ -39,7 +43,7 @@ class EnrollPay extends Admin
                 $item['teacher_name'] = $up['teacher_name'];
                 $item['teacher_phone'] = $up['teacher_phone'];
             }
-            $data[$key]=$item;
+            $data[$key] = $item;
         }
 
         // 设置表头信息（对应字段名,宽度，显示表头名称）
