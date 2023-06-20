@@ -45,9 +45,7 @@ class EnrollPay extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::alias("a")
-            ->where($map)
-            ->leftJoin(["g_enroll_upload" => "b"], "b.enroll_id=a.id")
+        $data_list = EnrollModel::where($map)
             ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
@@ -89,7 +87,6 @@ class EnrollPay extends Admin
             ->addColumn('district', '区域', 'text.edit')
             ->addColumn('address', '地址', 'text')
             ->addColumn('is_payed', '是否已支付', 'switch')
-            ->addColumn('attachment', '图片', 'picture')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
