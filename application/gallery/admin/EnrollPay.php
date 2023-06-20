@@ -32,8 +32,8 @@ class EnrollPay extends Admin
             ->select()->toArray();
 
         foreach ($data as $key => $item) {
-            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->column("name");
-            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->column("name");
+            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->value("name");
+            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->value("name");
             $item["cert"] = "ID:" . $item["cert"];
             $item['title'] = '';
             $item['content'] = '';
