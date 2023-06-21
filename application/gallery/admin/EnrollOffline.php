@@ -72,14 +72,6 @@ class EnrollOffline extends Admin
         $tag_group = TagGroupModel::column('id,name');
 
 
-        // 授权按钮
-        $btn_access = [
-            'title' => '导出数据',
-            'icon' => 'fa fa-fw fa-key',
-            'href' => url('export', ['id' => '__id__'])
-        ];
-
-
         return ZBuilder::make('table')
             ->setPageTips('总数量：' . $num2 . '    今日数量：' . $num1, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
@@ -90,7 +82,7 @@ class EnrollOffline extends Admin
                 ['text', 'school_name_show', '报名学校',],
             ])
             ->addTopButton('add')
-            ->addTopButton('custom', $btn_access)
+            ->addTopButton('export')
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
