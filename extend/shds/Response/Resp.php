@@ -21,6 +21,7 @@ class Resp
         if (empty($ret)) {
             $this->error = "json解析错误";
         }
+        $this->is_success = $ret['success'];
         if ($ret["success"]) {
             $this->data = $ret["data"];
         } else {
