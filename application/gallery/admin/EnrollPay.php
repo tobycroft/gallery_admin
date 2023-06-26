@@ -28,8 +28,8 @@ class EnrollPay extends Admin
     public function sync($ids = [])
     {
         try {
-            Login::login();
-            $this->success();
+            $token = Login::login();
+            $this->success($token);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
