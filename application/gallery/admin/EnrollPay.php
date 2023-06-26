@@ -14,6 +14,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use shds\Login;
 use think\Db;
+use think\exception\ErrorException;
 use think\exception\ThrowableError;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
@@ -30,7 +31,7 @@ class EnrollPay extends Admin
     {
         try {
             Login::login();
-        } catch (ThrowableError $e) {
+        } catch (ErrorException $e) {
             $this->error($e->getMessage());
         }
     }
