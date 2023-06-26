@@ -4,7 +4,7 @@ namespace shds;
 
 use shds\Response\AddBaby;
 use shds\Response\FindBaby;
-use shds\Response\Resp;
+use shds\Response\UploadBabyWork;
 use shds\Response\UploadFile;
 use think\Exception;
 
@@ -42,26 +42,26 @@ class Student extends Login
         return $record;
     }
 
-    public function uploadBabyWork($activityId, $activityName, $babyId, $groupId, $imgs, $majorId, $majorname, $name,)
+    public function uploadBabyWork($activityId, $babyId, $groupId, $title, $content, $imgs, $majorId, $teacherName, $teacherTel, $teacherCompany)
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
-            'activityName' => '第二十七届全国中小学生绘画书法作品比赛',
             'imgs' => [
                 'https://motherland-h5.oss-cn-beijing.aliyuncs.com/1687769113264/2023062616451340180877206391549.jpg'
             ],
-            'activityId' => 24,
+            'activityId' => $activityId,
             'sourceFile' => '',
-            'groupId' => 12,
-            'majorId' => 16,
-            'majorname' => '绘画',
-            'teacherName' => '123',
-            'teacherCompany' => '123',
-            'teacherTel' => '123',
-            'name' => '123',
-            'synopsis' => '123',
-            'babyId' => 813116
+            'groupId' => $groupId,
+            'majorId' => $majorId,
+            'teacherName' => $teacherName,
+            'teacherCompany' => $teacherCompany,
+            'teacherTel' => $teacherTel,
+            'name' => $title,
+            'synopsis' => $content,
+            'babyId' => $babyId
         ], ['token' => $this->token]);
+        $upload = new UploadBabyWork($ret);
+        return $upload;
     }
 
     public function uploadFile()

@@ -7,8 +7,6 @@ class UploadBabyWork extends Resp
 
     protected int $code = 0;
 
-    protected string $fileUrl = "";
-
     public function __construct($json)
     {
         parent::__construct($json);
@@ -20,8 +18,6 @@ class UploadBabyWork extends Resp
             $this->is_success = false;
         }
         $this->error = $this->data['data'];
-        $this->data = $this->data["data"];
-        $this->fileUrl = $this->data["fileUrl"];
     }
 
     /**
@@ -30,13 +26,5 @@ class UploadBabyWork extends Resp
     public function getCode(): int
     {
         return $this->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileUrl(): string
-    {
-        return $this->fileUrl;
     }
 }
