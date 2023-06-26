@@ -22,6 +22,7 @@ class Net
             array_push($headers, $key . ":" . $value);
         });
         var_dump($headers);
+        exit();
         if (!empty($postData)) {
             $postData = json_encode($postData, 320);
         }
