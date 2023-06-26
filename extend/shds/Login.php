@@ -11,7 +11,7 @@ class Login
     public function __construct()
     {
         $this->token = cache('shds_remote_token');
-        if (empty($this->token)) {
+        if ($this->token=="") {
             $this->login();
         }
     }

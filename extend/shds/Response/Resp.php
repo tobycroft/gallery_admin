@@ -61,7 +61,6 @@ class Resp
     {
 
         if ($this->str_code == "SYSTEM_LOGIN_ERROR") {
-            echo($this->str_code);
             cache('shds_remote_token', '', 1);
             return true;
         }
