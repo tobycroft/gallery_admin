@@ -34,6 +34,7 @@ class Student extends Login
         echo $this->token;
         $ret = \Net::PostBinary($path, config('shds_remote_url') . $path, ["Token" => $this->token]);
         var_dump($ret);
+
 //        $resp = new Resp($ret);
 //        return $resp;
     }
