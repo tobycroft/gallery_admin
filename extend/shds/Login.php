@@ -19,7 +19,8 @@ class Login
         $data = $decode['data'];
         if ($success && !empty($data)) {
             return $data["token"];
+        } else {
+            throw $decode["message"];
         }
-        return "";
     }
 }
