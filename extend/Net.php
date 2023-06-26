@@ -10,7 +10,16 @@ class Net
         if (!empty($query)) {
             $send_url .= '?' . http_build_query($query);
         }
-        $headers = array('Content-type: application/json;charset=UTF-8', 'Accept: application/json', 'Cache-Control: no-cache', 'Pragma: no-cache');
+        $header_r = [
+            'Content-type' => 'application/json;charset=UTF-8',
+            'Accept' => 'application/json',
+            'Cache-Control' => 'no-cache',
+            'Pragma' => 'no-cache',
+        ];
+        $headers = [];
+        array_walk($header_r, function ($value, $key) use ($headers) {
+            array_push($headers, $key . ":" . $value);
+        });
         $headers = array_merge($headers, $postHeaders);
         if (!empty($postData)) {
             $postData = json_encode($postData, 320);
