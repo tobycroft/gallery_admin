@@ -39,7 +39,7 @@ class Student extends Login
             'idCardNo' => $cert
         ], ['token' => $this->token]);
         $record = new FindBaby($ret);
-        echo json_encode($record->getRecords());
+        return $record;
     }
 
     public function uploadBabyWork($activityId, $activityName, $babyId, $groupId, $imgs, $majorId, $majorname, $name,)
