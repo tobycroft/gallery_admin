@@ -13,7 +13,7 @@ class Login
     {
         $this->token = cache('shds_remote_token');
         if ($this->token) {
-            return;
+            return $this->token ;
         }
         $ret = \Net::PostJson(config('shds_remote_url') . "/megagame/login/user/login", [], [
             'code' => config('shds_remote_username'),
