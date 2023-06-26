@@ -2,7 +2,8 @@
 
 namespace shds\Response;
 
-class GetActivityList
+class GetActivityList extends Resp
 {
 
+    
 }
