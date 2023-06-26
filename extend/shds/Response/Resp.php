@@ -25,7 +25,9 @@ class Resp
         }
         $this->is_success = $ret['success'];
         $this->str_code = $ret["code"];
-        $this->logout();
+        if ($this->logout()) {
+            return;
+        }
         if ($ret["success"]) {
             $this->data = $ret["data"];
         } else {
@@ -54,10 +56,12 @@ class Resp
         return $this->data;
     }
 
-    private function logout()
+    private function logout(): bool
     {
         if ($this->str_code == "SYSTEM_LOGIN_ERROR") {
             cache('shds_remote_token', '', 1);
+            return true;
         }
+        return false;
     }
 }
