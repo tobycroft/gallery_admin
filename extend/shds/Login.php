@@ -32,7 +32,7 @@ class Login
             if ($success && !empty($data)) {
 //                return config('shds_remote_token', $data['token']);
                 cache("shds_remote_token", $data["token"], 600);
-                echo "刷新缓存";
+//                echo "刷新缓存";
                 $this->token = $data["token"];
                 return $this->token;
             } else {
