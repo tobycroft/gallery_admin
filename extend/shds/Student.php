@@ -25,4 +25,11 @@ class Student extends Login
             throw new Exception($resp->getError());
         }
     }
+
+    public function uploadFile()
+    {
+        \Net::PostJson($base_url)
+    }
+
+
 }

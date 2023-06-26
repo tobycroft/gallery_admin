@@ -51,5 +51,48 @@ class Net
         return $response;
     }
 
+    /**
+     * @send("文件地址","文件类型","文件名称")
+     * @param $real_path
+     * @param $mime_type
+     * @param $file_name
+     * @param $send_url
+     * @return bool|string
+     */
+    public static function PostFile($real_path, $send_url): string|bool
+    {
+        $postData = [
+            'file' => new CURLFile(realpath($real_path))
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $send_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
+
+    public function PostBinary($url, $data = array())
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_URL, $url);//上传类
+        curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+        $result = curl_exec($ch);
+        if (0 != curl_errno($ch)) {
+            $result['error'] = "Error:\n" . curl_error($ch);
+
+        }
+        $httpCodes = curl_getinfo($ch);
+        curl_close($ch);
+        return $result;
+    }
+
 
 }
