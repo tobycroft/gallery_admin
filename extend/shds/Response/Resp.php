@@ -20,7 +20,7 @@ class Resp
             return;
         }
         $ret = json_decode($json, 1);
-        if (empty($ret)) {
+        if ($ret != JSON_ERROR_NONE) {
             $this->error = "json解析错误";
             return;
         }
