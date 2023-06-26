@@ -16,8 +16,9 @@ class Net
             'Cache-Control' => 'no-cache',
             'Pragma' => 'no-cache',
         ];
-        $headers = array_merge($header_r, $postHeaders);
-        array_walk($header_r, function ($value, $key) use ($headers) {
+        $headers = [];
+        $marge_header = array_merge($header_r, $postHeaders);
+        array_walk($marge_header, function ($value, $key) use ($headers) {
             array_push($headers, $key . ":" . $value);
         });
         var_dump($headers);
@@ -88,6 +89,7 @@ class Net
 
     public static function PostBinary($fileData, $upload_url, array $postHeaders = []): string
     {
+        $header = [];
         array_walk($postHeaders, function ($value, $key) use ($postHeaders) {
             array_push($postHeaders, $key . ':' . $value);
         });
