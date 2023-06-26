@@ -2,6 +2,8 @@
 
 namespace shds\Response;
 
+use think\facade\Cache;
+
 class Resp
 {
     public string $response;
