@@ -28,7 +28,7 @@ class EnrollPay extends Admin
     public function sync($ids = [])
     {
         try {
-            $token = Login::login();
+            $token = new Login();
 //            var_dump($token);
 //            var_dump(config('shds_remote_token'));
         } catch (\Throwable $e) {
