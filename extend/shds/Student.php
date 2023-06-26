@@ -33,7 +33,7 @@ class Student extends Login
         $fileData = file_get_contents("https://static.familyeducation.org.cn/gallery/20230612/9de27752e3aff3e7257989f4c7eda315.jpg");
         $ret = \Net::PostBinary($path, config('shds_remote_url') . $path);
         $resp = new Resp($ret);
-
+        return $resp;
     }
 
 
