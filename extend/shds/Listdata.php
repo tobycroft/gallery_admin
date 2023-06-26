@@ -29,33 +29,25 @@ class Listdata extends Login
         }
     }
 
-    public function Major($name)
+    public function Major($name): int
     {
         $path = '/megagame/api/swMajor/getCurrentActivityMajor';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new GetMajor($ret);
         if ($resp->isSuccess()) {
-            if (count($resp->getRecords()) > 1) {
-                return $resp->getMap()[config('shds_remote_activity')];
-            } else {
-                return $resp->getMap()[array_key_first($resp->getMap())];
-            }
+            return $resp->getMajorId($name);
         } else {
             throw new Exception($resp->getError());
         }
     }
 
-    public function Group($major_name, $group_name)
+    public function Group($major_name, $group_name): int
     {
         $path = '/megagame/api/swMajor/getCurrentActivityMajor';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new GetMajor($ret);
         if ($resp->isSuccess()) {
-            if (count($resp->getRecords()) > 1) {
-                return $resp->getMap()[config('shds_remote_activity')];
-            } else {
-                return $resp->getMap()[array_key_first($resp->getMap())];
-            }
+            return $resp->getGroupId($major_name, $group_name);
         } else {
             throw new Exception($resp->getError());
         }

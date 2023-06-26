@@ -46,17 +46,17 @@ class GetMajor extends Resp
     /**
      * @return array
      */
-    public function getMajorName(): array
+    public function getMajorId($name): int
     {
-        return $this->major_name;
+        return $this->major_name[$name];
     }
 
     /**
      * @return array
      */
-    public function getMajorGroup(): array
+    public function getGroupId($major_name, $group_name): int
     {
-        return $this->major_group;
+        return $this->major_group[$major_name][$group_name];
     }
 
 
