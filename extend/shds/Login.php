@@ -5,7 +5,6 @@ namespace shds;
 class Login
 {
 
-
     public function login($username, $password): string
     {
 
