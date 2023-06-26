@@ -7,6 +7,7 @@ class Resp
     public string $response;
     protected array $json;
     protected array $data;
+    protected string $str_code;
 
     protected bool $is_success = false;
     protected string $error = "";
@@ -22,6 +23,7 @@ class Resp
             $this->error = "json解析错误";
         }
         $this->is_success = $ret['success'];
+        $this->str_code = $ret["code"];
         if ($ret["success"]) {
             $this->data = $ret["data"];
         } else {
@@ -48,5 +50,12 @@ class Resp
     public function getData(): array
     {
         return $this->data;
+    }
+
+    private function logout()
+    {
+        if ($this->str_code == "SYSTEM_LOGIN_ERROR") {
+            cache('shds_remote_token', '', 1);
+        }
     }
 }
