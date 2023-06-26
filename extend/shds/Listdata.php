@@ -2,7 +2,7 @@
 
 namespace shds;
 
-use shds\Response\AddBaby;
+use shds\Response\GetActivityList;
 use think\Exception;
 
 class Listdata extends Login
@@ -12,13 +12,17 @@ class Listdata extends Login
         'pageSize' => 10000
     ];
 
-    public function ActivityList($name)
+    public function ActivityId(): int
     {
         $path = 'megagame/user/userWorks/getActivityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
-        $resp = new AddBaby($ret);
+        $resp = new GetActivityList($ret);
         if ($resp->isSuccess()) {
-            return true;
+            if (count($resp->getRecords()) > 1) {
+                return $resp->getMap()[config('shds_remote_activity')];
+            } else {
+                return $resp->getMap()[array_key_first($resp->getMap())];
+            }
         } else {
             throw new Exception($resp->getError());
         }

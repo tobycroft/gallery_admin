@@ -47,4 +47,12 @@ class GetActivityList extends Resp
         return $this->map;
     }
 
+    /**
+     * @return array
+     */
+    public function getRecords(): array
+    {
+        return $this->records;
+    }
+
 }
