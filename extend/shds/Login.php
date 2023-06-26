@@ -7,7 +7,7 @@ use think\Exception;
 
 class Login extends Controller
 {
-    public string $token = '';
+    protected string $token = '';
 
     public function initialize()
     {
