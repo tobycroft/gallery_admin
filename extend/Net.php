@@ -17,8 +17,8 @@ class Net
             'Pragma' => 'no-cache',
         ];
         $headers = [];
-        $marge_header = array_merge($header_r, $postHeaders);
-        array_walk($marge_header, function ($value, $key) use ($headers) {
+        $merged_headers = array_merge($header_r, $postHeaders);
+        array_walk($merged_headers, function ($value, $key) use ($headers) {
             array_push($headers, $key . ":" . $value);
         });
         var_dump($headers);
