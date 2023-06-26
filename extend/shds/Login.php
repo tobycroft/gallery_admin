@@ -25,7 +25,6 @@ class Login
             'password' => config('shds_remote_password'),
             'sysflg' => ''
         ]);
-        echo $ret;
         $decode = json_decode($ret, 1);
         if (!empty($decode)) {
             $success = (bool)$decode['success'];
