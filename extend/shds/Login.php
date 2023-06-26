@@ -19,9 +19,6 @@ class Login
 
     public function login()
     {
-        if ($this->token) {
-            return $this->token;
-        }
         $path = '/megagame/login/user/login';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'code' => config('shds_remote_username'),
