@@ -7,7 +7,7 @@ use think\Exception;
 class Login
 {
 
-    public static function login(): string
+    public static function login()
     {
 
         $ret = \Net::PostJson(config('shds_remote_url') . "/megagame/login/user/login", [], [
