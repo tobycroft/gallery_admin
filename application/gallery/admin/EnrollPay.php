@@ -24,6 +24,11 @@ use util\Tree;
 class EnrollPay extends Admin
 {
 
+    public function sync($ids = [])
+    {
+
+    }
+
     public function export($ids = [])
     {
         $data = EnrollModel::field("id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
