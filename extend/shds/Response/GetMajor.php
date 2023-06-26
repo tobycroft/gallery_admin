@@ -46,9 +46,17 @@ class GetMajor extends Resp
     /**
      * @return array
      */
-    public function getMap(): array
+    public function getMajorName(): array
     {
-        return $this->map;
+        return $this->major_name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMajorGroup(): array
+    {
+        return $this->major_group;
     }
 
 
