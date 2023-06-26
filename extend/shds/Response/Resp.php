@@ -21,9 +21,9 @@ class Resp
         $ret = json_decode($json, 1);
         if (empty($ret)) {
             $this->error = "json解析错误";
+            return;
         }
-        var_dump($ret['success']);
-        $this->is_success = boolval($ret['success']);
+        $this->is_success = $ret['success'];
         $this->str_code = $ret["code"];
         $this->logout();
         if ($ret["success"]) {
