@@ -2,7 +2,7 @@
 
 namespace shds;
 
-use think\exception\ErrorException;
+use think\Exception;
 
 class Login
 {
@@ -22,10 +22,10 @@ class Login
             if ($success && !empty($data)) {
                 config('shds_remote_token', $data['token']);
             } else {
-                throw new ErrorException(0, $decode['message'], null, null);
+                throw new Exception($decode['message']);
             }
         } else {
-            throw new ErrorException(0, $json, null, null);
+            throw new Exception($json);
         }
 
     }
