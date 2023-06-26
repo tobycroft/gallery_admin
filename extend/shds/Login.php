@@ -28,6 +28,7 @@ class Login
 //                return config('shds_remote_token', $data['token']);
                 cache("shds_remote_token", $data["token"], 86400);
                 $this->token = $data["token"];
+                return $this->token;
             } else {
                 throw new Exception($decode['message']);
             }
