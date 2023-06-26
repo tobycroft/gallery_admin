@@ -21,7 +21,7 @@ class Login
             $data = $decode['data'];
             if ($success && !empty($data)) {
                 config('shds_remote_token', $data['token']);
-                return $data;
+                return $data["token"];
             } else {
                 throw new Exception($decode['message']);
             }
