@@ -24,6 +24,7 @@ class Resp
         }
         $this->is_success = $ret['success'];
         $this->str_code = $ret["code"];
+        $this->logout();
         if ($ret["success"]) {
             $this->data = $ret["data"];
         } else {
