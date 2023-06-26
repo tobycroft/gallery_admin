@@ -18,7 +18,7 @@ class Net
         ];
         $headers = [];
         $merged_headers = array_merge($header_r, $postHeaders);
-        foreach ($header_r as $key => $value) {
+        foreach ($merged_headers as $key => $value) {
             $headers[] = $key . ":" . $value;
         }
         if (!empty($postData)) {
@@ -89,9 +89,10 @@ class Net
     public static function PostBinary($fileData, $upload_url, array $postHeaders = []): string
     {
         $headers = [];
-        array_walk($postHeaders, function ($value, $key) use ($headers) {
-            array_push($headers, $key . ':' . $value);
-        });
+        $merged_headers = array_merge($postHeaders, $postHeaders);
+        foreach ($merged_headers as $key => $value) {
+            $headers[] = $key . ':' . $value;
+        }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $upload_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
