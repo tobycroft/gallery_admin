@@ -38,7 +38,7 @@ class EnrollPay extends Admin
         $student = new \shds\Student();
         $ret=($student->uploadFile());
         echo $ret->getError();
-        echo $ret->getData();
+         echo json_encode($ret->getData());
     }
 
     public function export($ids = [])
