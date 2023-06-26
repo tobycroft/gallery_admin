@@ -17,6 +17,7 @@ class Resp
         $this->response = $json;
         if (empty($json)) {
             $this->error = "无数据";
+            return;
         }
         $ret = json_decode($json, 1);
         if (empty($ret)) {
