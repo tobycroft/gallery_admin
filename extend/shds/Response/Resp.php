@@ -24,7 +24,6 @@ class Resp
             $this->error = "json解析错误";
             return;
         }
-        var_dump($ret);
         $this->is_success = $ret['success'];
         $this->str_code = $ret["code"];
         if ($this->logout()) {
@@ -60,6 +59,7 @@ class Resp
 
     private function logout(): bool
     {
+
         var_dump($this->str_code);
         if ($this->str_code == "SYSTEM_LOGIN_ERROR") {
             cache('shds_remote_token', '', 1);
