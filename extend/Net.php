@@ -59,7 +59,7 @@ class Net
      * @param $send_url
      * @return bool|string
      */
-    public static function PostFile($real_path, $send_url): string|bool
+    public static function PostFile($send_url, $real_path): string|bool
     {
         $postData = [
             'file' => new CURLFile(realpath($real_path))
@@ -74,24 +74,16 @@ class Net
         return $response;
     }
 
-    public function PostBinary($url, $data = array())
+    public function PostBinary($file_url, $upload_url): string|bool
     {
+        $fileData = file_get_contents($file_url);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_URL, $upload_url);
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_URL, $url);//上传类
-        curl_setopt($ch, CURLOPT_TIMEOUT, 40);
-        $result = curl_exec($ch);
-        if (0 != curl_errno($ch)) {
-            $result['error'] = "Error:\n" . curl_error($ch);
-
-        }
-        $httpCodes = curl_getinfo($ch);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
+        $response = curl_exec($ch);
         curl_close($ch);
-        return $result;
+        return $response;
     }
 
 

@@ -28,7 +28,9 @@ class Student extends Login
 
     public function uploadFile()
     {
-        \Net::PostJson($base_url)
+        $path = "/megagame/api/upload/uploadFile";
+        $file = file_get_contents($this->path_prefix . $wechat_data['path'])
+        \Net::PostFile(config('shds_remote_url') . $path, $file_path);
     }
 
 
