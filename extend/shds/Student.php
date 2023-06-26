@@ -30,7 +30,7 @@ class Student extends Login
         }
     }
 
-    public function findBaby($cert)
+    public function findBaby($cert): int
     {
         $path = '/megagame/user/baby/pageUserBaby';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
@@ -70,12 +70,16 @@ class Student extends Login
         return $upload;
     }
 
-    public function uploadFile($remote_link)
+    public function uploadFile($remote_link): string
     {
         $path = "/megagame/api/upload/uploadFile";
         $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path, ["token" => $this->token]);
         $resp = new UploadFile($ret);
-        return $resp;
+        if ($resp->isSuccess()) {
+            return $resp->getFileUrl();
+        } else {
+            throw new Exception($resp->getError());
+        }
     }
 
 
