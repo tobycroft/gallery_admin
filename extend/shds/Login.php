@@ -2,6 +2,8 @@
 
 namespace shds;
 
+use think\exception\ErrorException;
+
 class Login
 {
 
@@ -23,7 +25,7 @@ class Login
                 throw $decode['message'];
             }
         } else {
-            throw $json;
+            throw new ErrorException(0, $json, null, null);
         }
 
     }
