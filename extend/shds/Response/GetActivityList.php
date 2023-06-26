@@ -10,6 +10,7 @@ class GetActivityList extends Resp
     protected array $records = [];
     protected array $map = [];
 
+
     public function __construct($json)
     {
         parent::__construct($json);
@@ -25,8 +26,9 @@ class GetActivityList extends Resp
 
         $this->records = $this->data['data']['records'];
         foreach ($this->records as $record) {
-            $map[$record["name"]] = $record["activityId"];
+            $map[$record['name']] = $record['activityId'];
         }
+
     }
 
     /**
@@ -35,6 +37,14 @@ class GetActivityList extends Resp
     public function getCode(): int
     {
         return $this->code;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMap(): array
+    {
+        return $this->map;
     }
 
 }
