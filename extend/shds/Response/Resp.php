@@ -22,6 +22,7 @@ class Resp
         if (empty($ret)) {
             $this->error = "json解析错误";
         }
+        var_dump($ret['success']);
         $this->is_success = (bool)$ret['success'];
         $this->str_code = $ret["code"];
         $this->logout();
