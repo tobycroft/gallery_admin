@@ -12,11 +12,13 @@ class Login extends Controller
     public function initialize()
     {
         $this->token = cache('shds_remote_token');
+        if (empty($this->token)) {
+            $this->login();
+        }
     }
 
 
-    public
-    function login()
+    public function login()
     {
         if ($this->token) {
             return $this->token;
