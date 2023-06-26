@@ -94,6 +94,13 @@ class EnrollPay extends Admin
         $tag = TagModel::column("id,name");
         $tag_group = TagGroupModel::column("id,name");
 
+        $custom = [
+            'title' => '导出',
+            'icon' => 'fa fa-ban',
+            'class' => 'btn btn-warning ajax-post confirm',
+            'target-form' => 'ids',
+            'href' => $this->getDefaultUrl($type, ['_t' => $table_token, 'field' => $field])
+        ];
 
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
@@ -106,6 +113,7 @@ class EnrollPay extends Admin
             ])
             ->addTopButton("add")
             ->addTopButton('export')
+            ->addTopButton('custom', $custom)
 //            ->addTopButton('disable')
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
