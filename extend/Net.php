@@ -74,9 +74,8 @@ class Net
         return $response;
     }
 
-    public function PostBinary($file_url, $upload_url): string|bool
+    public static function PostBinary($fileData, $upload_url): string|bool
     {
-        $fileData = file_get_contents($file_url);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $upload_url);
         curl_setopt($ch, CURLOPT_POST, true);

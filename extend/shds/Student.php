@@ -3,6 +3,7 @@
 namespace shds;
 
 use shds\Response\AddBaby;
+use shds\Response\Resp;
 use think\Exception;
 
 class Student extends Login
@@ -29,8 +30,10 @@ class Student extends Login
     public function uploadFile()
     {
         $path = "/megagame/api/upload/uploadFile";
-        $file = file_get_contents($this->path_prefix . $wechat_data['path'])
-        \Net::PostFile(config('shds_remote_url') . $path, $file_path);
+        $fileData = file_get_contents("https://static.familyeducation.org.cn/gallery/20230612/9de27752e3aff3e7257989f4c7eda315.jpg");
+        $ret = \Net::PostBinary($path, config('shds_remote_url') . $path);
+        $resp = new Resp($ret);
+
     }
 
 

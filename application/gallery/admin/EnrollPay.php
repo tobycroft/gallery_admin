@@ -12,7 +12,6 @@ use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
-use shds\Login;
 use think\Db;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
@@ -27,14 +26,17 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-        try {
-            $token = new Login();
-            $this->error($token->login());
-//            var_dump($token);
-//            var_dump(config('shds_remote_token'));
-        } catch (\Throwable $e) {
-            $this->error($e->getMessage());
-        }
+//        try {
+////            $token = new Login();
+////            $this->error($token->login());
+//
+////            var_dump($token);
+////            var_dump(config('shds_remote_token'));
+//        } catch (\Throwable $e) {
+//            $this->error($e->getMessage());
+//        }
+        $student = new \shds\Student();
+        $student->uploadFile();
     }
 
     public function export($ids = [])
