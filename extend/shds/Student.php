@@ -3,21 +3,21 @@
 namespace shds;
 
 use shds\Response\AddBaby;
-use shds\Response\Resp;
+use shds\Response\UploadFile;
 use think\Exception;
 
 class Student extends Login
 {
 
-    public function addBaby()
+    public function addBaby($name, $age, $sex, $cert)
     {
         $path = "/megagame/user/userInstitution/addBaby";
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
-            'name' => '测试学生',
+            'name' => $name,
             'idCardType' => 0,
-            'idCardNo' => 'MzUwMTA0MjAxODAxMDE3NDg5',
-            'sex' => 1,
-            'age' => '6'
+            'idCardNo' => base64_encode($cert),
+            'sex' => $sex,
+            'age' => $age
         ]);
         $resp = new AddBaby($ret);
         if ($resp->isSuccess()) {
@@ -33,7 +33,7 @@ class Student extends Login
         $fileData = ("https://static.familyeducation.org.cn/gallery/20230612/9de27752e3aff3e7257989f4c7eda315.jpg");
         echo $this->token;
         $ret = \Net::PostBinary($fileData, config('shds_remote_url') . $path, ["token" => $this->token]);
-        $resp = new Resp($ret);
+        $resp = new UploadFile($ret);
         return $resp;
     }
 
