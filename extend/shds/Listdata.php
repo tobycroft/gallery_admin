@@ -15,7 +15,7 @@ class Listdata extends Login
     public function ActivityList($name)
     {
         $path = 'megagame/user/userWorks/getActivityList';
-        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry,);
+        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new AddBaby($ret);
         if ($resp->isSuccess()) {
             return true;
