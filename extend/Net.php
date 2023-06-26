@@ -61,7 +61,7 @@ class Net
      * @param $send_url
      * @return bool|string
      */
-    public static function PostFile($send_url, $real_path, array $postHeaders = []): string|bool
+    public static function PostFile($send_url, $real_path, array $postHeaders = []): string
     {
         $postData = [
             'file' => new CURLFile(realpath($real_path))
@@ -77,7 +77,7 @@ class Net
         return $response;
     }
 
-    public static function PostBinary($fileData, $upload_url, array $postHeaders = []): string|bool
+    public static function PostBinary($fileData, $upload_url, array $postHeaders = []): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $upload_url);
