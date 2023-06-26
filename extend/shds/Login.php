@@ -6,12 +6,16 @@ use think\Exception;
 
 class Login
 {
+    public string $token = '';
 
-    public string $token = "";
+    public function __construct()
+    {
+        $this->token = cache('shds_remote_token');
+    }
+
 
     public function login()
     {
-        $this->token = cache('shds_remote_token');
         if ($this->token) {
             return $this->token;
         }
