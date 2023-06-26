@@ -5,11 +5,11 @@ namespace shds\Response;
 class Resp
 {
     public string $response;
-    public array $json;
-    public array $data;
+    protected array $json;
+    protected array $data;
 
-    private bool $is_success = false;
-    private string $error = "";
+    protected bool $is_success = false;
+    protected string $error = "";
 
     public function __construct($json)
     {
@@ -39,5 +39,13 @@ class Resp
     public function getError(): string
     {
         return $this->error;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->data;
     }
 }
