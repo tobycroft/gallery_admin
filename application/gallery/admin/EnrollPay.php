@@ -95,11 +95,11 @@ class EnrollPay extends Admin
         $tag_group = TagGroupModel::column("id,name");
 
         $custom = [
-            'title' => '导出',
+            'title' => '同步到远程系统',
             'icon' => 'fa fa-ban',
             'class' => 'btn btn-warning ajax-post confirm',
             'target-form' => 'ids',
-            'href' => $this->getDefaultUrl($type, ['_t' => $table_token, 'field' => $field])
+            'href' => url("sync")
         ];
 
         return ZBuilder::make('table')
