@@ -36,7 +36,8 @@ class EnrollPay extends Admin
 //            $this->error($e->getMessage());
 //        }
         $student = new \shds\Student();
-        var_dump($student->uploadFile());
+        $ret=($student->uploadFile());
+        echo $ret->getError();
     }
 
     public function export($ids = [])
