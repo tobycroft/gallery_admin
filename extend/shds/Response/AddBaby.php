@@ -5,7 +5,7 @@ namespace shds\Response;
 class AddBaby extends Resp
 {
 
-    protected $code = 0;
+    protected int $code = 0;
 
     public function __construct($json)
     {
@@ -18,6 +18,14 @@ class AddBaby extends Resp
             $this->is_success = false;
         }
         $this->error = $this->data["data"];
+    }
+
+    /**
+     * @return int
+     */
+    public function getCode(): int
+    {
+        return $this->code;
     }
 
 }

@@ -2,6 +2,9 @@
 
 namespace shds;
 
+use shds\Response\AddBaby;
+use think\Exception;
+
 class Student extends Login
 {
 
@@ -15,6 +18,11 @@ class Student extends Login
             'sex' => 1,
             'age' => '6'
         ]);
-
+        $resp = new AddBaby($ret);
+        if ($resp->isSuccess()) {
+            return true;
+        } else {
+            throw new Exception($resp->getError());
+        }
     }
 }
