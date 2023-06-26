@@ -18,9 +18,11 @@ class Net
         ];
         $headers = [];
         $merged_headers = array_merge($header_r, $postHeaders);
-        array_walk($merged_headers, function ($value, $key) use ($headers) {
-            array_push($headers, $key . ":" . $value);
-        });
+        array_push($headers,
+            array_walk($merged_headers, function ($value, $key) {
+                return $key . ':' . $value;
+            })
+        );
         var_dump($headers);
         exit();
         if (!empty($postData)) {
