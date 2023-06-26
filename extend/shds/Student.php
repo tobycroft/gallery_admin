@@ -52,7 +52,7 @@ class Student extends Login
         $groupId = $listdata->Group($GroupName);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'imgs' => [
-                'https://motherland-h5.oss-cn-beijing.aliyuncs.com/1687769113264/2023062616451340180877206391549.jpg'
+                $imgs
             ],
             'activityId' => $activityId,
             'sourceFile' => '',
