@@ -9,8 +9,8 @@ class Login
     {
 
         $json = \Net::PostJson(config('shds_remote_url') . "/megagame/login/user/login", [], [
-            'code' => $username,
-            'password' => $password,
+            'code' => config('shds_remote_username'),
+            'password' => config('shds_remote_password'),
             'sysflg' => ''
         ]);
         $decode = json_decode($json, 1);
