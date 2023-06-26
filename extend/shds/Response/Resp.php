@@ -6,7 +6,7 @@ class Resp
 {
     public string $response;
     public array $json;
-    public mixed $data;
+    public array $data;
 
     private bool $is_success = false;
     private string $error = "";
