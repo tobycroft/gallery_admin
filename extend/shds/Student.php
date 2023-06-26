@@ -3,6 +3,7 @@
 namespace shds;
 
 use shds\Response\AddBaby;
+use shds\Response\FindBaby;
 use shds\Response\Resp;
 use shds\Response\UploadFile;
 use think\Exception;
@@ -37,8 +38,8 @@ class Student extends Login
             'queryType' => 0,
             'idCardNo' => $cert
         ], ['token' => $this->token]);
-        $record = new Resp($ret);
-        echo json_encode($record);
+        $record = new FindBaby($ret);
+        echo json_encode($record->getRecords());
     }
 
     public function uploadBabyWork($activityId, $activityName, $babyId, $groupId, $imgs, $majorId, $majorname, $name,)
