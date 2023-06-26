@@ -27,6 +27,5 @@ class Login
         } else {
             throw new Exception($ret);
         }
-
     }
 }
