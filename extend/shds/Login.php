@@ -22,7 +22,7 @@ class Login
             if ($success && !empty($data)) {
                 config('shds_remote_token', $data['token']);
             } else {
-                throw $decode['message'];
+                throw new ErrorException(0, $json, null, null);
             }
         } else {
             throw new ErrorException(0, $json, null, null);
