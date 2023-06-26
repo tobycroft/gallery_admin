@@ -2,14 +2,13 @@
 
 namespace shds;
 
-use think\Controller;
 use think\Exception;
 
-class Login extends Controller
+class Login
 {
     protected string $token = '';
 
-    public function initialize()
+    public function __construct()
     {
         $this->token = cache('shds_remote_token');
         if (empty($this->token)) {
