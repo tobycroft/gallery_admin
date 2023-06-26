@@ -18,13 +18,9 @@ class Net
         ];
         $headers = [];
         $merged_headers = array_merge($header_r, $postHeaders);
-        array_push($headers,
-            array_walk($merged_headers, function ($value, $key) {
-                return $key . ':' . $value;
-            })
-        );
-        var_dump($headers);
-        exit();
+        foreach ($header_r as $key => $value) {
+            $headers[] = $key . ":" . $value;
+        }
         if (!empty($postData)) {
             $postData = json_encode($postData, 320);
         }
