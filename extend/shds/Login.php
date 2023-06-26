@@ -12,7 +12,7 @@ class Login
     {
         $this->token = cache('shds_remote_token');
         if (empty($this->token)) {
-            $this->token = $this->login();
+            $this->login();
         }
     }
 
