@@ -37,6 +37,7 @@ class EnrollPay extends Admin
 //        }
         $student = new \shds\Student();
         $ret=($student->uploadFile());
+        echo $ret->getError();
         echo $ret->getData();
     }
 
