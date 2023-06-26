@@ -11,6 +11,7 @@ use think\Exception;
 class Student extends Login
 {
 
+
     public function addBaby($name, $age, $sex, $cert)
     {
         $path = "/megagame/user/userInstitution/addBaby";
