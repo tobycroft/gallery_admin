@@ -23,7 +23,8 @@
       "topthink/think-helper": "^1.0",
       "ezyang/htmlpurifier": "^4.9",
       "ext-curl": "*",
-      "tobycroft/aoss-sdk": "^1.0"
+      "tobycroft/aoss-sdk": "^1.0",
+      "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
