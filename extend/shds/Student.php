@@ -30,7 +30,7 @@ class Student extends Login
     public function uploadFile()
     {
         $path = "/megagame/api/upload/uploadFile";
-        $fileData = file_get_contents("https://static.familyeducation.org.cn/gallery/20230612/9de27752e3aff3e7257989f4c7eda315.jpg");
+        $fileData = ("https://static.familyeducation.org.cn/gallery/20230612/9de27752e3aff3e7257989f4c7eda315.jpg");
         echo $this->token;
         $ret = \Net::PostBinary($fileData, config('shds_remote_url') . $path, ["token" => $this->token]);
         $resp = new Resp($ret);
