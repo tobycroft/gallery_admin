@@ -42,17 +42,22 @@ class Student extends Login
         return $record;
     }
 
-    public function uploadBabyWork($activityId, $babyId, $groupId, $title, $content, $imgs, $majorId, $teacherName, $teacherTel, $teacherCompany)
+    public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany)
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
+
+        $listdata = new Listdata();
+        $activityId = $listdata->ActivityId(config('shds_remote_activity'));
+        $majorId = $listdata->Major($MajorName);
+        $groupId = $listdata->Group($GroupName);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'imgs' => [
                 'https://motherland-h5.oss-cn-beijing.aliyuncs.com/1687769113264/2023062616451340180877206391549.jpg'
             ],
             'activityId' => $activityId,
             'sourceFile' => '',
-            'groupId' => $groupId,
             'majorId' => $majorId,
+            'groupId' => $groupId,
             'teacherName' => $teacherName,
             'teacherCompany' => $teacherCompany,
             'teacherTel' => $teacherTel,

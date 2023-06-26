@@ -13,15 +13,24 @@ class Listdata extends Login
         'pageSize' => 10000
     ];
 
-    public function ActivityId(): int
+    private $major_ret;
+
+    public int $activityId;
+
+
+    public function ActivityId($name): int
     {
         $path = '/megagame/user/userWorks/getActivityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new GetActivityList($ret);
         if ($resp->isSuccess()) {
             if (count($resp->getRecords()) > 1) {
-                return $resp->getMap()[config('shds_remote_activity')];
+                $this->activityId = $resp->getMap()[$name];
+                $this->setmajor();
+                return $resp->getMap()[$name];
             } else {
+                $this->activityId = $resp->getMap()[array_key_first($resp->getMap())];
+                $this->setmajor();
                 return $resp->getMap()[array_key_first($resp->getMap())];
             }
         } else {
@@ -29,27 +38,28 @@ class Listdata extends Login
         }
     }
 
-    public function Major($name): int
+    private function setmajor()
     {
         $path = '/megagame/api/swMajor/getCurrentActivityMajor';
-        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
-        $resp = new GetMajor($ret);
-        if ($resp->isSuccess()) {
-            return $resp->getMajorId($name);
+        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], ['activityId' => $this->activityId], $this->header);
+        $this->major_ret = new GetMajor($ret);
+    }
+
+    public function Major($name): int
+    {
+        if ($this->major_ret->isSuccess()) {
+            return $this->major_ret->getMajorId($name);
         } else {
-            throw new Exception($resp->getError());
+            throw new Exception($this->major_ret->getError());
         }
     }
 
     public function Group($major_name, $group_name): int
     {
-        $path = '/megagame/api/swMajor/getCurrentActivityMajor';
-        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
-        $resp = new GetMajor($ret);
-        if ($resp->isSuccess()) {
-            return $resp->getGroupId($major_name, $group_name);
+        if ($this->major_ret->isSuccess()) {
+            return $this->major_ret->getGroupId($major_name, $group_name);
         } else {
-            throw new Exception($resp->getError());
+            throw new Exception($this->major_ret->getError());
         }
     }
 
