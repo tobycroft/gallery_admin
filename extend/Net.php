@@ -16,8 +16,7 @@ class Net
             'Cache-Control' => 'no-cache',
             'Pragma' => 'no-cache',
         ];
-        $headers = [];
-        $headers = array_merge($headers, $postHeaders);
+        $headers = array_merge($header_r, $postHeaders);
         array_walk($header_r, function ($value, $key) use ($headers) {
             array_push($headers, $key . ":" . $value);
         });
