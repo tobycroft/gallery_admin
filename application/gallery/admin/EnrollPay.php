@@ -97,7 +97,7 @@ class EnrollPay extends Admin
         $custom = [
             'title' => '同步到远程系统',
             'icon' => 'fa fa-ban',
-            'class' => 'btn btn-warning ajax-post confirm',
+            'class' => 'btn btn-danger ajax-post confirm',
             'target-form' => 'ids',
             'href' => url("sync")
         ];
