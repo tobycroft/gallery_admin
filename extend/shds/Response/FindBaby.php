@@ -8,6 +8,7 @@ class FindBaby extends Resp
     protected int $code = 0;
 
     protected array $records = [];
+    protected int $id;
 
     public function __construct($json)
     {
@@ -23,6 +24,10 @@ class FindBaby extends Resp
         }
 
         $this->records = $this->data["data"]["records"];
+        $first = current($this->records);
+        if ($first) {
+            $this->id = $first['id'];
+        }
     }
 
     /**
@@ -39,6 +44,14 @@ class FindBaby extends Resp
     public function getRecords(): array
     {
         return $this->records;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
     }
 
 }

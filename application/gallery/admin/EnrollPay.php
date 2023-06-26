@@ -39,6 +39,7 @@ class EnrollPay extends Admin
         $ret = ($student->findBaby("350104"));
         echo $ret->getError();
         echo json_encode($ret->getData(),1);
+        echo $ret->getId();
     }
 
     public function export($ids = [])
