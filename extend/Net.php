@@ -21,6 +21,7 @@ class Net
         array_walk($header_r, function ($value, $key) use ($headers) {
             array_push($headers, $key . ":" . $value);
         });
+        var_dump($headers);
         if (!empty($postData)) {
             $postData = json_encode($postData, 320);
         }
