@@ -27,7 +27,7 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-        Login::login($username, $password);
+        Login::login();
     }
 
     public function export($ids = [])
