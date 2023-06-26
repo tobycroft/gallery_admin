@@ -29,7 +29,7 @@ class EnrollPay extends Admin
     {
         try {
             $token = Login::login();
-            $this->success($token);
+            $this->success(config("shds_remote_token"));
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
         }
