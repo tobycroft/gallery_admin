@@ -36,7 +36,7 @@ class Login extends Controller
             $data = $decode['data'];
             if ($success && !empty($data)) {
 //                return config('shds_remote_token', $data['token']);
-                cache("shds_remote_token", $data["token"], 86400);
+                cache("shds_remote_token", $data["token"], 600);
                 $this->token = $data["token"];
                 return $this->token;
             } else {
