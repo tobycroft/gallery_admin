@@ -27,11 +27,12 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-//        try {
+        try {
             Login::login();
-//        } catch (\Throwable $e) {
-//            $this->error($e->getMessage());
-//        }
+            $this->success();
+        } catch (\Throwable $e) {
+            $this->error($e->getMessage());
+        }
     }
 
     public function export($ids = [])
