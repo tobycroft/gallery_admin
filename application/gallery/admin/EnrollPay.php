@@ -29,7 +29,7 @@ class EnrollPay extends Admin
     {
         try {
             $token = Login::login();
-            echo $token;
+            print_r($token);
 //            $this->success($token);
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
