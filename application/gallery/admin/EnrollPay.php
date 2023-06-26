@@ -14,6 +14,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use shds\Login;
 use think\Db;
+use think\exception\ThrowableError;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
 use util\Tree;
@@ -27,7 +28,11 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-        Login::login();
+        try {
+            Login::login();
+        } catch (ThrowableError $e) {
+            $this->error($e->getMessage());
+        }
     }
 
     public function export($ids = [])
