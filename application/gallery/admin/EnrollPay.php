@@ -12,6 +12,7 @@ use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
+use shds\Login;
 use think\Db;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
@@ -26,7 +27,7 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-
+        Login::login($username, $password);
     }
 
     public function export($ids = [])

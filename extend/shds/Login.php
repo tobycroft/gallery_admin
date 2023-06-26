@@ -5,7 +5,7 @@ namespace shds;
 class Login
 {
 
-    public function login($username, $password)
+    public static function login()
     {
 
         $json = \Net::PostJson(config('shds_remote_url') . "/megagame/login/user/login", [], [
