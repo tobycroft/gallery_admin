@@ -98,7 +98,7 @@ class Net
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fileData);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $postHeaders);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         $response = curl_exec($ch);
         curl_close($ch);
         return $response;
