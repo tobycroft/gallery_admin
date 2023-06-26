@@ -88,6 +88,9 @@ class Net
 
     public static function PostBinary($fileData, $upload_url, array $postHeaders = []): string
     {
+        array_walk($postHeaders, function ($value, $key) use ($postHeaders) {
+            array_push($postHeaders, $key . ':' . $value);
+        });
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $upload_url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
