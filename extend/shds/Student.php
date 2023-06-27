@@ -26,7 +26,7 @@ class Student extends Listdata
         if ($resp->isSuccess()) {
             return $resp->isSuccess();
         } else {
-            throw new Exception($resp->getError());
+            throw new Exception($resp->getError() . "\n-" . $name . "\n-" . $cert);
         }
     }
 
@@ -54,7 +54,7 @@ class Student extends Listdata
         $activity = $this->ActivityResp();
         $majorId = $this->Major($MajorName);
         $groupId = $this->Group($GroupName);
-        $post=[
+        $post = [
             'imgs' => [
                 $imgs
             ],
@@ -87,7 +87,7 @@ class Student extends Listdata
         $activity = $this->ActivityResp();
         $majorId = $this->Major($MajorName);
         $groupId = $this->Group($GroupName);
-        $post=[
+        $post = [
             'groupId' => $groupId,
             'userWorkId' => $userWorkId,
             'imgs' => [
