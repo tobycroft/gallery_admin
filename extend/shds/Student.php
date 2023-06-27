@@ -71,7 +71,7 @@ class Student extends Listdata
             'synopsis' => $content,
             'babyId' => $babyId
         ];
-        ksort($post);
+//        ksort($post);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], $post, $this->header);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
@@ -105,8 +105,8 @@ class Student extends Listdata
             'synopsis' => $content,
 //            'babyId' => $babyId
         ];
-        ksort($post);
-        var_dump($post);
+//        ksort($post);
+//        var_dump($post);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], $post, $this->header);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
