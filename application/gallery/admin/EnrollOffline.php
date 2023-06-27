@@ -84,8 +84,9 @@ class EnrollOffline extends Admin
             ->addTopButton('add')
             ->addTopButton('export')
             ->setPageTitle('列表')
-            ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
+            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '绑定单位', 'school_name_show' => '学校', 'is_send' => '已寄出']) // 设置搜索参数
+
             ->addColumn('id', '问题ID')
 //            ->addColumn('source', '数据来源', 'number')
             ->addColumn('uid', '用户id', 'number')
@@ -102,6 +103,7 @@ class EnrollOffline extends Admin
             ->addColumn('district', '区域', 'text.edit')
             ->addColumn('address', '地址', 'text')
             ->addColumn('is_payed', '是否已支付', 'switch')
+            ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮

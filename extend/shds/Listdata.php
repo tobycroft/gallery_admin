@@ -23,13 +23,13 @@ class Listdata extends Login
     private string $major_name;
 
 
-    public function activityList($babyId): ActivityList
+    public function activityList($babyId, $major_name, $group_name):
     {
         $path = '/megagame/user/baby/v1/activityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, ['babyId' => $babyId], self::$jayParsedAry, $this->header);
         $resp = new ActivityList($ret);
         if ($resp->isSuccess()) {
-            return $resp;
+            $resp->getUploadId($major_name, $group_name)
         } else {
             throw new Exception($resp->getError());
         }

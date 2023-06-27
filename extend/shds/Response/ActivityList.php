@@ -43,4 +43,17 @@ class ActivityList extends Resp
         return $this->uploads;
     }
 
+    /**
+     * @return array
+     */
+    public function getUploadId($major_name, $group_name): int
+    {
+        foreach ($this->records as $data) {
+            if ($data['groupName'] == $group_name && $data['majorName'] == $major_name) {
+                return $data["id"];
+            }
+        }
+        return 0;
+    }
+
 }
