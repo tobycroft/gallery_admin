@@ -4,7 +4,7 @@ namespace shds\Action;
 
 use shds\Student;
 
-class GetBabyAction extends Student
+class StudentAction extends Student
 {
 
     private int $id;

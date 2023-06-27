@@ -12,7 +12,7 @@ use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
-use shds\Action\GetBabyAction;
+use shds\Action\StudentAction;
 use think\Db;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
@@ -37,7 +37,7 @@ class EnrollPay extends Admin
                 $this->error("用户还未上传作品无法同步");
             }
             $file = $upload->toArray();
-            $baby = new GetBabyAction();
+            $baby = new StudentAction();
             $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["sex"], $data["cert"]);
 
             $attachment = $file['attachment'];
