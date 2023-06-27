@@ -16,8 +16,8 @@ class AddBaby extends Resp
         $this->code = $this->data['code'];
         if ($this->code != 20000) {
             $this->is_success = false;
+            $this->error = $this->data['data'];
         }
-        $this->error = $this->data["data"];
     }
 
     /**
