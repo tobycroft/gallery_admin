@@ -16,6 +16,14 @@ class Login
         if ($this->token == "") {
             $this->login();
         }
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
         $this->header = ['token' => $this->token];
     }
 
@@ -36,8 +44,7 @@ class Login
 //                return config('shds_remote_token', $data['token']);
                 cache("shds_remote_token", $data["token"], 600);
 //                echo "刷新缓存";
-                $this->token = $data["token"];
-                $this->header = ['token' => $this->token];
+                $this->setToken($data['token']);
                 return $this->token;
             } else {
                 throw new Exception($decode['message']);
