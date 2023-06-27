@@ -12,6 +12,7 @@ use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
+use shds\Action\GetBabyAction;
 use think\Db;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
@@ -35,7 +36,35 @@ class EnrollPay extends Admin
             if ($upload->isEmpty()) {
                 $this->error("用户还未上传作品无法同步");
             }
-            $file = $upload->toArray()["attachment"];
+            $file = $upload->toArray();
+            $baby = new GetBabyAction();
+            $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["sex"], $data["cert"]);
+
+            $attachment = $file['attachment'];
+            $oss_file_link = $baby->uploadFile($attachment);
+
+            $tag_group_name = TagGroupModel::where("id", $data["tag_group_id"])->value("name");
+            $tag_name = TagModel::where("id", $data["tag_id"])->value("name");
+            $school_name_show = $data["school_name_show"];
+            $school_name = $data["school_name"];
+            $teacher_name = $file['teacher_name'];
+            $teacher_phone = $file['teacher_phone'];
+            $title = $file['title'];
+            $content = $file['content'];
+
+            if ($school_name == "无") {
+                $school_name = config("shds_default_school");
+            }
+
+            if (strlen($teacher_phone) < 8) {
+                $teacher_phone = config("shds_default_phone");
+            }
+            if (strlen($teacher_name) < 2) {
+                $teacher_name = config("shds_default_name");
+            }
+
+            $baby->uploadBabyWork($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name);
+
 
         }
 //        try {

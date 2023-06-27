@@ -18,7 +18,7 @@ class Listdata extends Login
     public int $activityId;
 
 
-    public function ActivityId($name): int
+    public function ActivityId($name = ""): int
     {
         $path = '/megagame/user/userWorks/getActivityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);

@@ -10,7 +10,7 @@ class GetBabyAction extends Student
     private int $id;
 
 
-    public function getId($name, $age, $sex, $cert): int
+    public function AddOrGetId($name, $age, $sex, $cert): int
     {
         $baby = $this->findBaby($cert);
         if ($baby > 0) {

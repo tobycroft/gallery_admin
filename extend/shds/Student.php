@@ -70,8 +70,7 @@ class Student extends Login
             'synopsis' => $content,
             'babyId' => $babyId
         ], ['token' => $this->token]);
-        $upload = new UploadBabyWork($ret);
-        return $upload;
+        return new UploadBabyWork($ret);
     }
 
     public function uploadFile($remote_link): string
