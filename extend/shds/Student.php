@@ -55,6 +55,7 @@ class Student extends Login
         $activityId = $listdata->ActivityId(config('shds_remote_activity'));
         $majorId = $listdata->Major($MajorName);
         $groupId = $listdata->Group($GroupName);
+        var_dump($this->header);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'imgs' => [
                 $imgs
