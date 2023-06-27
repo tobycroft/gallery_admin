@@ -8,11 +8,11 @@ class Login
 {
     protected string $token = '';
 
-    protected array $header=[];
+    protected array $header;
 
     public function __construct()
     {
-        $this->token = cache('shds_remote_token');
+        $this->setToken(cache('shds_remote_token'));
         if ($this->token == "") {
             $this->login();
         }
