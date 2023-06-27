@@ -21,7 +21,7 @@ class Student extends Login
             'idCardNo' => base64_encode($cert),
             'sex' => $sex,
             'age' => $age
-        ], $this->token);
+        ], $this->header);
         $resp = new AddBaby($ret);
         if ($resp->isSuccess()) {
             return $resp->isSuccess();
@@ -38,7 +38,7 @@ class Student extends Login
             'pageSize' => 10,
             'queryType' => 0,
             'idCardNo' => $cert
-        ], ['token' => $this->token]);
+        ], $this->header);
         $resp = new FindBaby($ret);
         if ($resp->isSuccess()) {
             return $resp->getId();
@@ -69,14 +69,14 @@ class Student extends Login
             'name' => $title,
             'synopsis' => $content,
             'babyId' => $babyId
-        ], ['token' => $this->token]);
+        ], $this->header);
         return new UploadBabyWork($ret);
     }
 
     public function uploadFile($remote_link): string
     {
         $path = "/megagame/api/upload/uploadFile";
-        $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path, ["token" => $this->token]);
+        $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path,$this->header);
         $resp = new UploadFile($ret);
         if ($resp->isSuccess()) {
             return $resp->getFileUrl();
