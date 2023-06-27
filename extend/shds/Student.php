@@ -8,7 +8,7 @@ use shds\Response\UploadBabyWork;
 use shds\Response\UploadFile;
 use think\Exception;
 
-class Student extends Login
+class Student extends Listdata
 {
 
 
@@ -51,11 +51,9 @@ class Student extends Login
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
 
-        $listdata = new Listdata();
-        $activityId = $listdata->ActivityId(config('shds_remote_activity'));
-        $majorId = $listdata->Major($MajorName);
-        $groupId = $listdata->Group($GroupName);
-        var_dump($this->header);
+        $activityId = $this->ActivityId(config('shds_remote_activity'));
+        $majorId = $this->Major($MajorName);
+        $groupId = $this->Group($GroupName);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'imgs' => [
                 $imgs

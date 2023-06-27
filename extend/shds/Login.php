@@ -25,7 +25,6 @@ class Login
     {
         $this->token = $token;
         $this->header = ['Token' => $this->token];
-        var_dump($this->header);
     }
 
 
