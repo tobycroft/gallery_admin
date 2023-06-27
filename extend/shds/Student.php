@@ -47,7 +47,7 @@ class Student extends Listdata
         }
     }
 
-    public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany)
+    public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany):UploadBabyWork
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
 
@@ -79,14 +79,14 @@ class Student extends Listdata
         }
     }
 
-    public function updateBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany)
+    public function updateBabyWork($userWorkId, $babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany):UploadBabyWork
     {
-        $path = '/megagame/user/baby/uploadBabyWorks';
-
+        $path = '/megagame/user/userWorks/updateWork';
         $activity = $this->ActivityResp();
         $majorId = $this->Major($MajorName);
         $groupId = $this->Group($GroupName);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
+            'userWorkId' => $userWorkId,
             'imgs' => [
                 $imgs
             ],

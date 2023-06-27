@@ -62,8 +62,7 @@ class EnrollPay extends Admin
             if (strlen($teacher_name) < 2) {
                 $teacher_name = config("shds_default_name");
             }
-
-            $resp = $baby->uploadBabyWork($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
+            $resp = $baby->UploadOrUpdate($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
             if ($resp->isSuccess()) {
                 $this->success("成功导入");
             } else {
