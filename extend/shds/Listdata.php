@@ -22,21 +22,14 @@ class Listdata extends Login
     private string $major_name;
 
 
-    public function ActivityId($name = ""): int
+    public function ActivityId(): GetActivityList
     {
         $path = '/megagame/user/userWorks/getActivityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new GetActivityList($ret);
         if ($resp->isSuccess()) {
-            if (count($resp->getRecords()) > 1) {
-                $this->activityId = $resp->getMap()[$name];
-                $this->setmajor();
-                return $resp->getMap()[$name];
-            } else {
-                $this->activityId = $resp->getMap()[array_key_first($resp->getMap())];
-                $this->setmajor();
-                return $resp->getMap()[array_key_first($resp->getMap())];
-            }
+            $this->setmajor();
+            return $resp;
         } else {
             throw new Exception($resp->getError());
         }

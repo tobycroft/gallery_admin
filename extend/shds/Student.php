@@ -59,8 +59,10 @@ class Student extends Listdata
                 $imgs
             ],
             'activityId' => $activityId,
+            'activityName' => $activityId,
             'sourceFile' => '',
             'majorId' => $majorId,
+            'majorname' => $MajorName,
             'groupId' => $groupId,
             'teacherName' => $teacherName,
             'teacherCompany' => $teacherCompany,

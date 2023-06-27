@@ -8,7 +8,8 @@ class GetActivityList extends Resp
     protected int $code = 0;
 
     protected array $records;
-    protected array $map;
+    protected array $idmap;
+    protected array $namemap;
 
 
     public function __construct($json)
@@ -25,9 +26,10 @@ class GetActivityList extends Resp
         }
 
         $this->records = $this->data['data']['records'];
-        $this->map = [];
+        $this->idmap = [];
         foreach ($this->records as $record) {
-            $this->map[$record['name']] = $record['activityId'];
+            $this->idmap[$record['name']] = $record['activityId'];
+            $this->namemap[$record['activityId']] = $record['name'];
         }
 
     }
@@ -35,25 +37,25 @@ class GetActivityList extends Resp
     /**
      * @return int
      */
-    public function getCode(): int
+    public function getActivityId($name = ""): int
     {
-        return $this->code;
+        if (count($this->records) > 1) {
+            return $this->idmap[$name];
+        } else {
+            return $this->idmap[array_key_first($this->idmap)];
+        }
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getMap(): array
+    public function getActivityName($id = null): string
     {
-        return $this->map;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRecords(): array
-    {
-        return $this->records;
+        if (count($this->records) > 1) {
+            return $this->idmap[$id];
+        } else {
+            return $this->idmap[array_key_first($this->idmap)];
+        }
     }
 
 }
