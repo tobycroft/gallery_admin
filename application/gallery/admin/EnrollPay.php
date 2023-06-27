@@ -26,11 +26,18 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-        $data = EnrollModel::field('id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
+        $datas = EnrollModel::field('id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
             ->where('id', 'in', $ids)
             ->order('id desc')
             ->select()->toArray();
-        echo json_encode($data,320);
+        foreach ($datas as $data) {
+            $upload = EnrollUploadModel::where("enroll_id", $data['id'])->find();
+            if ($upload->isEmpty()) {
+                $this->error("用户还未上传作品无法同步");
+            }
+            $file = $upload->toArray()["attachment"];
+
+        }
 //        try {
 ////            $token = new Login();
 ////            $this->error($token->login());
