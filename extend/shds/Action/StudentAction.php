@@ -15,7 +15,12 @@ class StudentAction extends Student
             return $babyId;
         } else {
             $this->addBaby($name, $age, $sex, $cert);
-            return $this->findBaby($cert);
+            $babyId = $this->AddOrGetId($name, $age, $sex, $cert);
+            if ($babyId === 0) {
+                throw new \ErrorException("新建学生错误");
+            } else {
+                return $babyId;
+            }
         }
     }
 
