@@ -44,8 +44,6 @@ class EnrollPay extends Admin
             }
             $attachment = $file['attachment'];
             $oss_file_link = $baby->uploadFile($attachment);
-var_dump($oss_file_link);
-exit();
             $tag_group_name = TagGroupModel::where("id", $data["tag_group_id"])->value("name");
             $tag_name = TagModel::where("id", $data["tag_id"])->value("name");
             $school_name_show = $data[config("shds_select_name")];
