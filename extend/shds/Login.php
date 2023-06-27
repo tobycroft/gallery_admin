@@ -14,7 +14,7 @@ class Login
     {
 //        $this->setToken(cache('shds_remote_token'));
 //        if ($this->token == "") {
-            $this->login();
+        $this->login();
 //        }
     }
 
