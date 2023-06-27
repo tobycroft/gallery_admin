@@ -2,6 +2,7 @@
 
 namespace shds;
 
+use shds\Response\ActivityList;
 use shds\Response\GetActivityList;
 use shds\Response\GetMajor;
 use think\Exception;
@@ -22,13 +23,12 @@ class Listdata extends Login
     private string $major_name;
 
 
-    public function activityList($babyId): GetActivityList
+    public function activityList($babyId): ActivityList
     {
         $path = '/megagame/user/baby/v1/activityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, ['babyId' => $babyId], self::$jayParsedAry, $this->header);
-        $resp = new GetActivityList($ret);
+        $resp = new ActivityList($ret);
         if ($resp->isSuccess()) {
-            $this->setmajor();
             return $resp;
         } else {
             throw new Exception($resp->getError());

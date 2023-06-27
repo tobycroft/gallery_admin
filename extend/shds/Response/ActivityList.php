@@ -3,6 +3,7 @@
 namespace shds\Response;
 
 
+use shds\Response\Structs\ActivityListStruct;
 
 class ActivityList extends Resp
 {
@@ -11,9 +12,7 @@ class ActivityList extends Resp
 
     protected array $records;
 
-    protected array $uploads = [
-
-    ];
+    protected array $uploads;
 
 
     public function __construct($json)
@@ -31,38 +30,17 @@ class ActivityList extends Resp
 
         $this->records = $this->data['data'];
         foreach ($this->records as $record) {
-            $this->uploads = [
-                "activityId" => $record['activityId'],
-                "id" => $record['id'],
-                "groupName" => $record["groupName"],
-                "majorName" => $record["majorName"],
-            ];
-        }
-
-    }
-
-    /**
-     * @return int
-     */
-    public function getActivityId($name = ""): int
-    {
-        if (count($this->records) > 1) {
-            return $this->idmap[$name];
-        } else {
-            return array_key_first($this->namemap);
+            $this->uploads[] = new ActivityListStruct($record);
         }
     }
 
+
     /**
-     * @return string
+     * @return array
      */
-    public function getActivityName($id = null): string
+    public function getUploads(): array
     {
-        if (count($this->records) > 1) {
-            return $this->namemap[$id];
-        } else {
-            return array_key_first($this->idmap);
-        }
+        return $this->uploads;
     }
 
 }
