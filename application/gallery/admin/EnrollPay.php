@@ -33,7 +33,7 @@ class EnrollPay extends Admin
             ->select()->toArray();
         foreach ($datas as $data) {
             $upload = EnrollUploadModel::where("enroll_id", $data['id'])->find();
-            if ($upload) {
+            if (!$upload) {
                 $this->error("用户还未上传作品无法同步");
             }
             $file = $upload->toArray();
