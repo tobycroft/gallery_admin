@@ -24,7 +24,7 @@ class Login
     public function setToken(string $token): void
     {
         $this->token = $token;
-        $this->header = ['token' => $this->token];
+        $this->header = ['Token' => $this->token];
     }
 
 

@@ -70,7 +70,6 @@ class Student extends Login
             'synopsis' => $content,
             'babyId' => $babyId
         ], $this->header);
-        var_dump($ret);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
             return $resp;
@@ -82,8 +81,6 @@ class Student extends Login
     public function uploadFile($remote_link): string
     {
         $path = "/megagame/api/upload/uploadFile";
-        var_dump($this->header);
-        exit();
         $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path, $this->header);
         $resp = new UploadFile($ret);
         if ($resp->isSuccess()) {
