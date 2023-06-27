@@ -7,8 +7,8 @@ class GetActivityList extends Resp
 
     protected int $code = 0;
 
-    protected array $records = [];
-    protected array $map = [];
+    protected array $records;
+    protected array $map;
 
 
     public function __construct($json)
