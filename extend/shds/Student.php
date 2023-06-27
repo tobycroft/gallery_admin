@@ -77,7 +77,7 @@ class Student extends Listdata
         if ($resp->isSuccess()) {
             return $resp;
         } else {
-            throw new Exception($resp->getError() . '-' . $MajorName . $majorId . '-' . $GroupName . $groupId . "-" . $title);
+            throw new Exception($resp->getError() . "\n-" . $MajorName . $majorId . "\n-" . $GroupName . $groupId . "\n-" . $title);
         }
     }
 
