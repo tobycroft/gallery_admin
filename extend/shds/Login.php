@@ -6,7 +6,7 @@ use think\Exception;
 
 class Login
 {
-    protected string $token = '';
+    protected string $token;
 
     protected array $header;
 
