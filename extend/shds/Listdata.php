@@ -8,6 +8,11 @@ use think\Exception;
 
 class Listdata extends Login
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public static $jayParsedAry = [
         'pageNo' => 1,
         'pageSize' => 10000

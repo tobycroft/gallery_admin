@@ -11,6 +11,10 @@ use think\Exception;
 class Student extends Login
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     public function addBaby($name, $age, $sex, $cert)
     {
@@ -76,7 +80,7 @@ class Student extends Login
     public function uploadFile($remote_link): string
     {
         $path = "/megagame/api/upload/uploadFile";
-        $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path,$this->header);
+        $ret = \Net::PostBinary($remote_link, config('shds_remote_url') . $path, $this->header);
         $resp = new UploadFile($ret);
         if ($resp->isSuccess()) {
             return $resp->getFileUrl();
