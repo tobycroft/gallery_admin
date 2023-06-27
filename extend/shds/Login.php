@@ -8,7 +8,7 @@ class Login
 {
     protected string $token = '';
 
-    protected array $header;
+    protected array $header=[];
 
     public function __construct()
     {
