@@ -7,9 +7,6 @@ use shds\Student;
 class StudentAction extends Student
 {
 
-    private int $id;
-
-
     public function AddOrGetId($name, $age, $sex, $cert): int
     {
         $baby = $this->findBaby($cert);
