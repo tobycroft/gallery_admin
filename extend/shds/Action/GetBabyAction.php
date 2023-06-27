@@ -17,7 +17,7 @@ class GetBabyAction extends Student
             return $baby;
         } else {
             $this->addBaby($name, $age, $sex, $cert);
-            return $this->findBaby($cert;
+            return $this->findBaby($cert);
         }
     }
 }
