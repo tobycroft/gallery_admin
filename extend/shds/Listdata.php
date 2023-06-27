@@ -41,6 +41,7 @@ class Listdata extends Login
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);
         $resp = new GetActivityList($ret);
         if ($resp->isSuccess()) {
+            $this->activityId = $resp->getActivityId(config('shds_remote_activity'));
             $this->setmajor();
             return $resp;
         } else {
