@@ -43,7 +43,7 @@ class Student extends Listdata
         if ($resp->isSuccess()) {
             return $resp->getId();
         } else {
-            throw new Exception($resp->getError());
+            throw new Exception($resp->getError() . "\n-" . $cert);
         }
     }
 
