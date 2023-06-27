@@ -29,8 +29,6 @@ class Listdata extends Login
                 $this->setmajor();
                 return $resp->getMap()[$name];
             } else {
-              var_dump($resp->getMap());
-                exit();
                 $this->activityId = $resp->getMap()[array_key_first($resp->getMap())];
                 $this->setmajor();
                 return $resp->getMap()[array_key_first($resp->getMap())];
