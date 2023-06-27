@@ -58,7 +58,7 @@ class Resp
     private function logout(): bool
     {
         if ($this->str_code == "SYSTEM_LOGIN_ERROR") {
-//            var_dump(cache('shds_remote_token', null, 1));
+            cache('shds_remote_token', null, 1);
             return true;
         }
         return false;
