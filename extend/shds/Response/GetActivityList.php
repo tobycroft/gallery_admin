@@ -25,6 +25,7 @@ class GetActivityList extends Resp
         }
 
         $this->records = $this->data['data']['records'];
+        $this->map=[];
         foreach ($this->records as $record) {
             $map[$record['name']] = $record['activityId'];
         }
