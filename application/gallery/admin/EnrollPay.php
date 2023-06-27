@@ -27,7 +27,7 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
-        $datas = EnrollModel::field('id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
+        $datas = EnrollModel::field('id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
             ->where('id', 'in', $ids)
             ->order('id desc')
             ->select()->toArray();
@@ -38,7 +38,7 @@ class EnrollPay extends Admin
             }
             $file = $upload->toArray();
             $baby = new StudentAction();
-            $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["sex"], $data["cert"]);
+            $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["gender"], $data["cert"]);
 
             $attachment = $file['attachment'];
             $oss_file_link = $baby->uploadFile($attachment);
@@ -88,7 +88,7 @@ class EnrollPay extends Admin
 
     public function export($ids = [])
     {
-        $data = EnrollModel::field("id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
+        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
             ->where('id', 'in', $ids)
             ->order('id desc')
             ->select()->toArray();
