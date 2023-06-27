@@ -62,7 +62,7 @@ class Listdata extends Login
     public function Group($group_name): int
     {
         if ($this->major_ret->isSuccess()) {
-            return $this->major_ret($this->major_name, $group_name);
+            return $this->major_ret->getGroupId($this->major_name, $group_name);
         } else {
             throw new Exception($this->major_ret->getError());
         }
