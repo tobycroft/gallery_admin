@@ -70,7 +70,13 @@ class Student extends Login
             'synopsis' => $content,
             'babyId' => $babyId
         ], $this->header);
-        return new UploadBabyWork($ret);
+        var_dump($ret);
+        $resp = new UploadBabyWork($ret);
+        if ($resp->isSuccess()) {
+            return $resp->isSuccess();
+        } else {
+            throw new Exception($resp->getError());
+        }
     }
 
     public function uploadFile($remote_link): string

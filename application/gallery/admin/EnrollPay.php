@@ -41,9 +41,6 @@ class EnrollPay extends Admin
             $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["gender"], $data["cert"]);
             if ($babyId === 0) {
                 $this->error("babyid为0");
-            }else{
-                var_dump($babyId);
-                exit();
             }
             $attachment = $file['attachment'];
             $oss_file_link = $baby->uploadFile($attachment);
@@ -71,7 +68,7 @@ class EnrollPay extends Admin
             if ($resp->isSuccess()) {
                 $this->success("成功导入");
             } else {
-                $this->error($resp->getError());
+                $this->error("上传错误");
             }
 
         }
