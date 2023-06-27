@@ -17,6 +17,8 @@ class Listdata extends Login
 
     public int $activityId;
 
+    private $major_name;
+
 
     public function ActivityId($name = ""): int
     {
@@ -47,6 +49,7 @@ class Listdata extends Login
 
     public function Major($name): int
     {
+        $this->major_name=$name;
         if ($this->major_ret->isSuccess()) {
             return $this->major_ret->getMajorId($name);
         } else {
@@ -54,10 +57,10 @@ class Listdata extends Login
         }
     }
 
-    public function Group($major_name, $group_name): int
+    public function Group($group_name): int
     {
         if ($this->major_ret->isSuccess()) {
-            return $this->major_ret->getGroupId($major_name, $group_name);
+            return $this->major_ret->getGroupId($this->major_name, $group_name);
         } else {
             throw new Exception($this->major_ret->getError());
         }
