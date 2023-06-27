@@ -8,7 +8,7 @@ class FindBaby extends Resp
     protected int $code = 0;
 
     protected array $records = [];
-    protected int $id;
+    protected int $id=0;
 
     public function __construct($json)
     {
