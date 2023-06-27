@@ -25,7 +25,7 @@ class GetMajor extends Resp
             return;
         }
 
-        $this->records = $this->data['data']['records'];
+        $this->records = $this->data['data'];
         foreach ($this->records as $record) {
             $this->major_name[$record['majorName']] = $record['majorId'];
             foreach ($record["childGroup"] as $item) {
