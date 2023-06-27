@@ -31,6 +31,7 @@ class EnrollPay extends Admin
             ->where('id', 'in', $ids)
             ->order('id desc')
             ->select()->toArray();
+        $resps = [];
         foreach ($datas as $data) {
             $upload = EnrollUploadModel::where("enroll_id", $data['id'])->find();
             if (!$upload) {
@@ -64,13 +65,11 @@ class EnrollPay extends Admin
                 $teacher_name = config("shds_default_name");
             }
             $resp = $baby->UploadOrUpdate($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
-            if ($resp->isSuccess()) {
-                $this->success("导入/更新成功");
-            } else {
+            if (!$resp->isSuccess()) {
                 $this->error($resp->getError(), '', json_encode([$babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show], 320));
             }
-
         }
+        $this->success('导入/更新成功');
     }
 
     public function export($ids = [])
