@@ -6,6 +6,8 @@ use think\Exception;
 
 class Login
 {
+
+    public $code;
     protected string $token;
 
     protected array $header;
@@ -32,7 +34,7 @@ class Login
     {
         $path = '/megagame/login/user/login';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
-            'code' => config('shds_remote_username'),
+            'code' => $this->code != null ?: config('shds_remote_username'),
             'password' => config('shds_remote_password'),
             'sysflg' => ''
         ]);

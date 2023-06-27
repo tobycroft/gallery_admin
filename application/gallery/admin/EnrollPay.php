@@ -33,12 +33,18 @@ class EnrollPay extends Admin
             ->select()->toArray();
         $resps = [];
         foreach ($datas as $data) {
+            $school_name_show = $data[config('shds_select_name')];
+            if ($school_name_show == '无') {
+                $school_name_show = config('shds_default_school');
+            }
+
             $upload = EnrollUploadModel::where("enroll_id", $data['id'])->find();
             if (!$upload) {
                 $this->error("用户还未上传作品无法同步");
             }
             $file = $upload->toArray();
             $baby = new StudentAction();
+            $baby->code = config('shds_school_to_phone')[$school_name_show];
             $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["gender"], $data["cert"]);
             if ($babyId === 0) {
                 $this->error("babyid为0");
@@ -47,16 +53,13 @@ class EnrollPay extends Admin
             $oss_file_link = $baby->uploadFile($attachment);
             $tag_group_name = TagGroupModel::where("id", $data["tag_group_id"])->value("name");
             $tag_name = TagModel::where("id", $data["tag_id"])->value("name");
-            $school_name_show = $data[config("shds_select_name")];
 //            $school_name = $data["school_name"];
             $teacher_name = $file['teacher_name'];
             $teacher_phone = $file['teacher_phone'];
             $title = $file['title'];
             $content = $file['content'];
 
-            if ($school_name_show == "无") {
-                $school_name_show = config("shds_default_school");
-            }
+
 //            var_dump($school_name_show);
             if (strlen($teacher_phone) < 8) {
                 $teacher_phone = config("shds_default_phone");
@@ -72,38 +75,38 @@ class EnrollPay extends Admin
         $this->success('导入/更新成功');
     }
 
-    public function export($ids = [])
+    public
+    function export($ids = [])
     {
-        echo json_encode(config("shds_school_to_phone"),320);
-//        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
-//            ->where('id', 'in', $ids)
-//            ->order('id desc')
-//            ->select()->toArray();
-//
-//        foreach ($data as $key => $item) {
-//            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->value("name");
-//            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->value("name");
-//            $item["cert"] = "ID:" . $item["cert"];
-//            $item['title'] = '';
-//            $item['content'] = '';
-//            $item['attachment'] = '';
-//            $item['teacher_name'] = '';
-//            $item['teacher_phone'] = '';
-//            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
-//            if (!$up->isEmpty()) {
-//                $item['title'] = $up['title'];
-//                $item['content'] = $up['content'];
-//                $item['attachment'] = $up['attachment'];
-//                $item['teacher_name'] = $up['teacher_name'];
-//                $item['teacher_phone'] = $up['teacher_phone'];
-//            }
-//            $data[$key] = $item;
-//        }
-//
-//        // 设置表头信息（对应字段名,宽度，显示表头名称）
-//        $Aoss = new Excel(config('upload_prefix'));
-//        $ret = $Aoss->create_excel_fileurl($data);
-//        $this->success("成功", $ret->file_url(), "_blank");
+        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
+            ->where('id', 'in', $ids)
+            ->order('id desc')
+            ->select()->toArray();
+
+        foreach ($data as $key => $item) {
+            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->value("name");
+            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->value("name");
+            $item["cert"] = "ID:" . $item["cert"];
+            $item['title'] = '';
+            $item['content'] = '';
+            $item['attachment'] = '';
+            $item['teacher_name'] = '';
+            $item['teacher_phone'] = '';
+            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+            if (!$up->isEmpty()) {
+                $item['title'] = $up['title'];
+                $item['content'] = $up['content'];
+                $item['attachment'] = $up['attachment'];
+                $item['teacher_name'] = $up['teacher_name'];
+                $item['teacher_phone'] = $up['teacher_phone'];
+            }
+            $data[$key] = $item;
+        }
+
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+        $Aoss = new Excel(config('upload_prefix'));
+        $ret = $Aoss->create_excel_fileurl($data);
+        $this->success("成功", $ret->file_url(), "_blank");
     }
 
     /**
@@ -112,7 +115,8 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public function index()
+    public
+    function index()
     {
         // 获取排序
         $order = $this->getOrder("id desc");
@@ -195,7 +199,8 @@ class EnrollPay extends Admin
      * @return mixed
      * @throws \think\Exception
      */
-    public function add()
+    public
+    function add()
     {
         // 保存数据
         if ($this->request->isPost()) {
@@ -289,7 +294,8 @@ class EnrollPay extends Admin
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    public function edit($id = null)
+    public
+    function edit($id = null)
     {
         if ($id === null)
             $this->error('缺少参数');
@@ -378,7 +384,8 @@ class EnrollPay extends Admin
      * @throws \think\exception\DbException
      * @throws \think\exception\PDOException
      */
-    public function access($module = '', $uid = 0, $tab = '')
+    public
+    function access($module = '', $uid = 0, $tab = '')
     {
         if ($uid === 0)
             $this->error('缺少参数');
@@ -576,7 +583,8 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public function delete($ids = [])
+    public
+    function delete($ids = [])
     {
         Hook::listen('user_delete', $ids);
         action_log('user_delete', 'user', $ids, UID);
@@ -590,7 +598,8 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public function setStatus($type = '', $record = [])
+    public
+    function setStatus($type = '', $record = [])
     {
         $ids = $this->request->isPost() ? input('post.ids/a') : input('param.ids');
         $ids = (array)$ids;
@@ -633,7 +642,8 @@ class EnrollPay extends Admin
      * @param array $user_access 用户授权信息
      * @return string
      */
-    private function buildJsTree($nodes = [], $curr_access = [], $user_access = [])
+    private
+    function buildJsTree($nodes = [], $curr_access = [], $user_access = [])
     {
         $result = '';
         if (!empty($nodes)) {
@@ -662,7 +672,8 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public function enable($ids = [])
+    public
+    function enable($ids = [])
     {
         Hook::listen('user_enable', $ids);
         return $this->setStatus('enable');
@@ -674,13 +685,15 @@ class EnrollPay extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public function disable($ids = [])
+    public
+    function disable($ids = [])
     {
         Hook::listen('user_disable', $ids);
         return $this->setStatus('disable');
     }
 
-    public function quickEdit($record = [])
+    public
+    function quickEdit($record = [])
     {
         $field = input('post.name', '');
         $value = input('post.value', '');
