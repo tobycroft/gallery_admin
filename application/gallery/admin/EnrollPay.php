@@ -55,7 +55,6 @@ class EnrollPay extends Admin
             if ($school_name_show == "无") {
                 $school_name_show = config("shds_default_school");
             }
-
             if (strlen($teacher_phone) < 8) {
                 $teacher_phone = config("shds_default_phone");
             }
@@ -63,8 +62,12 @@ class EnrollPay extends Admin
                 $teacher_name = config("shds_default_name");
             }
 
-            $baby->uploadBabyWork($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
-
+            $resp = $baby->uploadBabyWork($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
+            if ($resp->isSuccess()) {
+                $this->success("成功导入");
+            } else {
+                $this->error($resp->getError());
+            }
 
         }
 //        try {
