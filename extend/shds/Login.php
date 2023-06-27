@@ -37,6 +37,7 @@ class Login
                 cache("shds_remote_token", $data["token"], 600);
 //                echo "刷新缓存";
                 $this->token = $data["token"];
+                $this->header = ['token' => $this->token];
                 return $this->token;
             } else {
                 throw new Exception($decode['message']);
