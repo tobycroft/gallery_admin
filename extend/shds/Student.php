@@ -93,17 +93,17 @@ class Student extends Listdata
             'imgs' => [
                 $imgs
             ],
-//            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
-//            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
+            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
+            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
             'sourceFile' => '',
             'majorId' => $majorId,
-//            'majorname' => $MajorName,
+            'majorname' => $MajorName,
             'teacherName' => $teacherName,
             'teacherCompany' => $teacherCompany,
             'teacherTel' => $teacherTel,
             'name' => $title,
             'synopsis' => $content,
-//            'babyId' => $babyId
+            'babyId' => $babyId
         ];
 //        ksort($post);
 //        var_dump($post);
