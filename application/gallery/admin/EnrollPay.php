@@ -38,8 +38,7 @@ class EnrollPay extends Admin
             }
             $file = $upload->toArray();
             $baby = new StudentAction();
-            var_dump($baby->login());
-            exit();
+
             $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["gender"], $data["cert"]);
             if ($babyId === 0) {
                 $this->error("babyid为0");
