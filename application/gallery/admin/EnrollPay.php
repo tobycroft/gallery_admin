@@ -74,7 +74,7 @@ class EnrollPay extends Admin
 
     public function export($ids = [])
     {
-        var_dump(config("shds_school_to_phone"));
+        echo json_encode(config("shds_school_to_phone"),1);
 //        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
 //            ->where('id', 'in', $ids)
 //            ->order('id desc')
