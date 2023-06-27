@@ -68,7 +68,7 @@ class EnrollPay extends Admin
             if ($resp->isSuccess()) {
                 $this->success("成功导入");
             } else {
-                $this->error($resp->getError());
+                $this->error($resp->getError(),'',json_encode([$babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show],320));
             }
 
         }
