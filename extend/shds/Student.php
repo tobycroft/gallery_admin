@@ -21,10 +21,10 @@ class Student extends Login
             'idCardNo' => base64_encode($cert),
             'sex' => $sex,
             'age' => $age
-        ]);
+        ], $this->token);
         $resp = new AddBaby($ret);
         if ($resp->isSuccess()) {
-            return true;
+            return $resp->isSuccess();
         } else {
             throw new Exception($resp->getError());
         }
@@ -39,8 +39,12 @@ class Student extends Login
             'queryType' => 0,
             'idCardNo' => $cert
         ], ['token' => $this->token]);
-        $record = new FindBaby($ret);
-        return $record;
+        $resp = new FindBaby($ret);
+        if ($resp->isSuccess()) {
+            return $resp->getId();
+        } else {
+            throw new Exception($resp->getError());
+        }
     }
 
     public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany)
