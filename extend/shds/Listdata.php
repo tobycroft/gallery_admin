@@ -22,6 +22,19 @@ class Listdata extends Login
     private string $major_name;
 
 
+    public function activityList($babyId): GetActivityList
+    {
+        $path = '/megagame/user/baby/v1/activityList';
+        $ret = \Net::PostJson(config('shds_remote_url') . $path, ['babyId' => $babyId], self::$jayParsedAry, $this->header);
+        $resp = new GetActivityList($ret);
+        if ($resp->isSuccess()) {
+            $this->setmajor();
+            return $resp;
+        } else {
+            throw new Exception($resp->getError());
+        }
+    }
+
     public function ActivityResp(): GetActivityList
     {
         $path = '/megagame/user/userWorks/getActivityList';

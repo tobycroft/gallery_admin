@@ -79,6 +79,38 @@ class Student extends Listdata
         }
     }
 
+    public function updateBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany)
+    {
+        $path = '/megagame/user/baby/uploadBabyWorks';
+
+        $activity = $this->ActivityResp();
+        $majorId = $this->Major($MajorName);
+        $groupId = $this->Group($GroupName);
+        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
+            'imgs' => [
+                $imgs
+            ],
+            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
+            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
+            'sourceFile' => '',
+            'majorId' => $majorId,
+            'majorname' => $MajorName,
+            'groupId' => $groupId,
+            'teacherName' => $teacherName,
+            'teacherCompany' => $teacherCompany,
+            'teacherTel' => $teacherTel,
+            'name' => $title,
+            'synopsis' => $content,
+            'babyId' => $babyId
+        ], $this->header);
+        $resp = new UploadBabyWork($ret);
+        if ($resp->isSuccess()) {
+            return $resp;
+        } else {
+            throw new Exception($resp->getError() . '-' . $MajorName . $majorId . '-' . $GroupName . $groupId . "-" . $title);
+        }
+    }
+
     public function uploadFile($remote_link): string
     {
         $path = "/megagame/api/upload/uploadFile";
