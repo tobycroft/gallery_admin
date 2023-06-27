@@ -68,7 +68,7 @@ class EnrollPay extends Admin
             if ($resp->isSuccess()) {
                 $this->success("成功导入");
             } else {
-                $this->error("上传错误");
+                $this->error($resp->getError());
             }
 
         }
