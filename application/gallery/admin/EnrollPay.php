@@ -74,35 +74,36 @@ class EnrollPay extends Admin
 
     public function export($ids = [])
     {
-        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
-            ->where('id', 'in', $ids)
-            ->order('id desc')
-            ->select()->toArray();
-
-        foreach ($data as $key => $item) {
-            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->value("name");
-            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->value("name");
-            $item["cert"] = "ID:" . $item["cert"];
-            $item['title'] = '';
-            $item['content'] = '';
-            $item['attachment'] = '';
-            $item['teacher_name'] = '';
-            $item['teacher_phone'] = '';
-            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
-            if (!$up->isEmpty()) {
-                $item['title'] = $up['title'];
-                $item['content'] = $up['content'];
-                $item['attachment'] = $up['attachment'];
-                $item['teacher_name'] = $up['teacher_name'];
-                $item['teacher_phone'] = $up['teacher_phone'];
-            }
-            $data[$key] = $item;
-        }
-
-        // 设置表头信息（对应字段名,宽度，显示表头名称）
-        $Aoss = new Excel(config('upload_prefix'));
-        $ret = $Aoss->create_excel_fileurl($data);
-        $this->success("成功", $ret->file_url(), "_blank");
+        var_dump(config("shds_school_to_phone"));
+//        $data = EnrollModel::field("id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date")
+//            ->where('id', 'in', $ids)
+//            ->order('id desc')
+//            ->select()->toArray();
+//
+//        foreach ($data as $key => $item) {
+//            $item["tag_id"] = TagModel::where("id", $item["tag_id"])->value("name");
+//            $item["tag_group_id"] = TagGroupModel::where("id", $item["tag_group_id"])->value("name");
+//            $item["cert"] = "ID:" . $item["cert"];
+//            $item['title'] = '';
+//            $item['content'] = '';
+//            $item['attachment'] = '';
+//            $item['teacher_name'] = '';
+//            $item['teacher_phone'] = '';
+//            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+//            if (!$up->isEmpty()) {
+//                $item['title'] = $up['title'];
+//                $item['content'] = $up['content'];
+//                $item['attachment'] = $up['attachment'];
+//                $item['teacher_name'] = $up['teacher_name'];
+//                $item['teacher_phone'] = $up['teacher_phone'];
+//            }
+//            $data[$key] = $item;
+//        }
+//
+//        // 设置表头信息（对应字段名,宽度，显示表头名称）
+//        $Aoss = new Excel(config('upload_prefix'));
+//        $ret = $Aoss->create_excel_fileurl($data);
+//        $this->success("成功", $ret->file_url(), "_blank");
     }
 
     /**
