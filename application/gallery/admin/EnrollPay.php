@@ -56,7 +56,7 @@ class EnrollPay extends Admin
             if ($school_name_show == "无") {
                 $school_name_show = config("shds_default_school");
             }
-            var_dump($school_name_show);
+//            var_dump($school_name_show);
             if (strlen($teacher_phone) < 8) {
                 $teacher_phone = config("shds_default_phone");
             }
