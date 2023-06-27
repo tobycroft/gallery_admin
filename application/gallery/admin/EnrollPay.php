@@ -26,6 +26,11 @@ class EnrollPay extends Admin
 
     public function sync($ids = [])
     {
+        $data = EnrollModel::field('id,uid,age,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
+            ->where('id', 'in', $ids)
+            ->order('id desc')
+            ->select()->toArray();
+        echo json_encode($data,320);
 //        try {
 ////            $token = new Login();
 ////            $this->error($token->login());
@@ -35,11 +40,11 @@ class EnrollPay extends Admin
 //        } catch (\Throwable $e) {
 //            $this->error($e->getMessage());
 //        }
-        $student = new \shds\Student();
-        $ret = ($student->findBaby("350104"));
+//        $student = new \shds\Student();
+//        $ret = ($student->findBaby("350104"));
 //        echo $ret->getError();
 //        echo json_encode($ret->getData(),1);
-        echo $ret->getId();
+//        echo $ret->getId();
     }
 
     public function export($ids = [])
