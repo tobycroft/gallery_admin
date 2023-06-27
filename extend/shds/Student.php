@@ -73,7 +73,7 @@ class Student extends Login
         var_dump($ret);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
-            return $resp->isSuccess();
+            return $resp;
         } else {
             throw new Exception($resp->getError());
         }
