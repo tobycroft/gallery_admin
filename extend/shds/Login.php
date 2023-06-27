@@ -12,10 +12,10 @@ class Login
 
     public function __construct()
     {
-        $this->setToken(cache('shds_remote_token'));
-        if ($this->token == "") {
+//        $this->setToken(cache('shds_remote_token'));
+//        if ($this->token == "") {
             $this->login();
-        }
+//        }
     }
 
     /**
