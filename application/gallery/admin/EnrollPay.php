@@ -40,7 +40,7 @@ class EnrollPay extends Admin
             $baby = new StudentAction();
             $babyId = $baby->AddOrGetId($data["name"], $data["age"], $data["gender"], $data["cert"]);
             if ($babyId === 0) {
-                $this->error();
+                $this->error("babyid为0");
             }
             $attachment = $file['attachment'];
             $oss_file_link = $baby->uploadFile($attachment);
