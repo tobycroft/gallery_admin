@@ -42,7 +42,7 @@ class GetActivityList extends Resp
         if (count($this->records) > 1) {
             return $this->idmap[$name];
         } else {
-            return $this->idmap[array_key_first($this->idmap)];
+            return array_key_first($this->namemap);
         }
     }
 
@@ -52,9 +52,9 @@ class GetActivityList extends Resp
     public function getActivityName($id = null): string
     {
         if (count($this->records) > 1) {
-            return $this->idmap[$id];
+            return $this->namemap[$id];
         } else {
-            return $this->idmap[array_key_first($this->idmap)];
+            return array_key_first($this->idmap);
         }
     }
 

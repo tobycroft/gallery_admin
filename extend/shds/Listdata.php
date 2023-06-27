@@ -22,7 +22,7 @@ class Listdata extends Login
     private string $major_name;
 
 
-    public function ActivityId(): GetActivityList
+    public function ActivityResp(): GetActivityList
     {
         $path = '/megagame/user/userWorks/getActivityList';
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], self::$jayParsedAry, $this->header);

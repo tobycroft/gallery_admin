@@ -51,15 +51,15 @@ class Student extends Listdata
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
 
-        $activityId = $this->ActivityId(config('shds_remote_activity'));
+        $activity = $this->ActivityResp();
         $majorId = $this->Major($MajorName);
         $groupId = $this->Group($GroupName);
         $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
             'imgs' => [
                 $imgs
             ],
-            'activityId' => $activityId,
-            'activityName' => $activityId,
+            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
+            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
             'sourceFile' => '',
             'majorId' => $majorId,
             'majorname' => $MajorName,
