@@ -68,7 +68,7 @@ class EnrollPay extends Admin
             if ($resp->isSuccess()) {
                 $this->success("成功导入");
             } else {
-                $this->error($resp->getError(),'',json_encode([$babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show],320));
+                $this->error($resp->getError(), '', json_encode([$babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show], 320));
             }
 
         }
@@ -160,7 +160,7 @@ class EnrollPay extends Admin
             ->addTopButton('custom', $custom)
 //            ->addTopButton('disable')
             ->setPageTitle('列表')
-            ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校", 'is_send' => '已寄出']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
 //            ->addColumn('source', '数据来源', 'number')
@@ -178,6 +178,7 @@ class EnrollPay extends Admin
             ->addColumn('district', '区域', 'text.edit')
             ->addColumn('address', '地址', 'text')
             ->addColumn('is_payed', '是否已支付', 'switch')
+            ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('right_button', '操作', 'btn')
