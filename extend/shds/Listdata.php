@@ -17,7 +17,7 @@ class Listdata extends Login
 
     public int $activityId;
 
-    private $major_name;
+    private string $major_name;
 
 
     public function ActivityId($name = ""): int
@@ -49,7 +49,7 @@ class Listdata extends Login
 
     public function Major($name): int
     {
-        $this->major_name=$name;
+        $this->major_name = $name;
         if ($this->major_ret->isSuccess()) {
             return $this->major_ret->getMajorId($name);
         } else {
