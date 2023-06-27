@@ -47,7 +47,7 @@ class Student extends Listdata
         }
     }
 
-    public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany):UploadBabyWork
+    public function uploadBabyWork($babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany): UploadBabyWork
     {
         $path = '/megagame/user/baby/uploadBabyWorks';
 
@@ -79,7 +79,7 @@ class Student extends Listdata
         }
     }
 
-    public function updateBabyWork($userWorkId, $babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany):UploadBabyWork
+    public function updateBabyWork($userWorkId, $babyId, $MajorName, $GroupName, $title, $content, $imgs, $teacherName, $teacherTel, $teacherCompany): UploadBabyWork
     {
         $path = '/megagame/user/userWorks/updateWork';
         $activity = $this->ActivityResp();
@@ -90,18 +90,18 @@ class Student extends Listdata
             'imgs' => [
                 $imgs
             ],
-            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
-            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
+//            'activityId' => $activity->getActivityId(config('shds_remote_activity')),
+//            'activityName' => $activity->getActivityName($activity->getActivityId(config('shds_remote_activity'))),
             'sourceFile' => '',
             'majorId' => $majorId,
-            'majorname' => $MajorName,
+//            'majorname' => $MajorName,
             'groupId' => $groupId,
             'teacherName' => $teacherName,
             'teacherCompany' => $teacherCompany,
             'teacherTel' => $teacherTel,
             'name' => $title,
             'synopsis' => $content,
-            'babyId' => $babyId
+//            'babyId' => $babyId
         ], $this->header);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
