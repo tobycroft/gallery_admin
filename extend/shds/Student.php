@@ -85,7 +85,8 @@ class Student extends Listdata
         $activity = $this->ActivityResp();
         $majorId = $this->Major($MajorName);
         $groupId = $this->Group($GroupName);
-        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], [
+        $post=[
+            'groupId' => $groupId,
             'userWorkId' => $userWorkId,
             'imgs' => [
                 $imgs
@@ -95,14 +96,15 @@ class Student extends Listdata
             'sourceFile' => '',
             'majorId' => $majorId,
 //            'majorname' => $MajorName,
-            'groupId' => $groupId,
             'teacherName' => $teacherName,
             'teacherCompany' => $teacherCompany,
             'teacherTel' => $teacherTel,
             'name' => $title,
             'synopsis' => $content,
 //            'babyId' => $babyId
-        ], $this->header);
+        ];
+        ksort($post);
+        $ret = \Net::PostJson(config('shds_remote_url') . $path, [], $post, $this->header);
         $resp = new UploadBabyWork($ret);
         if ($resp->isSuccess()) {
             return $resp;
