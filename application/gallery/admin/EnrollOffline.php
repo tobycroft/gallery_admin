@@ -80,12 +80,13 @@ class EnrollOffline extends Admin
                 ['text', 'name', '姓名',],
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
+                ['text', 'is_send', '已寄出',],
             ])
             ->addTopButton('add')
             ->addTopButton('export')
             ->setPageTitle('列表')
 //            ->addOrder('id,callsign,year,class')
-            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '绑定单位', 'is_send' => '已寄出']) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '绑定单位', 'school_name_show' => '学校']) // 设置搜索参数
 
             ->addColumn('id', '问题ID')
 //            ->addColumn('source', '数据来源', 'number')
