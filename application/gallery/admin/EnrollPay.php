@@ -70,20 +70,6 @@ class EnrollPay extends Admin
             }
 
         }
-//        try {
-////            $token = new Login();
-////            $this->error($token->login());
-//
-////            var_dump($token);
-////            var_dump(config('shds_remote_token'));
-//        } catch (\Throwable $e) {
-//            $this->error($e->getMessage());
-//        }
-//        $student = new \shds\Student();
-//        $ret = ($student->findBaby("350104"));
-//        echo $ret->getError();
-//        echo json_encode($ret->getData(),1);
-//        echo $ret->getId();
     }
 
     public function export($ids = [])
