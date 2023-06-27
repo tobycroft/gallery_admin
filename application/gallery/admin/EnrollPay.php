@@ -65,7 +65,7 @@ class EnrollPay extends Admin
             }
             $resp = $baby->UploadOrUpdate($babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show);
             if ($resp->isSuccess()) {
-                $this->success("成功导入");
+                $this->success("导入/更新成功");
             } else {
                 $this->error($resp->getError(), '', json_encode([$babyId, $tag_name, $tag_group_name, $title, $content, $oss_file_link, $teacher_name, $teacher_phone, $school_name_show], 320));
             }
