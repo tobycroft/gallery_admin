@@ -18,8 +18,8 @@ class UploadFile extends Resp
         $this->code = $this->data['code'];
         if ($this->code != 20000) {
             $this->is_success = false;
+            $this->error = $this->data['data'];
         }
-        $this->error = $this->data['data'];
         $this->data = $this->data["data"];
         $this->fileUrl = $this->data["fileUrl"];
     }
