@@ -11,10 +11,6 @@ use think\Exception;
 class Student extends Login
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     public function addBaby($name, $age, $sex, $cert)
     {
