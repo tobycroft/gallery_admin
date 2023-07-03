@@ -32,7 +32,7 @@ class EnrollUpload extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollUploadModel::field("a.*")->alias("a")->leftJoin(["g_enroll" => "b"], "b.enroll_id=a.id")->where($map)->order($order)->paginate();
+        $data_list = EnrollUploadModel::field("a.*")->alias("a")->leftJoin(["g_enroll" => "b"], "a.enroll_id=b.id")->where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
