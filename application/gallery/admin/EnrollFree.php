@@ -6,6 +6,7 @@ namespace app\gallery\admin;
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
+use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
@@ -33,7 +34,15 @@ class EnrollFree extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->where("source", "free")->order($order)->paginate();
+        $data_list = EnrollModel::where($map)->where("source", "free")->order($order)->paginate()->each(function ($item) {
+            $item['attachment'] = '';
+            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+            if (!$up->isEmpty()) {
+                $item['attachment'] = $up['attachment'];
+                $item['rating'] = $up['rating'];
+            }
+            return $item;
+        });
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
@@ -54,7 +63,7 @@ class EnrollFree extends Admin
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')
-                        ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '问题ID')
 //            ->addColumn('source', '数据来源', 'number')
@@ -70,6 +79,8 @@ class EnrollFree extends Admin
             ->addColumn('district', '已支付', 'text.edit')
 //            ->addColumn('address', '已支付', 'text.edit')
             ->addColumn('is_payed', '已支付', 'switch')
+            ->addColumn('attachment', '图片', 'picture')
+            ->addColumn('rating', '评级', 'text')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
