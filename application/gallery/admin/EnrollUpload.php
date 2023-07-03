@@ -32,7 +32,7 @@ class EnrollUpload extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollUploadModel::alias("a")->where($map)->order($order)->paginate();
+        $data_list = EnrollUploadModel::field("a.*")->alias("a")->leftJoin(["g_enroll_upload" => "b"], "b.enroll_id=a.id")->where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
@@ -51,9 +51,9 @@ class EnrollUpload extends Admin
                 ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
 
             ])
-            //            ->setSearch(['a.id' => 'ID', 'a.uid' => "uid", 'a.name' => '用户名']) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '绑定单位', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
-            ->addColumn('id', '作品id')
+            ->addColumn('a.id', '作品id')
 //            ->addColumn('uid', '用户id', 'number')
             ->addColumn('enroll_id', '报名id', 'select', $enroll)
             ->addColumn('title', '标题', 'text')
