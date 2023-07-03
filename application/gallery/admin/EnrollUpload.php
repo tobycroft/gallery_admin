@@ -51,7 +51,7 @@ class EnrollUpload extends Admin
                 ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
 
             ])
-            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '绑定单位', 'school_name_show' => '学校']) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('a.id', '作品id')
 //            ->addColumn('uid', '用户id', 'number')
