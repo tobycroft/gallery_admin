@@ -7,6 +7,8 @@ use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
 use app\gallery\model\EnrollUploadModel;
+use app\gallery\model\TagGroupModel;
+use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
 use app\user\model\Role as RoleModel;
 use app\user\model\User;
@@ -49,6 +51,8 @@ class EnrollUpload extends Admin
             ->setSearchArea([
                 ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
                 ['text', 'school_name_show', '报名学校',],
+                ['select', 'tag_group_id', '年级组id', '', TagGroupModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', TagModel::column('id,name')],
 
 
             ])
