@@ -60,7 +60,14 @@ class EnrollUpload extends Admin
             ->addColumn('content', '内容', 'text')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('teacher_name', '教师名称', 'text.edit')
-            ->addColumn('teacher_phone', '教师电话', 'text.edit')
+            ->addColumn('content', '内容', 'text')
+            ->addColumn('rating', '教师电话', 'select', [
+                "一等奖" => "一等奖",
+                "二等奖" => "二等奖",
+                "三等奖" => "三等奖",
+                "优秀奖" => "优秀奖",
+                "淘汰" => "淘汰",
+            ])
 //            ->addColumn('is_original', '是否原创', 'switch')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
