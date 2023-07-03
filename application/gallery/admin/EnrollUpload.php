@@ -73,7 +73,7 @@ class EnrollUpload extends Admin
                 "淘汰" => "淘汰",
             ])
 //            ->addColumn('is_original', '是否原创', 'switch')
-            ->addColumn('date', '创建时间')
+            ->addColumn('a.date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
 //            ->addRightButton('delete') //添加删除按钮
