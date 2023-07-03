@@ -32,7 +32,7 @@ class EnrollUpload extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollUploadModel::field("a.*")->alias("a")->leftJoin(["g_enroll" => "b"], "a.enroll_id=b.id")->where($map)->order($order)->paginate();
+        $data_list = EnrollUploadModel::field("*")->alias("a")->leftJoin(["g_enroll" => "b"], "a.enroll_id=b.id")->where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
@@ -47,8 +47,9 @@ class EnrollUpload extends Admin
             ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearchArea([
-                ['select', 'enroll_id', '通过学生姓名', '', '', $enroll],
                 ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
+                ['text', 'school_name_show', '报名学校',],
+
 
             ])
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构', 'school_name_show' => '学校']) // 设置搜索参数
