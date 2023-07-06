@@ -42,6 +42,8 @@ class EnrollUpload extends Admin
             ->count();
         $num2 = EnrollUploadModel::count();
         $enroll = EnrollModel::column("id,name");
+        $tag = TagModel::column('id,name');
+        $tag_group = TagGroupModel::column('id,name');
         $enroll2 = EnrollModel::column("id,phone");
         return ZBuilder::make('table')
             ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
@@ -63,6 +65,8 @@ class EnrollUpload extends Admin
             ->addColumn('enroll_id', '报名id', 'select', $enroll)
             ->addColumn('title', '标题', 'text')
             ->addColumn('content', '内容', 'text')
+            ->addColumn('tag_id', '类型', 'select', $tag)
+            ->addColumn('tag_group_id', '组别', 'select', $tag_group)
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('teacher_name', '教师名称', 'text.edit')
             ->addColumn('content', '内容', 'text')
