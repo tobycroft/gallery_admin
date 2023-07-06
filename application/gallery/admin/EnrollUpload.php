@@ -34,7 +34,7 @@ class EnrollUpload extends Admin
         $order = $this->getOrder("a.id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollUploadModel::alias("a")->field('*')->leftJoin(["g_enroll" => "b"], "a.enroll_id=b.id")->where($map)->order($order)->paginate();
+        $data_list = EnrollUploadModel::alias("a")->field('*,a.id as id')->leftJoin(["g_enroll" => "b"], "a.enroll_id=b.id")->where($map)->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
