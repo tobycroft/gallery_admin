@@ -81,7 +81,7 @@ class EnrollFree extends Admin
             ->addColumn('is_payed', '已支付', 'switch')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
-            ->addColumn('remark', '备注')
+            ->addColumn('remark', '备注','text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
