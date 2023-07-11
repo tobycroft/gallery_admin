@@ -159,7 +159,8 @@ class EnrollPay extends Admin
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
                 ['text', 'is_send', '已寄出',],
-            ])
+                ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],  ])
             ->addTopButton("add")
             ->addTopButton('export')
             ->addTopButton('custom', $custom)
@@ -184,7 +185,7 @@ class EnrollPay extends Admin
             ->addColumn('district', '区域', 'text.edit')
             ->addColumn('address', '地址', 'text')
             ->addColumn('is_payed', '是否已支付', 'switch')
-                        ->addColumn('remark', '备注','text.edit')
+            ->addColumn('remark', '备注', 'text.edit')
             ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('send_date', '寄出时间', 'text.edit')
             ->addColumn('attachment', '图片', 'picture')

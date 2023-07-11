@@ -60,7 +60,8 @@ class EnrollFree extends Admin
                 ['text', 'name', '姓名',],
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
-            ])
+                ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],])
             ->addTopButton("add")
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
@@ -81,7 +82,7 @@ class EnrollFree extends Admin
             ->addColumn('is_payed', '已支付', 'switch')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
-            ->addColumn('remark', '备注','text.edit')
+            ->addColumn('remark', '备注', 'text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮

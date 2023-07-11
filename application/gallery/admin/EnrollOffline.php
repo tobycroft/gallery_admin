@@ -81,7 +81,8 @@ class EnrollOffline extends Admin
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
                 ['text', 'is_send', '已寄出',],
-            ])
+                ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
+                ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],   ])
             ->addTopButton('add')
             ->addTopButton('export')
             ->setPageTitle('列表')
@@ -106,7 +107,7 @@ class EnrollOffline extends Admin
             ->addColumn('is_payed', '是否已支付', 'switch')
             ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('send_date', '寄出时间', 'text.edit')
-                        ->addColumn('remark', '备注','text.edit')
+            ->addColumn('remark', '备注', 'text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
