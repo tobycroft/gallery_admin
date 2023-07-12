@@ -160,7 +160,15 @@ class EnrollPay extends Admin
                 ['text', 'school_name_show', '报名学校',],
                 ['text', 'is_send', '已寄出',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
-                ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],  ])
+                ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
+                ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',
+                    '一等奖' => '一等奖',
+                    '二等奖' => '二等奖',
+                    '三等奖' => '三等奖',
+                    '优秀奖' => '优秀奖',
+                    '淘汰' => '淘汰',],
+                ]
+            ])
             ->addTopButton("add")
             ->addTopButton('export')
             ->addTopButton('custom', $custom)
