@@ -34,14 +34,14 @@ class EnrollFree extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::alias('a')->field('*,a.id as id')->leftJoin(['g_enroll_upload' => 'b'], 'a.enroll_id=b.id')->where($map)->where("source", "free")->order($order)->paginate()->each(function ($item) {
-            $item['attachment'] = '';
-            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
-            if (!$up->isEmpty()) {
-                $item['attachment'] = $up['attachment'];
-                $item['rating'] = $up['rating'];
-            }
-            return $item;
+        $data_list = EnrollModel::alias('a')->field('*,b.rating,b.attachment')->leftJoin(['g_enroll_upload' => 'b'], 'a.enroll_id=b.id')->where($map)->where("source", "free")->order($order)->paginate()->each(function ($item) {
+//            $item['attachment'] = '';
+//            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+//            if (!$up->isEmpty()) {
+//                $item['attachment'] = $up['attachment'];
+//                $item['rating'] = $up['rating'];
+//            }
+//            return $item;
         });
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
