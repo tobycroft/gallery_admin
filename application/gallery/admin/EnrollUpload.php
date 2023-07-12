@@ -63,7 +63,7 @@ class EnrollUpload extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',]]
             ])
-            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构', 'school_name_show' => '学校']) // 设置搜索参数
+            ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构/纯邮费', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
             ->addColumn('source', '来源', 'select',["local"=>"机构","free"=>"学校"])
