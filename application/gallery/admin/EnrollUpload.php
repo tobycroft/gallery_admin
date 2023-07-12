@@ -53,7 +53,7 @@ class EnrollUpload extends Admin
             ->setSearchArea([
 //                ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
 //                ['text', 'school_name_show', '报名学校',],
-                ['select', 'source', '来源', '', '', ["local" => "机构", "free" => "学校"]],
+                ['select', 'source', '来源', '', '', ["local" => "机构/纯邮费", "free" => "学校"]],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
                 ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',
