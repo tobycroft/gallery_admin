@@ -55,9 +55,17 @@ class EnrollUpload extends Admin
 //                ['text', 'school_name_show', '报名学校',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
+                ['select', 'rating', '评审', '', '', [
+                    '未获奖' => '未获奖',
+                    '一等奖' => '一等奖',
+                    '二等奖' => '二等奖',
+                    '三等奖' => '三等奖',
+                    '优秀奖' => '优秀奖',
+                    '淘汰' => '淘汰',
+                ],
 
 
-            ])
+                ])
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
