@@ -90,6 +90,7 @@ class EnrollOffline extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
                 ]])
+
             ->addTopButton('add')
             ->addTopButton('export')
             ->setPageTitle('列表')
