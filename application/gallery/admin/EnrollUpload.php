@@ -53,7 +53,7 @@ class EnrollUpload extends Admin
             ->setSearchArea([
 //                ['select', 'enroll_id', '通过手机号', '', '', $enroll2],
 //                ['text', 'school_name_show', '报名学校',],
-                ['select', 'source', '来源', '', '', ["local" => "机构", "ps" => "学校"]],
+                ['select', 'source', '来源', '', '', ["local" => "机构", "free" => "学校"]],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
                 ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',
@@ -66,7 +66,7 @@ class EnrollUpload extends Admin
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
-            ->addColumn('source', '来源', 'select',["local"=>"机构","ps"=>"学校"])
+            ->addColumn('source', '来源', 'select',["local"=>"机构","free"=>"学校"])
             ->addColumn('enroll_id', '报名id', 'select', $enroll)
             ->addColumn('title', '标题', 'text')
             ->addColumn('content', '内容', 'text')
