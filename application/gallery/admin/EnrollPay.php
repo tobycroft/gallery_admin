@@ -122,16 +122,9 @@ class EnrollPay extends Admin
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
         // 读取用户数据
-        $data_list = EnrollModel::where($map)
-            ->where('source', 'local')->where("tag_id", "<>", 6)->order($order)->paginate()->each(function ($item) {
-                $item['attachment'] = '';
-                $up = EnrollUploadModel::where("enroll_id", $item["id"])->findOrEmpty();
-                if (!$up->isEmpty()) {
-                    $item['attachment'] = $up["attachment"];
-                    $item['rating'] = $up["rating"];
-                }
-                return $item;
-            });
+        $data_list = EnrollModel::alias('a')->field('a.*,b.rating,b.attachment')->leftJoin(['g_enroll_upload' => 'b'], 'b.enroll_id=a.id')->where($map)->
+            ->where('source', 'local')->where('tag_id', '<>', 6)
+            ->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
