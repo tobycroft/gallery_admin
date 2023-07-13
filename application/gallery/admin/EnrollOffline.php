@@ -84,6 +84,7 @@ class EnrollOffline extends Admin
                 ['text', 'school_name', '绑定机构',],
                 ['text', 'school_name_show', '报名学校',],
                 ['text', 'is_send', '已寄出',],
+                ['text', 'is_upload', '已上传',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
                 ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',

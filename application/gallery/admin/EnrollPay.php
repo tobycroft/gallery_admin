@@ -154,6 +154,7 @@ class EnrollPay extends Admin
                 ['text', 'is_send', '已寄出',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
+                ['text', 'is_upload', '已上传',],
                 ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',
                     '一等奖' => '一等奖',
                     '二等奖' => '二等奖',
