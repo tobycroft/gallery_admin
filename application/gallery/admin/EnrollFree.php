@@ -6,7 +6,6 @@ namespace app\gallery\admin;
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
-use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
@@ -58,8 +57,8 @@ class EnrollFree extends Admin
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
                 ['text', 'name', '姓名',],
-                ['text', 'school_name', '绑定机构',],
-                ['text', 'school_name_show', '报名学校',],
+                ['text', 'school_name', '绑定机构', 'like'],
+                ['text', 'school_name_show', '报名学校', 'like'],
                 ['text', 'is_send', '已寄出',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],

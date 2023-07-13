@@ -81,8 +81,8 @@ class EnrollOffline extends Admin
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
                 ['text', 'name', '姓名',],
-                ['text', 'school_name', '绑定机构',],
-                ['text', 'school_name_show', '报名学校',],
+                ['text', 'school_name', '绑定机构', 'like'],
+                ['text', 'school_name_show', '报名学校', 'like'],
                 ['text', 'is_send', '已寄出',],
                 ['text', 'is_upload', '已上传',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
