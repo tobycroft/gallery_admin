@@ -60,7 +60,10 @@ class EnrollOffline extends Admin
             $map[$key] = $item;
         }
         // 读取用户数据
-        $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
+//        $data_list = EnrollModel::where($map)->where('source', 'local')->where("tag_id", 6)->order($order)->paginate();
+        $data_list = EnrollModel::alias('a')->field('a.*,b.rating,b.attachment')->leftJoin(['g_enroll_upload' => 'b'], 'b.enroll_id=a.id')->where($map)
+            ->where('source', 'local')->where('tag_id', 6)
+            ->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
 
@@ -90,7 +93,6 @@ class EnrollOffline extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
                 ]])
-
             ->addTopButton('add')
             ->addTopButton('export')
             ->setPageTitle('列表')
