@@ -123,7 +123,7 @@ class EnrollPay3 extends Admin
         $map = $this->getMap();
         // 读取用户数据
         $data_list = EnrollModel::alias('a')->field('a.*,b.rating,b.attachment')->leftJoin(['g_enroll_upload' => 'b'], 'b.enroll_id=a.id')->where($map)
-            ->where('source', 'local')->where('tag_id', '<>', 6)->whereIn('school_name', ['无', null])
+            ->where('source', 'local')->where('tag_id', '<>', 6)->whereIn('school_name', ['无', ""])
             ->order($order)->paginate();
         $page = $data_list->render();
         $todaytime = date('Y-m-d H:i:s', strtotime(date("Y-m-d"), time()));
