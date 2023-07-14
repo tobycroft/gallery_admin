@@ -103,6 +103,7 @@ class EnrollUpload extends Admin
             ])
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构/纯邮费', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
+            ->addTopButton('export')
             ->addColumn('id', '作品id')
             ->addColumn('source', '来源', 'select', ["local" => "机构", "free" => "学校"])
             ->addColumn('enroll_id', '报名id', 'select', $enroll)
