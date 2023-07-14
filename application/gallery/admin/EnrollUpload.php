@@ -14,6 +14,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
+use Tobycroft\AossSdk\Excel\Excel;
 use util\Tree;
 
 /**
@@ -22,6 +23,43 @@ use util\Tree;
  */
 class EnrollUpload extends Admin
 {
+
+
+    public
+    function export($ids = [])
+    {
+
+        $data = EnrollUploadModel::alias('a')->field('*,a.id as id')->leftJoin(['g_enroll' => 'b'], 'a.enroll_id=b.id')
+            ->where('a.id', 'in', $ids)
+            ->order('id desc')
+            ->select()->toArray();
+
+//        foreach ($data as $key => $item) {
+//            $item['tag_id'] = TagModel::where('id', $item['tag_id'])->value('name');
+//            $item['tag_group_id'] = TagGroupModel::where('id', $item['tag_group_id'])->value('name');
+//            $item['cert'] = 'ID:' . $item['cert'];
+//            $item['title'] = '';
+//            $item['content'] = '';
+//            $item['attachment'] = '';
+//            $item['teacher_name'] = '';
+//            $item['teacher_phone'] = '';
+//            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+//            if (!$up->isEmpty()) {
+//                $item['title'] = $up['title'];
+//                $item['content'] = $up['content'];
+//                $item['attachment'] = $up['attachment'];
+//                $item['teacher_name'] = $up['teacher_name'];
+//                $item['teacher_phone'] = $up['teacher_phone'];
+//            }
+//            $data[$key] = $item;
+//        }
+
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+        $Aoss = new Excel(config('upload_prefix'));
+        $ret = $Aoss->create_excel_fileurl($data);
+        $this->success('成功', $ret->file_url(), '_blank');
+    }
+
     /**
      * 用户首页
      * @return mixed
@@ -66,7 +104,7 @@ class EnrollUpload extends Admin
             ->setSearch(['name' => '学生姓名', 'phone' => '手机号', 'school_name' => '机构/纯邮费', 'school_name_show' => '学校']) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
             ->addColumn('id', '作品id')
-            ->addColumn('source', '来源', 'select',["local"=>"机构","free"=>"学校"])
+            ->addColumn('source', '来源', 'select', ["local" => "机构", "free" => "学校"])
             ->addColumn('enroll_id', '报名id', 'select', $enroll)
             ->addColumn('title', '标题', 'text')
             ->addColumn('content', '内容', 'text')
