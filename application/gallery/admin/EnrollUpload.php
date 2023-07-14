@@ -31,7 +31,7 @@ class EnrollUpload extends Admin
 
         $data = EnrollUploadModel::alias('a')->field('*,a.id as id')->leftJoin(['g_enroll' => 'b'], 'a.enroll_id=b.id')
             ->where('a.id', 'in', $ids)
-            ->order('id desc')
+            ->order('a.id desc')
             ->select()->toArray();
 
 //        foreach ($data as $key => $item) {
