@@ -147,7 +147,8 @@ class EnrollPay extends Admin
         ];
 
         return ZBuilder::make('table')
-            ->setPageTips('总数量：' . $num2 . '    今日数量：' . $num1 . '备注数量：', $num3, 'danger')
+            ->setPageTips('总数量：' . $num2 . '    今日数量：' . $num1 . '备注数量：' . $num3, 'danger')
+
 //            ->setPageTips("总数量：" . $num2, 'danger')
             ->setSearchArea([
                 ['text', 'is_payed', '是否已支付',],
