@@ -48,10 +48,11 @@ class EnrollFree extends Admin
         $num1 = EnrollModel::where("date", ">", $todaytime)
             ->count();
         $num2 = EnrollModel::count();
+        $num3 = EnrollModel::where("length(remark)>0")->where('source', 'free')->count();
         $school = EnrollModel::column("id,name");
 
         return ZBuilder::make('table')
-            ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1, 'danger')
+            ->setPageTips("总数量：" . $num2 . "    今日数量：" . $num1 . "备注数量：", $num3, 'danger')
 //            ->setPageTips("总数量：" . $num2, 'danger')
 //            ->setSearchArea([['select', 'school_id', '学校id', "", "", $school], ['text', 'year', '入学年份'], ['text', 'grade', '年级'], ['text', 'class', '班级'],])
             ->setSearchArea([
