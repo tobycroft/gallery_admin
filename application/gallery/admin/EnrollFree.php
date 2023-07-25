@@ -109,7 +109,7 @@ class EnrollFree extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
                 ],
-                ['text', 'LENGTH(remark)', '备注长度', '>'],
+                ['text', 'remark', '备注长度', 'neq', 'null'],
             ])
             ->addTopButton("add")
             ->addTopButton("export")
