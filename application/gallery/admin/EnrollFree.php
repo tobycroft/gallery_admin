@@ -9,8 +9,13 @@ use app\gallery\model\EnrollModel;
 use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
+use app\gallery\model\UserModel;
+use app\user\model\Role as RoleModel;
+use app\user\model\User;
+use think\Db;
 use think\facade\Hook;
 use Tobycroft\AossSdk\Excel\Excel;
+use util\Tree;
 
 /**
  * 用户默认控制器
@@ -105,6 +110,7 @@ class EnrollFree extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
                 ],
+                ['select', 'remark', '备注长度', 'neq', '', ['不为空' => '为空', '空' => '不为空',]],
             ])
             ->addTopButton("add")
             ->addTopButton("export")
@@ -116,18 +122,18 @@ class EnrollFree extends Admin
             ->addColumn('uid', '用户id', 'number')
             ->addColumn('age', '年龄', 'number')
             ->addColumn('phone', '手机', 'text')
-            ->addColumn('name', '姓名', 'text . edit')
-            ->addColumn('cert', '身份证', 'text . edit')
-            ->addColumn('school_name', '绑定机构', 'text . edit')
-            ->addColumn('school_name_show', '报名学校', 'text . edit')
-            ->addColumn('province', '省', 'text . edit')
-            ->addColumn('city', '已支付', 'text . edit')
-            ->addColumn('district', '已支付', 'text . edit')
-//            ->addColumn('address', '已支付', 'text . edit')
+            ->addColumn('name', '姓名', 'text.edit')
+            ->addColumn('cert', '身份证', 'text.edit')
+            ->addColumn('school_name', '绑定机构', 'text.edit')
+            ->addColumn('school_name_show', '报名学校', 'text.edit')
+            ->addColumn('province', '省', 'text.edit')
+            ->addColumn('city', '已支付', 'text.edit')
+            ->addColumn('district', '已支付', 'text.edit')
+//            ->addColumn('address', '已支付', 'text.edit')
             ->addColumn('is_payed', '已支付', 'switch')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
-            ->addColumn('remark', '备注', 'text . edit')
+            ->addColumn('remark', '备注', 'text.edit')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
@@ -148,11 +154,11 @@ class EnrollFree extends Admin
         if ($this->request->isPost()) {
             $data = $this->request->post();
             // 非超级管理需要验证可选择角色
-            if (session('user_auth . role') != 1) {
-                if ($data['role'] == session('user_auth . role')) {
+            if (session('user_auth.role') != 1) {
+                if ($data['role'] == session('user_auth.role')) {
                     $this->error('禁止创建与当前角色同级的用户');
                 }
-                $role_list = RoleModel::getChildsId(session('user_auth . role'));
+                $role_list = RoleModel::getChildsId(session('user_auth.role'));
                 if (!in_array($data['role'], $role_list)) {
                     $this->error('权限不足，禁止创建非法角色的用户');
                 }
@@ -185,8 +191,8 @@ class EnrollFree extends Admin
         }
 
         // 角色列表
-        if (session('user_auth . role') != 1) {
-            $role_list = RoleModel::getTree(null, false, session('user_auth . role'));
+        if (session('user_auth.role') != 1) {
+            $role_list = RoleModel::getTree(null, false, session('user_auth.role'));
         } else {
             $role_list = RoleModel::getTree(null, false);
         }
@@ -241,8 +247,8 @@ class EnrollFree extends Admin
             $this->error('缺少参数');
 
         // 非超级管理员检查可编辑用户
-        if (session('user_auth . role') != 1) {
-            $role_list = RoleModel::getChildsId(session('user_auth . role'));
+        if (session('user_auth.role') != 1) {
+            $role_list = RoleModel::getChildsId(session('user_auth.role'));
             $user_list = User::where('role', 'in', $role_list)
                 ->column('id');
             if (!in_array($id, $user_list)) {
@@ -329,8 +335,8 @@ class EnrollFree extends Admin
             $this->error('缺少参数');
 
         // 非超级管理员检查可编辑用户
-        if (session('user_auth . role') != 1) {
-            $role_list = RoleModel::getChildsId(session('user_auth . role'));
+        if (session('user_auth.role') != 1) {
+            $role_list = RoleModel::getChildsId(session('user_auth.role'));
             $user_list = User::where('role', 'in', $role_list)
                 ->column('id');
             if (!in_array($uid, $user_list)) {
@@ -391,7 +397,7 @@ class EnrollFree extends Admin
                 if (isset($post['nodes'])) {
                     $data_node = [];
                     foreach ($post['nodes'] as $node) {
-                        list($group, $nid) = explode(' | ', $node);
+                        list($group, $nid) = explode('|', $node);
                         $data_node[] = [
                             'module' => $module,
                             'group' => $group,
@@ -418,8 +424,8 @@ class EnrollFree extends Admin
 
                     // 调用后置方法
                     if (isset($curr_access_nodes['model_name']) && $curr_access_nodes['model_name'] != '') {
-                        if (strpos($curr_access_nodes['model_name'], ' / ')) {
-                            list($module, $model_name) = explode(' / ', $curr_access_nodes['model_name']);
+                        if (strpos($curr_access_nodes['model_name'], '/')) {
+                            list($module, $model_name) = explode('/', $curr_access_nodes['model_name']);
                         } else {
                             $model_name = $curr_access_nodes['model_name'];
                         }
@@ -451,8 +457,8 @@ class EnrollFree extends Admin
             } else {
                 $nodes = [];
                 if (isset($curr_access_nodes['model_name']) && $curr_access_nodes['model_name'] != '') {
-                    if (strpos($curr_access_nodes['model_name'], ' / ')) {
-                        list($module, $model_name) = explode(' / ', $curr_access_nodes['model_name']);
+                    if (strpos($curr_access_nodes['model_name'], '/')) {
+                        list($module, $model_name) = explode('/', $curr_access_nodes['model_name']);
                     } else {
                         $model_name = $curr_access_nodes['model_name'];
                     }
@@ -495,7 +501,7 @@ class EnrollFree extends Admin
                     ->select();
                 $user_access = [];
                 foreach ($node_access as $item) {
-                    $user_access[$item['group'] . ' | ' . $item['nid']] = 1;
+                    $user_access[$item['group'] . '|' . $item['nid']] = 1;
                 }
 
                 $nodes = $this->buildJsTree($nodes, $curr_access_nodes, $user_access);
@@ -537,7 +543,7 @@ class EnrollFree extends Admin
      */
     public function setStatus($type = '', $record = [])
     {
-        $ids = $this->request->isPost() ? input('post . ids / a') : input('param . ids');
+        $ids = $this->request->isPost() ? input('post.ids/a') : input('param.ids');
         $ids = (array)$ids;
 
         switch ($type) {
@@ -591,11 +597,11 @@ class EnrollFree extends Admin
                 'selected' => false
             ];
             foreach ($nodes as $node) {
-                $key = $curr_access['group'] . ' | ' . $node[$curr_access['primary_key']];
+                $key = $curr_access['group'] . '|' . $node[$curr_access['primary_key']];
                 $option['selected'] = isset($user_access[$key]) ? true : false;
                 if (isset($node['child'])) {
                     $curr_access_child = isset($curr_access['child']) ? $curr_access['child'] : $curr_access;
-                    $result .= ' < li id = "' . $key . '" data - jstree = \'' . json_encode($option) . '\'>' . $node[$curr_access['node_name']] . $this->buildJsTree($node['child'], $curr_access_child, $user_access) . '</li>';
+                    $result .= '<li id="' . $key . '" data-jstree=\'' . json_encode($option) . '\'>' . $node[$curr_access['node_name']] . $this->buildJsTree($node['child'], $curr_access_child, $user_access) . '</li>';
                 } else {
                     $result .= '<li id="' . $key . '" data-jstree=\'' . json_encode($option) . '\'>' . $node[$curr_access['node_name']] . '</li>';
                 }
@@ -611,8 +617,7 @@ class EnrollFree extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public
-    function enable($ids = [])
+    public function enable($ids = [])
     {
         Hook::listen('user_enable', $ids);
         return $this->setStatus('enable');
@@ -624,15 +629,13 @@ class EnrollFree extends Admin
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public
-    function disable($ids = [])
+    public function disable($ids = [])
     {
         Hook::listen('user_disable', $ids);
         return $this->setStatus('disable');
     }
 
-    public
-    function quickEdit($record = [])
+    public function quickEdit($record = [])
     {
         $field = input('post.name', '');
         $value = input('post.value', '');
