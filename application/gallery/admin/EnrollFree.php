@@ -6,6 +6,7 @@ namespace app\gallery\admin;
 use app\admin\controller\Admin;
 use app\common\builder\ZBuilder;
 use app\gallery\model\EnrollModel;
+use app\gallery\model\EnrollUploadModel;
 use app\gallery\model\TagGroupModel;
 use app\gallery\model\TagModel;
 use app\gallery\model\UserModel;
@@ -13,6 +14,7 @@ use app\user\model\Role as RoleModel;
 use app\user\model\User;
 use think\Db;
 use think\facade\Hook;
+use Tobycroft\AossSdk\Excel\Excel;
 use util\Tree;
 
 /**
@@ -21,6 +23,42 @@ use util\Tree;
  */
 class EnrollFree extends Admin
 {
+
+
+    public
+    function export($ids = [])
+    {
+        $data = EnrollModel::field('id,uid,age,gender,tag_id,tag_group_id,phone,name,cert,school_name,school_name_show,province,city,district,address,date')
+            ->where('id', 'in', $ids)
+            ->order('id desc')
+            ->select()->toArray();
+
+        foreach ($data as $key => $item) {
+            $item['tag_id'] = TagModel::where('id', $item['tag_id'])->value('name');
+            $item['tag_group_id'] = TagGroupModel::where('id', $item['tag_group_id'])->value('name');
+            $item['cert'] = 'ID:' . $item['cert'];
+            $item['title'] = '';
+            $item['content'] = '';
+            $item['attachment'] = '';
+            $item['teacher_name'] = '';
+            $item['teacher_phone'] = '';
+            $up = EnrollUploadModel::where('enroll_id', $item['id'])->findOrEmpty();
+            if (!$up->isEmpty()) {
+                $item['title'] = $up['title'];
+                $item['content'] = $up['content'];
+                $item['attachment'] = $up['attachment'];
+                $item['teacher_name'] = $up['teacher_name'];
+                $item['teacher_phone'] = $up['teacher_phone'];
+            }
+            $data[$key] = $item;
+        }
+
+        // 设置表头信息（对应字段名,宽度，显示表头名称）
+        $Aoss = new Excel(config('upload_prefix'));
+        $ret = $Aoss->create_excel_fileurl($data);
+        $this->success('成功', $ret->file_url(), '_blank');
+    }
+
     /**
      * 用户首页
      * @return mixed
