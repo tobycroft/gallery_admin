@@ -168,7 +168,7 @@ class EnrollPay2 extends Admin
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
                 ],
-                ['select', 'remark', '备注为空', 'neq', '', ['空' => '不为空',]],
+                ['select', 'remark', '备注为空', '=', '', ['空' => '为空',]],
 
             ])
             ->addTopButton("add")
