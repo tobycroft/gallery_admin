@@ -165,7 +165,8 @@ class EnrollPay extends Admin
                     '三等奖' => '三等奖',
                     '优秀奖' => '优秀奖',
                     '淘汰' => '淘汰',],
-                ]
+                ],
+                ['select', 'remark', '备注长度', 'neq', '', ['null' => '不为空', '' => '为空']],
             ])
             ->addTopButton("add")
             ->addTopButton('export')
