@@ -111,6 +111,7 @@ class EnrollFree extends Admin
                 ]
             ])
             ->addTopButton("add")
+            ->addTopButton("export")
             ->setPageTitle('列表')
             ->setSearch(['name' => '学生姓名', 'phone' => "手机号", "school_name" => "绑定单位", "school_name_show" => "学校"]) // 设置搜索参数
 //            ->addOrder('id,callsign,year,class')
