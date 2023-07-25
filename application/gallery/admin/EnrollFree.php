@@ -98,6 +98,7 @@ class EnrollFree extends Admin
                 ['text', 'name', '姓名',],
                 ['text', 'school_name', '绑定机构', 'like'],
                 ['text', 'school_name_show', '报名学校', 'like'],
+                ['text', 'length(remark)', '备注长度', '>'],
                 ['text', 'is_send', '已寄出',],
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
