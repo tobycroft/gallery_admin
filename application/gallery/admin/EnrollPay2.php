@@ -121,6 +121,7 @@ class EnrollPay2 extends Admin
         // 获取排序
         $order = $this->getOrder("id desc");
         $map = $this->getMap();
+
         // 读取用户数据
         $data_list = EnrollModel::alias('a')->field('a.*,b.rating,b.attachment')->leftJoin(['g_enroll_upload' => 'b'], 'b.enroll_id=a.id')->where($map)
             ->where('source', 'local')->where('tag_id', '<>', 6)->whereNotIn("school_name", ["无", ""])
