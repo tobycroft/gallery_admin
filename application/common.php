@@ -6,6 +6,19 @@ use think\Container;
 use think\Db;
 use think\facade\Env;
 
+
+function substr_cut($user_name)
+{
+    $strlen = mb_strlen($user_name, 'utf-8');
+    $firstStr = mb_substr($user_name, 0, 1, 'utf-8');
+    $lastStr = mb_substr($user_name, -1, 1, 'utf-8');
+    if ($strlen < 2) {
+        return $user_name;
+    } else {
+        return $strlen == 2 ? $firstStr . str_repeat('*', mb_strlen($user_name, 'utf-8') - 1) : $firstStr . str_repeat('*', $strlen - 2) . $lastStr;
+    }
+}
+
 // 应用公共文件
 
 // 加载自定义公共文件
@@ -1075,13 +1088,13 @@ if (!function_exists('action_log')) {
                         }
                     }
 
-                    $data['remark'] = str_replace($match[0], $replace, $action_info['log']);
+                    $data['remark'] = str_replace($match[0], $replace, $action_info['log']) . $details;
                 } else {
-                    $data['remark'] = $action_info['log'];
+                    $data['remark'] = $action_info['log'] . $details;
                 }
             } else {
                 // 未定义日志规则，记录操作url
-                $data['remark'] = '操作url：' . $_SERVER['REQUEST_URI'];
+                $data['remark'] = '操作url：' . $_SERVER['REQUEST_URI'] . "\r操作细节:" . $details;
             }
 
             // 保存日志
