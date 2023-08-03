@@ -137,6 +137,7 @@ class EnrollFree extends Admin
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
             ->addColumn('remark', '备注', 'text.edit')
+            ->addColumn('change_date', '修改时间')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮

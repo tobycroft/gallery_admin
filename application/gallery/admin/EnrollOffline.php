@@ -123,6 +123,7 @@ class EnrollOffline extends Admin
             ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('send_date', '寄出时间', 'text.edit')
             ->addColumn('remark', '备注', 'text.edit')
+            ->addColumn('change_date', '修改时间')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮

@@ -201,6 +201,7 @@ class EnrollPay2 extends Admin
             ->addColumn('send_date', '寄出时间', 'text.edit')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
+            ->addColumn('change_date', '修改时间')
             ->addColumn('date', '创建时间')
             ->addColumn('right_button', '操作', 'btn')
             ->addRightButton('edit') // 添加编辑按钮
