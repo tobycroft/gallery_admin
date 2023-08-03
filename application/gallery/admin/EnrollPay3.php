@@ -160,6 +160,7 @@ class EnrollPay3 extends Admin
                 ['select', 'tag_group_id', '年级组id', '', '', TagGroupModel::column('id,name')],
                 ['select', 'tag_id', '报名类型', '', '', TagModel::column('id,name')],
                 ['text', 'is_upload', '已上传',],
+                ['text', 'order_id', '微信支付D头单号', 'like'],
                 ['select', 'rating', '评审', '', '', ['未获奖' => '未获奖',
                     '一等奖' => '一等奖',
                     '二等奖' => '二等奖',
