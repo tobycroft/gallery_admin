@@ -52,7 +52,7 @@ class Enroll extends Admin
                 ['text', 'name', '姓名',],
                 ['text', 'school_name', '绑定机构', 'like'],
                 ['text', 'school_name_show', '报名学校', 'like'],
-                ['text', 'order_id', '报名学校', 'like'],
+                ['text', 'order_id', '微信支付D头单号', '='],
             ])
             ->addTopButton("add")
             ->setPageTitle('列表')
