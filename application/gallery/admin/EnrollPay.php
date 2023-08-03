@@ -186,6 +186,7 @@ class EnrollPay extends Admin
             ->addColumn('cert', '身份证', 'text.edit')
             ->addColumn('school_name', '绑定机构', 'text.edit')
             ->addColumn('school_name_show', '报名学校', 'text.edit')
+            ->addColumn('order_id', '订单ID')
             ->addColumn('province', '省', 'text.edit')
             ->addColumn('city', '城市', 'text.edit')
             ->addColumn('district', '区域', 'text.edit')
