@@ -133,6 +133,7 @@ class EnrollFree extends Admin
             ->addColumn('district', '已支付', 'text.edit')
 //            ->addColumn('address', '已支付', 'text.edit')
             ->addColumn('is_payed', '已支付', 'switch')
+            ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('attachment', '图片', 'picture')
             ->addColumn('rating', '评级', 'text')
             ->addColumn('remark', '备注', 'text.edit')
