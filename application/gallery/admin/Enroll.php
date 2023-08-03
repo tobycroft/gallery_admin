@@ -68,6 +68,7 @@ class Enroll extends Admin
             ->addColumn('school_name', '绑定机构', 'text.edit')
             ->addColumn('school_name_show', '报名学校', 'text.edit')
             ->addColumn('order_id', '订单ID')
+            ->addColumn('is_send', '已寄出', 'switch')
             ->addColumn('province', '省', 'text.edit')
             ->addColumn('city', '城市', 'text.edit')
             ->addColumn('district', '区域', 'text.edit')
