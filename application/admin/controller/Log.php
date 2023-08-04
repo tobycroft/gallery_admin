@@ -31,7 +31,7 @@ class Log extends Admin
         // 使用ZBuilder快速创建数据表格
         return ZBuilder::make('table')
             ->setPageTitle('系统日志') // 设置页面标题
-            ->setSearch(['admin_action.title' => '行为名称', 'admin_user.username' => '执行者', 'admin_module.title' => '所属模块', 'remark' => '详细信息']) // 设置搜索框
+            ->setSearch(['admin_action.title' => '行为名称', 'admin_user.username' => '执行者', 'admin_module.title' => '所属模块', 'admin_log.remark' => '详细信息']) // 设置搜索框
             ->hideCheckbox()
             ->addColumns([ // 批量添加数据列
                 ['id', '编号'],
